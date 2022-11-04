@@ -3,10 +3,11 @@ NOMBRE_JOUEURS = 8
 class Player:
     """Chess Player"""
 
-    def __init__(self,name,vorname,birthdate,sex,classment,score):
-        """Has name,vorname birthdate sex and classment"""
-        self.name = name
-        self.vorname = vorname
+    def __init__(self,player_id,lastname,firstname,birthdate,sex,classment,score):
+        """Has lastname,firstname, birthdate sex and classment"""
+        self.player_id = player_id
+        self.lastname = lastname
+        self.firstname = firstname
         self.birthdate = birthdate
         self.sex = sex
         self.classment = classment

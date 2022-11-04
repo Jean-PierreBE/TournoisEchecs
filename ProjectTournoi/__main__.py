@@ -1,5 +1,7 @@
-import ProjectTournoi.Tournoi
+from ProjectTournoi.controllers.base import Controller
+import ProjectTournoi.views.createtournament as vc
 
-import sys
+view = vc.CreateTournament()
+game = Controller(view)
 
-print('ça marche aussi')
+game.run()
