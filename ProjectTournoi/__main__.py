@@ -8,7 +8,8 @@ import ProjectTournoi.views.creategame as vg
 ctview = vt.CreateTournament()
 cpview = vp.CreatePlayer()
 crview = vr.CreateRound()
+cgview = vg.CreateGame()
 
-tournoi = Controller(ctview,cpview,crview)
+tournoi = Controller(ctview, cpview, crview, cgview)
 
 tournoi.run()
