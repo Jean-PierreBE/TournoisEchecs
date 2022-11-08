@@ -10,12 +10,13 @@ from ProjectTournoi.views import createtournament as ct
 from ProjectTournoi.views import createplayer as cp
 from ProjectTournoi.views import createround as cr
 from ProjectTournoi.views import creategame as cg
+from ProjectTournoi.views import createendview as cv
 
 import ProjectTournoi.variables as vr
 class Controller:
     """Main controller"""
 
-    def __init__(self,ctview,cpview,crview,cgview):
+    def __init__(self,ctview,cpview,crview,cgview,cvview):
         # models
         self.players: List[pl.Player] = []
         self.rounds: List[rn.Round] = []
@@ -25,6 +26,7 @@ class Controller:
         self.cpview = cpview
         self.crview = crview
         self.cgview = cgview
+        self.vview = cvview
 
     def get_tournament(self):
         """create tournament"""
@@ -75,6 +77,15 @@ class Controller:
 
         self.games[num_game].result = score
 
+    def print_views(self,tournoi):
+        """list of players"""
+        cv.CreateEndView.list_players(self,tournoi.players)
+        """list of tournaments"""
+        print()
+        cv.CreateEndView.list_tournaments(self, tournoi.area,tournoi.date,tournoi.description)
+        """list of rounds"""
+        """list of games """
+
     def run(self):
         """Run the game."""
         """Initialize tournament"""
@@ -83,14 +94,6 @@ class Controller:
         self.get_players()
         """complete tournament with the list of players"""
         self.tournoi.players = self.players
-
-        for i in range(len(self.tournoi.players)):
-            print(i,self.tournoi.players[i].player_id)
-            print(i,self.tournoi.players[i].lastname)
-            print(i,self.tournoi.players[i].firstname)
-            print(i,self.tournoi.players[i].birthdate)
-            print(i,self.tournoi.players[i].sex)
-            print(i,self.tournoi.players[i].classment)
 
         """Rounds"""
         for num_round in range(vr.NUMBER_ROUNDS):
@@ -101,7 +104,7 @@ class Controller:
             """view games"""
             """encode score"""
             for igame in range(len(self.games)):
-                self.get_score(igame,self.games[igame].player_A,self.games[igame].player_B)
+                self.get_score(igame, self.games[igame].player_A, self.games[igame].player_B)
             """end round"""
             self.get_round_end(num_round)
             self.rounds[num_round].games = self.games
@@ -115,9 +118,10 @@ class Controller:
 
         self.tournoi.rounds = self.rounds
         for i in range(len(self.tournoi.rounds)):
-            print(i,self.tournoi.rounds[i].round_id)
-            print(i,self.tournoi.rounds[i].begindate)
-            print(i,self.tournoi.rounds[i].begintime)
-            print(i,self.tournoi.rounds[i].enddate)
-            print(i,self.tournoi.rounds[i].endtime)
+            print(i, self.tournoi.rounds[i].round_id)
+            print(i, self.tournoi.rounds[i].begindate)
+            print(i, self.tournoi.rounds[i].begintime)
+            print(i, self.tournoi.rounds[i].enddate)
+            print(i, self.tournoi.rounds[i].endtime)
         """Affichage résultat tournoi"""
+        self.print_views(self.tournoi)
