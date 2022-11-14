@@ -1,6 +1,6 @@
 """Procedures"""
 
-def create_game(players,round,numbergame):
+def create_game(players, round, numbergame):
     """allocate players for game"""
     games = []
 

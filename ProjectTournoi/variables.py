@@ -9,7 +9,7 @@ ID_ROUND = 'Round_'
 """Constants for tournament"""
 AREA = "Bruxelles"
 DATE_TOURNAMENT = "06/11/2022"
-DESCRIPTION = "Tournoi d'échecs avec 4 tours , 4 parties pour cahque tour et 8 joueurs"
+DESCRIPTION = "Tournoi d'échecs avec 4 tours , 4 parties pour chaque tour et 8 joueurs"
 """Constants for players"""
 LAST_NAME = ['STEIN','STEINER','STEINMANN','STEINMEYER','STERLING','STERMANN','STERMEYER','MEYER']
 FIRST_NAME = ['Jean-Pierre','Jeanne','Jean','Paula','Patrick','Lola','Paul','Hélène']

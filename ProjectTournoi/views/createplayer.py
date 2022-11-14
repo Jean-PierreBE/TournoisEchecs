@@ -28,7 +28,7 @@ class CreatePlayer:
 
     def prompt_for_sex(self,num_player):
         """Prompt for a code sex"""
-        codesex = input("Entrez le genre du joueur n° " + str(num_player + 1) + " (M/F/Not Defined) : ")
+        codesex = input("Entrez le genre du joueur n° " + str(num_player + 1) + " (M/F) : ")
         if not codesex:
             return vr.SEX[num_player]
         return codesex
