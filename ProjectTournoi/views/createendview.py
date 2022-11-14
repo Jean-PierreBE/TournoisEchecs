@@ -1,5 +1,6 @@
 from prettytable import PrettyTable
 import ProjectTournoi.controllers.tools as tl
+import ProjectTournoi.variables as vr
 
 class CreateEndView:
 
@@ -43,6 +44,7 @@ class CreateEndView:
             for indg in range(len(tournoi.rounds[indr].games)):
                 ind_a = tl.get_result_player(tournoi.players, tournoi.rounds[indr].games[indg].player_A)
                 ind_b = tl.get_result_player(tournoi.players, tournoi.rounds[indr].games[indg].player_B)
+                lib_result = 'Pas de résultat'
                 if tournoi.rounds[indr].games[indg].result == 0:
                    lib_result = 'Match nul'
                 if tournoi.rounds[indr].games[indg].result == 1:
@@ -54,4 +56,30 @@ class CreateEndView:
                                tournoi.players[ind_a].lastname + ' ' + tournoi.players[ind_a].firstname,
                                tournoi.players[ind_b].lastname + ' ' + tournoi.players[ind_b].firstname,
                                lib_result])
+        print(table)
+
+    def list_turning_round(self, tournoi, num_round, games):
+        """Create list of results by round"""
+        table = PrettyTable()
+
+        table.title = 'Déroulement du round n° ' + str(num_round + 1) + ' du Tournoi du ' + str(tournoi.date) + ' à ' + tournoi.area
+        table.field_names = ['Game', 'Id Joueur A', 'Joueur A','Id Joueur B', 'Joueur B', 'Résultat']
+        imin = vr.NUMBER_GAMES * (num_round)
+        imax = vr.NUMBER_GAMES * (num_round + 1)
+        for indg in range(imin, imax):
+            ind_a = tl.get_result_player(tournoi.players, games[indg].player_A)
+            ind_b = tl.get_result_player(tournoi.players, games[indg].player_B)
+            lib_result = 'En attente'
+            if games[indg].result == 0:
+                lib_result = 'Match nul'
+            if games[indg].result == 1:
+                lib_result = 'Joueur A vainqueur'
+            if games[indg].result == 2:
+                lib_result = 'Joueur B vainqueur'
+            table.add_row([games[indg].game_id,
+                           games[indg].player_A,
+                           tournoi.players[ind_a].lastname + ' ' + tournoi.players[ind_a].firstname,
+                           games[indg].player_B,
+                           tournoi.players[ind_b].lastname + ' ' + tournoi.players[ind_b].firstname,
+                           lib_result])
         print(table)

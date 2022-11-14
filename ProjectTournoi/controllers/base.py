@@ -65,6 +65,27 @@ class Controller:
         self.rounds[num_round].enddate = end_date
         self.rounds[num_round].endtime = end_time
 
+        imin = vr.NUMBER_GAMES * (num_round)
+        imax = vr.NUMBER_GAMES * (num_round + 1)
+
+        print('imin ' + str(imin))
+        print('imax ' + str(imax))
+        for igame in range(imin, imax):
+            print('igame ' + str(igame))
+            self.rounds[num_round].games.append(self.games[igame])
+
+            inda = tl.get_result_player(self.tournoi.players, self.games[igame].player_A)
+            indb = tl.get_result_player(self.tournoi.players, self.games[igame].player_B)
+            self.tournoi.set_result(self.games[igame].result, inda, indb)
+
+    def get_game_choose(self,num_round):
+        response = cg.CreateGame.prompt_for_continue_round(self)
+        if response == 'Y':
+            return False, None
+        else:
+            num_game = cg.CreateGame.prompt_for_encode_result(self)
+            return True, num_game - 1 + vr.NUMBER_GAMES*(num_round)
+
     def get_games(self,num_round):
         last_player = 0
         for num_game in range(vr.NUMBER_GAMES):
@@ -77,12 +98,16 @@ class Controller:
 
     def get_result(self,num_game, player_A, player_B):
         result = cg.CreateGame.prompt_for_result(self, player_A, player_B)
-        inda = tl.get_result_player(self.tournoi.players, player_A)
-        indb = tl.get_result_player(self.tournoi.players, player_B)
+        #inda = tl.get_result_player(self.tournoi.players, player_A)
+        #indb = tl.get_result_player(self.tournoi.players, player_B)
         self.games[num_game].result = result
-        self.tournoi.set_result(result, inda, indb)
+        #self.tournoi.set_result(result, inda, indb)
 
-    def print_views(self, tournoi):
+    def print_turning_views(self, tournoi, num_round, games):
+        """list of tournaments"""
+        cv.CreateEndView.list_turning_round(self, tournoi, num_round, games)
+
+    def print_end_views(self, tournoi):
         """list of tournaments"""
         cv.CreateEndView.list_tournaments(self, tournoi.area, tournoi.date, tournoi.description)
         """list of players"""
@@ -107,21 +132,33 @@ class Controller:
             self.get_round_begin(num_round)
             """Swiss algorithm"""
             self.get_games(num_round)
-            """view games"""
-            """encode score"""
-            imin = vr.NUMBER_GAMES * (num_round)
-            imax = vr.NUMBER_GAMES * (num_round + 1)
+            running_game = True
             self.rounds[num_round].games = []
-            print('imin ' + str(imin))
-            print('imax ' + str(imax))
-            for igame in range(imin, imax):
-                print('igame ' + str(igame))
-                self.get_result(igame, self.games[igame].player_A, self.games[igame].player_B)
-                self.rounds[num_round].games.append(self.games[igame])
+            while running_game:
+                """view games"""
+                self.print_turning_views(self.tournoi, num_round,self.games)
+                """choose number of game to encode or leave the round"""
+                running_game, igame = self.get_game_choose(num_round)
+                """encode score"""
+                param = 'noall'
+                if param == 'all':
+                    imin = vr.NUMBER_GAMES * (num_round)
+                    imax = vr.NUMBER_GAMES * (num_round + 1)
+
+                    print('imin ' + str(imin))
+                    print('imax ' + str(imax))
+                    for igame in range(imin, imax):
+                        print('igame ' + str(igame))
+                        self.get_result(igame, self.games[igame].player_A, self.games[igame].player_B)
+                        self.rounds[num_round].games.append(self.games[igame])
+                else:
+                    if running_game:
+                        print('igame ' + str(igame))
+                        self.get_result(igame, self.games[igame].player_A, self.games[igame].player_B)
+                        #self.rounds[num_round].games.append(self.games[igame])
             """end round"""
             self.get_round_end(num_round)
 
-            #self.rounds[num_round].games = self.games
             for i in range(len(self.rounds[num_round].games)):
                 print(i, self.rounds[num_round].games[i].game_id)
                 print(i, self.rounds[num_round].games[i].player_A)
@@ -138,4 +175,4 @@ class Controller:
                 print(i, self.tournoi.rounds[i].games[j].player_B)
                 print(i, self.tournoi.rounds[i].games[j].result)
         """Affichage résultat tournoi"""
-        self.print_views(self.tournoi)
+        self.print_end_views(self.tournoi)

@@ -6,3 +6,17 @@ class CreateGame:
         if not result:
             return None
         return int(result)
+
+    def prompt_for_continue_round(self):
+        """Prompt for a score"""
+        response = input("le round est-il terminé (Y/N) ?  ")
+        if not response:
+            return 'N'
+        return response.upper()
+
+    def prompt_for_encode_result(self):
+        """Prompt for a score"""
+        num_game = input("Pour quel match voulez-vous entrer les scores ?  ")
+        if not num_game:
+            return None
+        return int(num_game)
