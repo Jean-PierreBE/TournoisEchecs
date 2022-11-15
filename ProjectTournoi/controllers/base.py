@@ -68,15 +68,15 @@ class Controller:
         imin = vr.NUMBER_GAMES * (num_round)
         imax = vr.NUMBER_GAMES * (num_round + 1)
 
-        print('imin ' + str(imin))
-        print('imax ' + str(imax))
         for igame in range(imin, imax):
-            print('igame ' + str(igame))
             self.rounds[num_round].games.append(self.games[igame])
 
             inda = tl.get_result_player(self.tournoi.players, self.games[igame].player_A)
             indb = tl.get_result_player(self.tournoi.players, self.games[igame].player_B)
             self.tournoi.set_result(self.games[igame].result, inda, indb)
+
+        """list of provisional results of tournament"""
+        cv.CreateEndView.list_results_tournaments(self,0, self.tournoi.area, self.tournoi.date, self.tournoi.players)
 
     def get_game_choose(self,num_round):
         response = cg.CreateGame.prompt_for_continue_round(self)
@@ -96,12 +96,32 @@ class Controller:
             game = gm.Game(pref_game,player_A, player_B)
             self.games.append(game)
 
+    def get_games_swiss(self,num_round):
+        """first round"""
+        if num_round == 0:
+            sorted_player = sorted(self.tournoi.players,key=lambda e:e.classment)
+            last_player = 0
+            for num_game in range(vr.NUMBER_GAMES):
+                pref_game = 'Game_' + str(num_round + 1) + str(num_game + 1)
+                player_A = sorted_player[last_player].player_id
+                player_B = sorted_player[last_player + 4].player_id
+                last_player = last_player + 1
+                game = gm.Game(pref_game,player_A, player_B)
+                self.games.append(game)
+        else:
+            sorted_player = sorted(self.tournoi.players, key=lambda e:e.score, reverse=True)
+            last_player = 0
+            for num_game in range(vr.NUMBER_GAMES):
+                pref_game = 'Game_' + str(num_round + 1) + str(num_game + 1)
+                player_A = sorted_player[last_player].player_id
+                player_B = sorted_player[last_player + 1].player_id
+                last_player = last_player + 2
+                game = gm.Game(pref_game, player_A, player_B)
+                self.games.append(game)
+
     def get_result(self,num_game, player_A, player_B):
         result = cg.CreateGame.prompt_for_result(self, player_A, player_B)
-        #inda = tl.get_result_player(self.tournoi.players, player_A)
-        #indb = tl.get_result_player(self.tournoi.players, player_B)
         self.games[num_game].result = result
-        #self.tournoi.set_result(result, inda, indb)
 
     def print_turning_views(self, tournoi, num_round, games):
         """list of tournaments"""
@@ -115,7 +135,7 @@ class Controller:
         """list of results of games """
         cv.CreateEndView.list_results_rounds(self, tournoi)
         """list of results of tournament"""
-        cv.CreateEndView.list_results_tournaments(self, tournoi.area, tournoi.date, tournoi.players)
+        cv.CreateEndView.list_results_tournaments(self, 1, tournoi.area, tournoi.date, tournoi.players)
 
     def run(self):
         """Run the game."""
@@ -131,7 +151,7 @@ class Controller:
             """begin round"""
             self.get_round_begin(num_round)
             """Swiss algorithm"""
-            self.get_games(num_round)
+            self.get_games_swiss(num_round)
             running_game = True
             self.rounds[num_round].games = []
             while running_game:
@@ -140,39 +160,11 @@ class Controller:
                 """choose number of game to encode or leave the round"""
                 running_game, igame = self.get_game_choose(num_round)
                 """encode score"""
-                param = 'noall'
-                if param == 'all':
-                    imin = vr.NUMBER_GAMES * (num_round)
-                    imax = vr.NUMBER_GAMES * (num_round + 1)
-
-                    print('imin ' + str(imin))
-                    print('imax ' + str(imax))
-                    for igame in range(imin, imax):
-                        print('igame ' + str(igame))
-                        self.get_result(igame, self.games[igame].player_A, self.games[igame].player_B)
-                        self.rounds[num_round].games.append(self.games[igame])
-                else:
-                    if running_game:
-                        print('igame ' + str(igame))
-                        self.get_result(igame, self.games[igame].player_A, self.games[igame].player_B)
-                        #self.rounds[num_round].games.append(self.games[igame])
+                if running_game:
+                    self.get_result(igame, self.games[igame].player_A, self.games[igame].player_B)
             """end round"""
             self.get_round_end(num_round)
 
-            for i in range(len(self.rounds[num_round].games)):
-                print(i, self.rounds[num_round].games[i].game_id)
-                print(i, self.rounds[num_round].games[i].player_A)
-                print(i, self.rounds[num_round].games[i].player_B)
-                print(i, self.rounds[num_round].games[i].result)
-
         self.tournoi.rounds = self.rounds
-        for i in range(len(self.tournoi.rounds)):
-            print('i ' + str(i))
-            print('self.tournoi.rounds[i].games ' + str(len(self.tournoi.rounds[i].games)))
-            for j in range(len(self.tournoi.rounds[i].games)):
-                print(i, self.tournoi.rounds[i].games[j].game_id)
-                print(i, self.tournoi.rounds[i].games[j].player_A)
-                print(i, self.tournoi.rounds[i].games[j].player_B)
-                print(i, self.tournoi.rounds[i].games[j].result)
         """Affichage résultat tournoi"""
         self.print_end_views(self.tournoi)

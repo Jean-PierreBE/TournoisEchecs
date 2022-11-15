@@ -24,10 +24,13 @@ class CreateEndView:
 
         print(table)
 
-    def list_results_tournaments(self, area, date, players):
+    def list_results_tournaments(self, status, area, date, players):
         """Create list of all players"""
         table = PrettyTable()
-        table.title = 'Résultat du tournoi du ' + str(date) + ' à ' + area
+        lib_status = 'définitif'
+        if status == 0:
+            lib_status = 'provisoire'
+        table.title = 'Résultat ' + lib_status + ' du tournoi du ' + str(date) + ' à ' + area
         table.field_names = ['Nom', 'Prénom', 'Score']
         for iplayer in range(len(players)):
             table.add_row([players[iplayer].lastname, players[iplayer].firstname, players[iplayer].score])
