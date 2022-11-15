@@ -5,6 +5,12 @@ NUMBER_GAMES = 4
 ID_PLAYER = 'Player_'
 ID_TOURNAMENT = 'Tour_'
 ID_ROUND = 'Round_'
+ID_GAME = 'Game_'
+ANSWER_YES = 'Y'
+ANSWER_NO = 'N'
+MESSAGE_BAD_ANSWER = "Veuillez encoder 'Y' ou 'N' !"
+MESSAGE_WRONG_GAME = "Veuillez encoder 1 ,2 3 ou 4 !"
+MESSAGE_WRONG_RESULT = "Veuillez encoder 0, 1 ou 2 !"
 
 """Constants for tournament"""
 AREA = "Bruxelles"

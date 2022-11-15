@@ -79,22 +79,19 @@ class Controller:
         cv.CreateEndView.list_results_tournaments(self,0, self.tournoi.area, self.tournoi.date, self.tournoi.players)
 
     def get_game_choose(self,num_round):
-        response = cg.CreateGame.prompt_for_continue_round(self)
-        if response == 'Y':
-            return False, None
-        else:
-            num_game = cg.CreateGame.prompt_for_encode_result(self)
-            return True, num_game - 1 + vr.NUMBER_GAMES*(num_round)
-
-    def get_games(self,num_round):
-        last_player = 0
-        for num_game in range(vr.NUMBER_GAMES):
-            pref_game = 'Game_' + str(num_round + 1) + str(num_game + 1)
-            player_A = self.tournoi.players[last_player].player_id
-            player_B = self.tournoi.players[last_player + 1].player_id
-            last_player = last_player + 2
-            game = gm.Game(pref_game,player_A, player_B)
-            self.games.append(game)
+        resp = True
+        while resp:
+            response = cg.CreateGame.prompt_for_continue_round(self)
+            if response.upper() == vr.ANSWER_YES:
+                return False, None
+            elif response.upper() == vr.ANSWER_NO:
+                num_game = cg.CreateGame.prompt_for_encode_result(self)
+                if num_game < 1 or num_game > vr.NUMBER_GAMES:
+                    print(vr.MESSAGE_WRONG_GAME)
+                else:
+                    return True, int(num_game) - 1 + vr.NUMBER_GAMES*(num_round)
+            else:
+                print(vr.MESSAGE_BAD_ANSWER)
 
     def get_games_swiss(self,num_round):
         """first round"""
@@ -102,7 +99,7 @@ class Controller:
             sorted_player = sorted(self.tournoi.players,key=lambda e:e.classment)
             last_player = 0
             for num_game in range(vr.NUMBER_GAMES):
-                pref_game = 'Game_' + str(num_round + 1) + str(num_game + 1)
+                pref_game = vr.ID_GAME + str(num_round + 1) + str(num_game + 1)
                 player_A = sorted_player[last_player].player_id
                 player_B = sorted_player[last_player + 4].player_id
                 last_player = last_player + 1
@@ -111,8 +108,45 @@ class Controller:
         else:
             sorted_player = sorted(self.tournoi.players, key=lambda e:e.score, reverse=True)
             last_player = 0
+            """search precedent game"""
+            game_12 = tl.search_couple(self.games, sorted_player[0].player_id,
+                                       sorted_player[1].player_id)
             for num_game in range(vr.NUMBER_GAMES):
-                pref_game = 'Game_' + str(num_round + 1) + str(num_game + 1)
+                pref_game = vr.ID_GAME + str(num_round + 1) + str(num_game + 1)
+                if game_12 and num_game < 2:
+                    if num_game == 0:
+                        ind_playa =  0
+                        ind_playb =  2
+                    elif num_game == 1:
+                        ind_playa = 1
+                        ind_playb = 3
+                        last_player = 4
+                else:
+                    ind_playa = last_player
+                    ind_playb = last_player + 1
+                    last_player = last_player + 2
+                player_A = sorted_player[ind_playa].player_id
+                player_B = sorted_player[ind_playb].player_id
+                game = gm.Game(pref_game, player_A, player_B)
+                self.games.append(game)
+
+    def get_games_swiss1(self, num_round):
+        """first round"""
+        if num_round == 0:
+            sorted_player = sorted(self.tournoi.players, key=lambda e: e.classment)
+            last_player = 0
+            for num_game in range(vr.NUMBER_GAMES):
+                pref_game = vr.ID_GAME + str(num_round + 1) + str(num_game + 1)
+                player_A = sorted_player[last_player].player_id
+                player_B = sorted_player[last_player + 4].player_id
+                last_player = last_player + 1
+                game = gm.Game(pref_game, player_A, player_B)
+                self.games.append(game)
+        else:
+            sorted_player = sorted(self.tournoi.players, key=lambda e: e.score, reverse=True)
+            last_player = 0
+            for num_game in range(vr.NUMBER_GAMES):
+                pref_game = vr.ID_GAME + str(num_round + 1) + str(num_game + 1)
                 player_A = sorted_player[last_player].player_id
                 player_B = sorted_player[last_player + 1].player_id
                 last_player = last_player + 2
@@ -120,8 +154,14 @@ class Controller:
                 self.games.append(game)
 
     def get_result(self,num_game, player_A, player_B):
-        result = cg.CreateGame.prompt_for_result(self, player_A, player_B)
-        self.games[num_game].result = result
+        resp = True
+        while resp:
+            result = cg.CreateGame.prompt_for_result(self, player_A, player_B)
+            if result < 0 or result > 2:
+                print(vr.MESSAGE_WRONG_RESULT)
+            else:
+                self.games[num_game].result = result
+                resp = False
 
     def print_turning_views(self, tournoi, num_round, games):
         """list of tournaments"""
