@@ -58,14 +58,15 @@ class Controller:
 
     def get_round_end(self,num_round, tournoi):
         end_date = cr.CreateRound.prompt_for_end_date(self, num_round)
+
         end_time = cr.CreateRound.prompt_for_end_time(self, num_round)
         round = tournoi.rounds[num_round]
         round.enddate = end_date
         round.endtime = end_time
 
         for igame in range(vr.NUMBER_GAMES):
-            inda = tl.get_result_player(tournoi.players, round.games[igame].player_A)
-            indb = tl.get_result_player(tournoi.players, round.games[igame].player_B)
+            inda = tl.get_result_player(tournoi.players, round.games[igame].player_a)
+            indb = tl.get_result_player(tournoi.players, round.games[igame].player_b)
             tournoi.set_result(round.games[igame].result, inda, indb)
 
         """list of provisional results of tournament"""
@@ -93,10 +94,10 @@ class Controller:
             last_player = 0
             for num_game in range(vr.NUMBER_GAMES):
                 pref_game = vr.ID_GAME + str(num_round + 1) + str(num_game + 1)
-                player_A = sorted_player[last_player].player_id
-                player_B = sorted_player[last_player + 4].player_id
+                player_a = sorted_player[last_player].player_id
+                player_b = sorted_player[last_player + 4].player_id
                 last_player = last_player + 1
-                game = gm.Game(pref_game,player_A, player_B)
+                game = gm.Game(pref_game,player_a, player_b)
                 tournoi.rounds[num_round].games.append(game)
         else:
             sorted_player = sorted(tournoi.players, key=lambda e:(e.score,e.classment), reverse=True)
@@ -118,15 +119,15 @@ class Controller:
                     ind_playa = last_player
                     ind_playb = last_player + 1
                     last_player = last_player + 2
-                player_A = sorted_player[ind_playa].player_id
-                player_B = sorted_player[ind_playb].player_id
-                game = gm.Game(pref_game, player_A, player_B)
+                player_a = sorted_player[ind_playa].player_id
+                player_b = sorted_player[ind_playb].player_id
+                game = gm.Game(pref_game, player_a, player_b)
                 tournoi.rounds[num_round].games.append(game)
 
     def get_result(self,game):
         resp = True
         while resp:
-            result = cg.CreateGame.prompt_for_result(self, game.player_A, game.player_B)
+            result = cg.CreateGame.prompt_for_result(self, game.player_a, game.player_b)
             if result < 0 or result > 2:
                 print(vr.MESSAGE_WRONG_RESULT)
             else:
@@ -188,4 +189,4 @@ class Controller:
         tournament_table.truncate()  # clear the table first
         tournament_table.insert(serialized_tournament)
 
-        current_tournament1 = tournament_table.all()
+        current_tournament.serialize()

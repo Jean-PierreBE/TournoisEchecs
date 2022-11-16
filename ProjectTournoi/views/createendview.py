@@ -58,8 +58,8 @@ class CreateEndView:
         table.field_names = ['round', 'Game', 'Joueur A', 'Joueur B','Résultat']
         for indr in range(len(tournoi.rounds)):
             for indg in range(len(tournoi.rounds[indr].games)):
-                ind_a = tl.get_result_player(tournoi.players, tournoi.rounds[indr].games[indg].player_A)
-                ind_b = tl.get_result_player(tournoi.players, tournoi.rounds[indr].games[indg].player_B)
+                ind_a = tl.get_result_player(tournoi.players, tournoi.rounds[indr].games[indg].player_a)
+                ind_b = tl.get_result_player(tournoi.players, tournoi.rounds[indr].games[indg].player_b)
                 lib_result = 'Pas de résultat'
                 if tournoi.rounds[indr].games[indg].result == 0:
                    lib_result = 'Match nul'
@@ -81,8 +81,8 @@ class CreateEndView:
         table.title = 'Déroulement du round n° ' + str(num_round + 1) + ' du Tournoi du ' + str(tournoi.date) + ' à ' + tournoi.area
         table.field_names = ['Game', 'Id Joueur A', 'Joueur A','Id Joueur B', 'Joueur B', 'Résultat']
         for indg in range(vr.NUMBER_GAMES):
-            ind_a = tl.get_result_player(tournoi.players, tournoi.rounds[num_round].games[indg].player_A)
-            ind_b = tl.get_result_player(tournoi.players, tournoi.rounds[num_round].games[indg].player_B)
+            ind_a = tl.get_result_player(tournoi.players, tournoi.rounds[num_round].games[indg].player_a)
+            ind_b = tl.get_result_player(tournoi.players, tournoi.rounds[num_round].games[indg].player_b)
             lib_result = 'En attente'
             if tournoi.rounds[num_round].games[indg].result == 0:
                 lib_result = 'Match nul'
@@ -91,9 +91,9 @@ class CreateEndView:
             if tournoi.rounds[num_round].games[indg].result == 2:
                 lib_result = 'Joueur B vainqueur'
             table.add_row([tournoi.rounds[num_round].games[indg].game_id,
-                           tournoi.rounds[num_round].games[indg].player_A,
+                           tournoi.rounds[num_round].games[indg].player_a,
                            tournoi.players[ind_a].lastname + ' ' + tournoi.players[ind_a].firstname,
-                           tournoi.rounds[num_round].games[indg].player_B,
+                           tournoi.rounds[num_round].games[indg].player_b,
                            tournoi.players[ind_b].lastname + ' ' + tournoi.players[ind_b].firstname,
                            lib_result])
         print(table)

@@ -33,7 +33,7 @@ class Tournament:
             self.players[inda].score += 0
             self.players[indb].score += 1
 
-        def serialize(self):
+    def serialize(self):
             """
             {
             players : [{name : stein , },..., tous les joueurs],
@@ -46,5 +46,5 @@ class Tournament:
             :param self:
             :return:
             """
-            return json.dumps(self, default=lambda o: o.__dict__,
+            return json.dump(self, default=lambda o: o.__dict__,
                               sort_keys=True, indent=4)
