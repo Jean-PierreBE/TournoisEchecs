@@ -14,10 +14,8 @@ class CreateTournament:
         """prompt for the date of tournament"""
         date_entry = input("Entrez la date du tournoi au format DD/MM/YYYY : ")
         if not date_entry:
-            date_entry = vr.DATE_TOURNAMENT
-        day,month,year  = map(int, date_entry.split('/'))
-        date_tournament = dt.date(year, month, day)
-        return date_tournament
+            date_entry = dt.date.today().strftime("%d/%m/%Y")
+        return date_entry
 
     def prompt_for_description(self):
         """prompt for the description of tournament"""

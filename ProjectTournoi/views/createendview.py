@@ -37,6 +37,19 @@ class CreateEndView:
 
         print(table)
 
+    def list_rounds(self, tournoi):
+        """Create list of results by round"""
+        table = PrettyTable()
+
+        table.title = 'Rounds du Tournoi du ' + str(tournoi.date) + ' à ' + tournoi.area
+        table.field_names = ['round', 'Date de début', 'Heure de début', 'Date de fin', 'Heure de fin']
+        for indr in range(len(tournoi.rounds)):
+            table.add_row([tournoi.rounds[indr].round_id, tournoi.rounds[indr].begindate,
+                            tournoi.rounds[indr].begintime,
+                            tournoi.rounds[indr].enddate,
+                            tournoi.rounds[indr].endtime])
+        print(table)
+
     def list_results_rounds(self, tournoi):
         """Create list of results by round"""
         table = PrettyTable()
@@ -61,28 +74,26 @@ class CreateEndView:
                                lib_result])
         print(table)
 
-    def list_turning_round(self, tournoi, num_round, games):
+    def list_turning_round(self, num_round, tournoi):
         """Create list of results by round"""
         table = PrettyTable()
 
         table.title = 'Déroulement du round n° ' + str(num_round + 1) + ' du Tournoi du ' + str(tournoi.date) + ' à ' + tournoi.area
         table.field_names = ['Game', 'Id Joueur A', 'Joueur A','Id Joueur B', 'Joueur B', 'Résultat']
-        imin = vr.NUMBER_GAMES * (num_round)
-        imax = vr.NUMBER_GAMES * (num_round + 1)
-        for indg in range(imin, imax):
-            ind_a = tl.get_result_player(tournoi.players, games[indg].player_A)
-            ind_b = tl.get_result_player(tournoi.players, games[indg].player_B)
+        for indg in range(vr.NUMBER_GAMES):
+            ind_a = tl.get_result_player(tournoi.players, tournoi.rounds[num_round].games[indg].player_A)
+            ind_b = tl.get_result_player(tournoi.players, tournoi.rounds[num_round].games[indg].player_B)
             lib_result = 'En attente'
-            if games[indg].result == 0:
+            if tournoi.rounds[num_round].games[indg].result == 0:
                 lib_result = 'Match nul'
-            if games[indg].result == 1:
+            if tournoi.rounds[num_round].games[indg].result == 1:
                 lib_result = 'Joueur A vainqueur'
-            if games[indg].result == 2:
+            if tournoi.rounds[num_round].games[indg].result == 2:
                 lib_result = 'Joueur B vainqueur'
-            table.add_row([games[indg].game_id,
-                           games[indg].player_A,
+            table.add_row([tournoi.rounds[num_round].games[indg].game_id,
+                           tournoi.rounds[num_round].games[indg].player_A,
                            tournoi.players[ind_a].lastname + ' ' + tournoi.players[ind_a].firstname,
-                           games[indg].player_B,
+                           tournoi.rounds[num_round].games[indg].player_B,
                            tournoi.players[ind_b].lastname + ' ' + tournoi.players[ind_b].firstname,
                            lib_result])
         print(table)

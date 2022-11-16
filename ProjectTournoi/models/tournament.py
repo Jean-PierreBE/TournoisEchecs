@@ -1,5 +1,4 @@
-NUMBER_ROUNDS = 4
-
+import json
 
 class Tournament:
     """Chess Tournament"""
@@ -34,5 +33,18 @@ class Tournament:
             self.players[inda].score += 0
             self.players[indb].score += 1
 
-        #print(str(inda) + ' self.tournoi.players[inda].score ' + str(self.players[inda].score))
-        #print(str(indb) + ' self.tournoi.players[indb].score ' + str(self.players[indb].score))
+        def serialize(self):
+            """
+            {
+            players : [{name : stein , },..., tous les joueurs],
+            rounds : [{
+                        start_date : ...,
+                        games : [{player_a : ...,...},...]
+                        }]
+              ]
+
+            :param self:
+            :return:
+            """
+            return json.dumps(self, default=lambda o: o.__dict__,
+                              sort_keys=True, indent=4)
