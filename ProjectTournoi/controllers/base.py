@@ -152,6 +152,8 @@ class Controller:
 
     def run(self):
         """Run the game."""
+        if len(self.tournois) == 0:
+            pass
         """Initialize tournament"""
         self.create_tournament()
         # liste des tournois
@@ -184,9 +186,7 @@ class Controller:
         self.print_end_views(current_tournament)
         """serialize object"""
         serialized_tournament = jsons.dump(current_tournament)
-        db = TinyDB('db.json')
+        db = TinyDB(vr.DB_TOURNAMENT)
         tournament_table = db.table('tournament')
-        tournament_table.truncate()  # clear the table first
+        #tournament_table.truncate()  # clear the table first
         tournament_table.insert(serialized_tournament)
-
-        current_tournament.serialize()
