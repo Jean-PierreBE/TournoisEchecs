@@ -1,6 +1,7 @@
 from ProjectTournoi.models import player as pl
 from ProjectTournoi.views import createplayer as cp
 from ProjectTournoi.views import createendview as cv
+import ProjectTournoi.controllers.tools as tl
 
 import ProjectTournoi.variables as vr
 from tinydb import TinyDB
@@ -29,7 +30,20 @@ def choose_players(self, tournoi):
     cv.CreateEndView.list_only_players(self, players)
     print(vr.INVITE_CHOOSE_8_PLAYERS)
     for indpt in range(vr.NUMBER_PLAYERS):
-        cp.CreatePlayer.prompt_for_continue_players(self)
+        resp = True
+        while resp:
+            num_play = cp.CreatePlayer.prompt_choose_indice_players(self, indpt)
+            if num_play > len(players):
+                print()
+            elif(tl.get_result_player(tournoi.players, players_table[num_play-1].player_id) >= 0 or
+                    tl.get_result_player(tournoi.players, players_table[num_play-1].player_id) < len(players)):
+                print()
+            else:
+                player_sel = pl.Player(players_table[num_play-1].player_id, players_table[num_play-1].lastname, players_table[num_play-1].firstname,
+                                       players_table[num_play-1].birthdate, players_table[num_play-1].sex, players_table[num_play-1].classment)
+                tournoi.players.append(player_sel)
+                resp = False
+        cv.CreateEndView.list_players(self, tournoi.area, tournoi.date, tournoi.players)
 
 
 def create_player(self, play_seq):

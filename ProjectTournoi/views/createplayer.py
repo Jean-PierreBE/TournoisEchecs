@@ -74,3 +74,10 @@ class CreatePlayer:
         if not response:
             return 2
         return int(response)
+
+    def prompt_choose_indice_players(self, num_player):
+        """Prompt to continue encode players"""
+        response = input("Selectionner un indice pour le joueur " + str(num_player))
+        if not response:
+            return 1
+        return int(response)

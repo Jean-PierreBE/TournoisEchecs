@@ -3,6 +3,7 @@ def get_result_player(list, element):
     for ind in range(len(list)):
         if list[ind].player_id == element:
             return ind
+    return -1
 
 """Search if player 1 and player 2 played already """
 
