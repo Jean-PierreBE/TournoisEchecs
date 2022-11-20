@@ -8,10 +8,12 @@ ID_ROUND = 'Round_'
 ID_GAME = 'Game_'
 ANSWER_YES = 'Y'
 ANSWER_NO = 'N'
-MESSAGE_BAD_ANSWER = "Veuillez encoder 'Y' ou 'N' !"
+MESSAGE_BAD_ANSWER_Y_OR_N = "Veuillez encoder 'Y' ou 'N' !"
+MESSAGE_BAD_ANSWER_1_OR_2 = "Veuillez encoder 1 ou 2 !"
 MESSAGE_WRONG_GAME = "Veuillez encoder 1 ,2 ,3 ou 4 !"
 MESSAGE_WRONG_RESULT = "Veuillez encoder 0, 1 ou 2 !"
 TOURNAMENT_STATUS = {'new' : 0, 'Active' : 1, 'closed' : 2}
+INVITE_CHOOSE_8_PLAYERS = "Veuillez choisir 8 joueurs en selectionnant l'indice "
 
 """menu"""
 menu_options = {
@@ -24,6 +26,7 @@ menu_options = {
 
 """DataBase"""
 DB_TOURNAMENT = 'db_Tournament.json'
+DB_PLAYERS = 'db_Players.json'
 TABLE_TOURNAMENT = 'tournament'
 PLAYERS_TOURNAMENT = 'players'
 

@@ -15,11 +15,11 @@ def print_menu():
 
 
 def option1():
-    print('Handle option \'Option 1\'')
+    tournoi.run_create_players()
 
 
 def option2():
-    tournoi.run()
+    tournoi.run_create_tournoi()
 
 
 def option3():

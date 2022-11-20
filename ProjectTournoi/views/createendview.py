@@ -9,9 +9,22 @@ class CreateEndView:
         table = PrettyTable()
 
         table.title = 'Liste des joueurs du tournoi du ' + str(date) + ' à ' + area
-        table.field_names = ['Nom', 'Prénom', 'Date de naissance', 'sexe', 'score']
+        table.field_names = ['Nom', 'Prénom', 'Date de naissance', 'sexe', 'classement']
         for iplayer in range(len(players)):
             table.add_row([players[iplayer].lastname, players[iplayer].firstname, players[iplayer].birthdate, players[iplayer].sex, players[iplayer].classment])
+
+        print(table)
+
+    def list_only_players(self, players):
+        """Create list of all players"""
+        table = PrettyTable()
+
+        table.title = 'Liste des joueurs disponibles '
+        table.field_names = ['Indice', 'Id', 'Nom', 'Prénom', 'Date de naissance', 'sexe', 'classement']
+        indp = 0
+        for iplayer in range(len(players)):
+            indp += 1
+            table.add_row([indp, players[iplayer].player_id, players[iplayer].lastname, players[iplayer].firstname, players[iplayer].birthdate, players[iplayer].sex, players[iplayer].classment])
 
         print(table)
 
