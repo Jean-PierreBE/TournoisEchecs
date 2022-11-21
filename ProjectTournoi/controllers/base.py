@@ -28,9 +28,6 @@ class Controller:
         encode_players = True
         db_players = TinyDB(vr.DB_PLAYERS)
         players_table = db_players.table(vr.DB_PLAYERS)
-        print('len(db_players) : ' + str(len(db_players)))
-        for row in players_table:
-            print(row)
         play_seq = len(players_table)
         while encode_players:
             """Encode players"""
@@ -82,8 +79,17 @@ class Controller:
         """serialize object"""
         serialized_tournament = jsons.dump(current_tournament)
         db = TinyDB(vr.DB_TOURNAMENT)
-        tournament_table = db.table(vr.TABLE_TOURNAMENT)
+        tournament_table = db.table(vr.DB_TOURNAMENT)
         #tournament_table.truncate()  # clear the table first
         tournament_table.insert(serialized_tournament)
         """delete self tournois after save"""
         self.tournois.clear()
+
+    def run_report_players_alph(self):
+        """reports"""
+        rep.print_players_order_alphabetics(self)
+    def run_report_players_classment(self):
+        rep.print_players_order_classment(self)
+
+    def run_report_tournament(self):
+        rep.print_all_tournaments(self)

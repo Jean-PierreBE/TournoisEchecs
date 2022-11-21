@@ -19,15 +19,23 @@ def option1():
 
 
 def option2():
-    tournoi.run_create_tournoi()
+    print('Handle option \'Option 2\'')
 
 
 def option3():
-    print('Handle option \'Option 3\'')
+    tournoi.run_create_tournoi()
 
 
 def option4():
-    print('Handle option \'Option 3\'')
+    tournoi.run_report_players_alph()
+
+
+def option5():
+    tournoi.run_report_players_classment()
+
+
+def option6():
+    tournoi.run_report_tournament()
 
 
 ctview = vt.CreateTournament()
@@ -55,7 +63,11 @@ while True:
     elif option == 4:
         option4()
     elif option == 5:
+        option5()
+    elif option == 6:
+        option6()
+    elif option == 7:
         print("Au revoir et à bientôt !")
         exit()
     else:
-        print('veuillez entrer un chiffre entre 1 et 4.')
+        print('veuillez entrer un chiffre entre 1 et 7.')

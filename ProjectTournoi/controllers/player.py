@@ -32,15 +32,15 @@ def choose_players(self, tournoi):
     for indpt in range(vr.NUMBER_PLAYERS):
         resp = True
         while resp:
-            num_play = cp.CreatePlayer.prompt_choose_indice_players(self, indpt)
+            num_play = cp.CreatePlayer.prompt_choose_indice_players(self, indpt + 1)
             if num_play > len(players):
-                print()
-            elif(tl.get_result_player(tournoi.players, players_table[num_play-1].player_id) >= 0 or
-                    tl.get_result_player(tournoi.players, players_table[num_play-1].player_id) < len(players)):
-                print()
+                print(vr.MESSAGE_PLAYER_OUT_OF_RANGE)
+            elif(tl.get_result_player(tournoi.players, players[num_play-1].player_id) >= 0 and
+                    tl.get_result_player(tournoi.players, players[num_play-1].player_id) < len(players)):
+                print(vr.MESSAGE_PLAYER_ALLREADY_SELECTED)
             else:
-                player_sel = pl.Player(players_table[num_play-1].player_id, players_table[num_play-1].lastname, players_table[num_play-1].firstname,
-                                       players_table[num_play-1].birthdate, players_table[num_play-1].sex, players_table[num_play-1].classment)
+                player_sel = pl.Player(players[num_play-1].player_id, players[num_play-1].lastname, players[num_play-1].firstname,
+                                       players[num_play-1].birthdate, players[num_play-1].sex, players[num_play-1].classment)
                 tournoi.players.append(player_sel)
                 resp = False
         cv.CreateEndView.list_players(self, tournoi.area, tournoi.date, tournoi.players)

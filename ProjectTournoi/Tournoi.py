@@ -1,4 +1,5 @@
 """Procedures"""
+from ProjectTournoi.variables import menu_options
 def print_menu():
     for key in menu_options.keys():
         print (key, '--', menu_options[key] )

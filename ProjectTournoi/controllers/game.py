@@ -55,7 +55,7 @@ def get_game_choose(self,num_round):
             else:
                 return True, int(num_game) - 1
         else:
-            print(vr.MESSAGE_BAD_ANSWER)
+            print(vr.MESSAGE_BAD_ANSWER_Y_OR_N)
 
 def get_result(self,game):
     resp = True

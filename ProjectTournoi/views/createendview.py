@@ -15,6 +15,17 @@ class CreateEndView:
 
         print(table)
 
+    def list_players_sort(self, players, title_rep):
+        """Create list of all players"""
+        table = PrettyTable()
+
+        table.title = title_rep
+        table.field_names = ['Nom', 'Prénom', 'Date de naissance', 'sexe', 'classement']
+        for iplayer in range(len(players)):
+            table.add_row([players[iplayer].lastname, players[iplayer].firstname, players[iplayer].birthdate, players[iplayer].sex, players[iplayer].classment])
+
+        print(table)
+
     def list_only_players(self, players):
         """Create list of all players"""
         table = PrettyTable()
@@ -34,6 +45,16 @@ class CreateEndView:
         table.title = 'liste des Tournois'
         table.field_names = ['Lieu', 'date', 'Description']
         table.add_row([area, date, description])
+
+        print(table)
+
+    def list_tournaments1(self, tournaments):
+        """Create list of all players"""
+        table = PrettyTable()
+        table.title = 'liste des Tournois'
+        table.field_names = ['Lieu', 'date', 'Description']
+        for itournoi in range(len(tournaments)):
+            table.add_row([tournaments[itournoi].area, tournaments[itournoi].date, tournaments[itournoi].description])
 
         print(table)
 
