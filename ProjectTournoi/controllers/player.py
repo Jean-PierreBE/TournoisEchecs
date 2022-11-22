@@ -57,6 +57,17 @@ def create_player(self, play_seq):
     self.players.append(player)
 
 
+def update_player(self, player_in):
+    """create 1 player"""
+    lastname = cp.UpdatePlayer.prompt_for_lastname(self, player_in.lastname)
+    firstname = cp.UpdatePlayer.prompt_for_firstname(self, player_in.firstname)
+    birthdate = cp.UpdatePlayer.prompt_for_birthdate(self, player_in.birthdate)
+    codesex = cp.UpdatePlayer.prompt_for_sex(self, player_in.sex)
+    classment = cp.UpdatePlayer.prompt_for_classment(self, player_in.classment)
+    player_out = pl.Player(player_in.player_id, lastname, firstname, birthdate, codesex, classment)
+    return player_out
+
+
 def get_players_continue(self):
     resp = True
     while resp:

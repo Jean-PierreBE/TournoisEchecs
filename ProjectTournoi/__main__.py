@@ -19,8 +19,7 @@ def option1():
 
 
 def option2():
-    print('Handle option \'Option 2\'')
-
+    tournoi.run_update_players()
 
 def option3():
     tournoi.run_create_tournoi()

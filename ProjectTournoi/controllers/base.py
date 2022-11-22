@@ -5,10 +5,14 @@ import ProjectTournoi.controllers.game as cgm
 import ProjectTournoi.controllers.round as rnd
 import ProjectTournoi.controllers.player as ply
 
+from ProjectTournoi.views import createendview as cv
+from ProjectTournoi.views import createplayer as cp
+
 import ProjectTournoi.variables as vr
+import ProjectTournoi.controllers.tools as tl
 
 import jsons
-from tinydb import TinyDB
+from tinydb import TinyDB, Query
 
 class Controller:
     """Main controller"""
@@ -36,6 +40,20 @@ class Controller:
             encode_players = ply.get_players_continue(self)
         serialized_players = jsons.dump(self.players)
         players_table.insert_multiple(serialized_players)
+
+    def run_update_players(self):
+        encode_players = True
+        db_players = TinyDB(vr.DB_PLAYERS)
+        players = tl.download_players()
+        cv.CreateEndView.list_only_players(self, players)
+        while encode_players:
+            """Encode players"""
+            num_play = cp.CreatePlayer.prompt_choose_indice_players(self, -1)
+            player_out = ply.update_player(self, players[num_play-1])
+            Playerid = Query()
+            print(db_players.get(Playerid.player_id == 'Player_2'))
+            db_players.update({'classment': player_out.classment}, Playerid.player_id == 'Player_2')
+            encode_players = ply.get_players_continue(self)
 
     def run_create_tournoi(self):
         """Run the game."""

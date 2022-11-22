@@ -77,7 +77,63 @@ class CreatePlayer:
 
     def prompt_choose_indice_players(self, num_player):
         """Prompt to continue encode players"""
-        response = input("Selectionner un indice pour le joueur " + str(num_player) + " : ")
+        if num_player == -1:
+            question = "Selectionner un indice pour le joueur "
+        else:
+            question = "Selectionner un indice pour le joueur " + str(num_player) + " : "
+        response = input(question)
         if not response:
             return 1
         return int(response)
+
+class UpdatePlayer:
+    def prompt_for_player_id(self):
+        """Prompt for a last name."""
+        question = "tapez le nom du joueur : "
+        lastname = input(question)
+        if not lastname:
+            return lastname_in
+        return lastname.upper()
+
+    def prompt_for_lastname(self,lastname_in):
+        """Prompt for a last name."""
+        question = "tapez le nom du joueur : "
+        lastname = input(question)
+        if not lastname:
+            return lastname_in
+        return lastname.upper()
+
+    def prompt_for_firstname(self,firstname_in):
+        """Prompt for a first name."""
+        question = "tapez le prénom du joueur  : "
+        firstname = input(question)
+        if not firstname:
+            return firstname_in
+        return firstname
+
+    def prompt_for_birthdate(self,birthdate_in):
+        """Prompt for a birthdate"""
+        question = "Entrez la date de naissance du joueur au format DD/MM/YYYY : "
+        date_entry = input(question)
+        if not date_entry:
+            return birthdate_in
+        day, month, year = map(int, date_entry.split('/'))
+        birthdate = dt.date(year, month, day)
+        return birthdate
+
+    def prompt_for_sex(self,codesex_in):
+        """Prompt for a code sex"""
+        question = "Entrez le genre du joueur (M/F) : "
+        codesex = input(question)
+        if not codesex:
+           return codesex_in
+        return codesex.upper()
+
+    def prompt_for_classment(self,classment_in):
+        """Prompt for a classment"""
+        question = "Entrez le dernier classement du joueur n° : "
+        classment = input(question)
+        try:
+            return int(classment)
+        except ValueError:
+            return classment_in
