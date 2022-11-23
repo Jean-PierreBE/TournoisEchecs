@@ -2,6 +2,7 @@ from tinydb import TinyDB
 import ProjectTournoi.variables as vr
 from ProjectTournoi.models import player as pl
 from ProjectTournoi.models import tournament as tn
+from ProjectTournoi.db import db_players,players_table, db_tournament, tournament_table
 
 def get_result_player(list, element):
     for ind in range(len(list)):
@@ -22,8 +23,6 @@ def search_couple(list, element_a, element_b):
     return False
 
 def download_players():
-    db_players = TinyDB(vr.DB_PLAYERS)
-    players_table = db_players.table(vr.DB_PLAYERS)
     players = []
     for row in players_table:
         player = pl.Player(row['player_id'], row['lastname'], row['firstname'], row['birthdate'], row['sex'],

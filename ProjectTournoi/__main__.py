@@ -7,8 +7,8 @@ import ProjectTournoi.views.creategame as vg
 import ProjectTournoi.views.createendview as vv
 from ProjectTournoi.variables import menu_options
 
-
 def print_menu():
+
     print("Gestion de tournois d'échecs")
     for key in menu_options.keys():
         print(key, '--', menu_options[key])

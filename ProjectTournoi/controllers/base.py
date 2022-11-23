@@ -12,7 +12,8 @@ import ProjectTournoi.variables as vr
 import ProjectTournoi.controllers.tools as tl
 
 import jsons
-from tinydb import TinyDB, Query
+from tinydb import Query
+from ProjectTournoi.db import db_players,players_table
 
 class Controller:
     """Main controller"""
@@ -30,8 +31,6 @@ class Controller:
 
     def run_create_players(self):
         encode_players = True
-        db_players = TinyDB(vr.DB_PLAYERS)
-        players_table = db_players.table(vr.DB_PLAYERS)
         play_seq = len(players_table)
         while encode_players:
             """Encode players"""
@@ -43,7 +42,6 @@ class Controller:
 
     def run_update_players(self):
         encode_players = True
-        db_players = TinyDB(vr.DB_PLAYERS)
         players = tl.download_players()
         cv.CreateEndView.list_only_players(self, players)
         while encode_players:
