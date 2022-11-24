@@ -87,13 +87,6 @@ class CreatePlayer:
         return int(response)
 
 class UpdatePlayer:
-    def prompt_for_player_id(self):
-        """Prompt for a last name."""
-        question = "tapez le nom du joueur : "
-        lastname = input(question)
-        if not lastname:
-            return lastname_in
-        return lastname.upper()
 
     def prompt_for_lastname(self,lastname_in):
         """Prompt for a last name."""

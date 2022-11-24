@@ -5,10 +5,7 @@ import ProjectTournoi.controllers.tools as tl
 
 import ProjectTournoi.variables as vr
 from tinydb import TinyDB
-db_players = TinyDB(vr.DB_PLAYERS)
-players_table = db_players.table(vr.DB_PLAYERS)
-db_tournament = TinyDB(vr.DB_TOURNAMENT)
-tournament_table = db_tournament.table(vr.DB_TOURNAMENT)
+from ProjectTournoi.db import db_players, db_tournament
 
 def create_players(self, tournoi):
     """create some players"""
@@ -26,7 +23,7 @@ def create_players(self, tournoi):
 def choose_players(self, tournoi):
     """create some players"""
     players = []
-    for row in players_table:
+    for row in db_players:
         player = pl.Player(row['player_id'], row['lastname'], row['firstname'], row['birthdate'], row['sex'], row['classment'])
         players.append(player)
     cv.CreateEndView.list_only_players(self, players)

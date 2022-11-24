@@ -13,7 +13,7 @@ import ProjectTournoi.controllers.tools as tl
 
 import jsons
 from tinydb import Query
-from ProjectTournoi.db import db_players,players_table
+from ProjectTournoi.db import db_players, db_tournament
 
 class Controller:
     """Main controller"""
@@ -31,14 +31,14 @@ class Controller:
 
     def run_create_players(self):
         encode_players = True
-        play_seq = len(players_table)
+        play_seq = len(db_players)
         while encode_players:
             """Encode players"""
             play_seq += 1
             ply.create_player(self, play_seq)
             encode_players = ply.get_players_continue(self)
         serialized_players = jsons.dump(self.players)
-        players_table.insert_multiple(serialized_players)
+        db_players.insert_multiple(serialized_players)
 
     def run_update_players(self):
         encode_players = True
@@ -49,8 +49,9 @@ class Controller:
             num_play = cp.CreatePlayer.prompt_choose_indice_players(self, -1)
             player_out = ply.update_player(self, players[num_play-1])
             Playerid = Query()
-            print(db_players.get(Playerid.player_id == 'Player_2'))
-            db_players.update({'classment': player_out.classment}, Playerid.player_id == 'Player_2')
+            db_players.update({'classment': player_out.classment,'lastname': player_out.lastname,
+                                'firstname': player_out.firstname, 'birthdate': player_out.birthdate,
+                               'sex': player_out.sex}, Playerid.player_id == player_out.player_id)
             encode_players = ply.get_players_continue(self)
 
     def run_create_tournoi(self):
@@ -63,13 +64,8 @@ class Controller:
         # demander de créer ou gérer un tournoi existant
         # tournoi = self.tournois[indice choisi]
         current_tournament = self.tournois[0]
-        """Select if you want to encoe players or to choose them from a list"""
-        if ply.get_players_choose(self) == 1:
-            """Encode players"""
-            ply.create_players(self, current_tournament)
-        else:
-            """choose players from a list"""
-            ply.choose_players(self, current_tournament)
+        """choose players from a list"""
+        ply.choose_players(self, current_tournament)
 
         """Rounds"""
         for num_round in range(vr.NUMBER_ROUNDS):
@@ -94,10 +90,7 @@ class Controller:
         rep.print_end_views(self, current_tournament)
         """serialize object"""
         serialized_tournament = jsons.dump(current_tournament)
-        db = TinyDB(vr.DB_TOURNAMENT)
-        tournament_table = db.table(vr.DB_TOURNAMENT)
-        #tournament_table.truncate()  # clear the table first
-        tournament_table.insert(serialized_tournament)
+        db_tournament.insert(serialized_tournament)
         """delete self tournois after save"""
         self.tournois.clear()
 

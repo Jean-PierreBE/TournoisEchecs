@@ -14,29 +14,6 @@ def print_menu():
         print(key, '--', menu_options[key])
 
 
-def option1():
-    tournoi.run_create_players()
-
-
-def option2():
-    tournoi.run_update_players()
-
-def option3():
-    tournoi.run_create_tournoi()
-
-
-def option4():
-    tournoi.run_report_players_alph()
-
-
-def option5():
-    tournoi.run_report_players_classment()
-
-
-def option6():
-    tournoi.run_report_tournament()
-
-
 ctview = vt.CreateTournament()
 cpview = vp.CreatePlayer()
 crview = vr.CreateRound()
@@ -54,17 +31,17 @@ while True:
     except:
         print('caractères non numériques ...')
     if option == 1:
-       option1()
+        tournoi.run_create_players()
     elif option == 2:
-        option2()
+        tournoi.run_update_players()
     elif option == 3:
-        option3()
+        tournoi.run_create_tournoi()
     elif option == 4:
-        option4()
+        tournoi.run_report_players_alph()
     elif option == 5:
-        option5()
+        tournoi.run_report_players_classment()
     elif option == 6:
-        option6()
+        tournoi.run_report_tournament()
     elif option == 7:
         print("Au revoir et à bientôt !")
         exit()
