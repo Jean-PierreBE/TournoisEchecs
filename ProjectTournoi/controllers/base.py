@@ -8,7 +8,7 @@ import ProjectTournoi.controllers.player as ply
 from ProjectTournoi.views import createendview as cv
 from ProjectTournoi.views import createplayer as cp
 
-import ProjectTournoi.variables as vr
+from ProjectTournoi.variables import NUMBER_ROUNDS
 import ProjectTournoi.controllers.tools as tl
 
 import jsons
@@ -39,6 +39,7 @@ class Controller:
             encode_players = ply.get_players_continue(self)
         serialized_players = jsons.dump(self.players)
         db_players.insert_multiple(serialized_players)
+        self.players.clear()
 
     def run_update_players(self):
         encode_players = True
@@ -54,45 +55,50 @@ class Controller:
                                'sex': player_out.sex}, Playerid.player_id == player_out.player_id)
             encode_players = ply.get_players_continue(self)
 
+
+    def run_update_tournoi(self):
+        # liste des tournois
+        self.tournois = tl.download_tournaments()
+        for i in range(len(self.tournois)):
+            print(self.tournois[i].area)
+            print(self.tournois[i].date)
+            print(self.tournois[i].tournament_id)
+        # demander de créer ou gérer un tournoi existant
+        # tournoi = self.tournois[indice choisi]
+
+
     def run_create_tournoi(self):
-        """Run the game."""
-        if len(self.tournois) == 0:
-            pass
-        """Initialize tournament"""
-        ctn.create_tournament(self)
+        ctn.create_tournament(self, len(db_tournament))
         # liste des tournois
         # demander de créer ou gérer un tournoi existant
         # tournoi = self.tournois[indice choisi]
-        current_tournament = self.tournois[0]
         """choose players from a list"""
-        ply.choose_players(self, current_tournament)
+        ply.choose_players(self, self.current_tournament)
 
         """Rounds"""
-        for num_round in range(vr.NUMBER_ROUNDS):
+        for num_round in range(NUMBER_ROUNDS):
             """begin round"""
-            rnd.create_round_begin(self, num_round, current_tournament)
+            rnd.create_round_begin(self, num_round, self.current_tournament)
             """Swiss algorithm"""
-            cgm.get_games_swiss(self, num_round, current_tournament)
+            cgm.get_games_swiss(self, num_round, self.current_tournament)
             running_game = True
 
             while running_game:
                 """view games"""
-                rep.print_turning_views(self, num_round, current_tournament)
+                rep.print_turning_views(self, num_round, self.current_tournament)
                 """choose number of game to encode or leave the round"""
                 running_game, igame = cgm.get_game_choose(self, num_round)
                 """encode score"""
                 if running_game:
-                    cgm.get_result(self, current_tournament.rounds[num_round].games[igame])
+                    cgm.get_result(self, self.current_tournament.rounds[num_round].games[igame])
             """end round"""
-            rnd.get_round_end(self, num_round, current_tournament)
+            rnd.get_round_end(self, num_round, self.current_tournament)
 
         """Affichage résultat tournoi"""
-        rep.print_end_views(self, current_tournament)
+        rep.print_end_views(self, self.current_tournament)
         """serialize object"""
-        serialized_tournament = jsons.dump(current_tournament)
+        serialized_tournament = jsons.dump(self.current_tournament)
         db_tournament.insert(serialized_tournament)
-        """delete self tournois after save"""
-        self.tournois.clear()
 
     def run_report_players_alph(self):
         """reports"""

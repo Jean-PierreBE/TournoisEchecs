@@ -1,8 +1,6 @@
-from tinydb import TinyDB
-import ProjectTournoi.variables as vr
 from ProjectTournoi.models import player as pl
 from ProjectTournoi.models import tournament as tn
-from ProjectTournoi.db import db_players, db_tournament, tournament_table
+from ProjectTournoi.db import db_players, db_tournament
 
 def get_result_player(list, element):
     for ind in range(len(list)):
@@ -32,7 +30,7 @@ def download_players():
 
 def download_tournaments():
     tournaments = []
-    for row in tournament_table:
+    for row in db_tournament:
         tournament = tn.Tournament(row['tournament_id'], row['area'], row['date'], row['description'],'','')
         tournaments.append(tournament)
     return tournaments

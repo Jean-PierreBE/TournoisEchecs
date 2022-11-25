@@ -37,12 +37,14 @@ while True:
     elif option == 3:
         tournoi.run_create_tournoi()
     elif option == 4:
-        tournoi.run_report_players_alph()
+        tournoi.run_update_tournoi()
     elif option == 5:
-        tournoi.run_report_players_classment()
+        tournoi.run_report_players_alph()
     elif option == 6:
-        tournoi.run_report_tournament()
+        tournoi.run_report_players_classment()
     elif option == 7:
+        tournoi.run_report_tournament()
+    elif option == 8:
         print("Au revoir et à bientôt !")
         exit()
     else:

@@ -1,13 +1,13 @@
 """Create tournament view"""
 import datetime as dt
-import ProjectTournoi.variables as vr
+from ProjectTournoi.variables import AREA_DEFAULT, DESCRIPTION_DEFAULT
 class CreateTournament:
 
     def prompt_for_area(self):
         """prompt for the area of tournament"""
         area = input("Entrez le lieu du tournoi : ")
         if not area:
-            return vr.AREA
+            return AREA_DEFAULT
         return area
 
     def prompt_for_date(self):
@@ -21,5 +21,5 @@ class CreateTournament:
         """prompt for the description of tournament"""
         description = input("Entrez la description du tournoi : ")
         if not description:
-            return vr.DESCRIPTION
+            return DESCRIPTION_DEFAULT
         return description

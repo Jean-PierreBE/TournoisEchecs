@@ -19,29 +19,23 @@ INVITE_CHOOSE_8_PLAYERS = "Veuillez choisir 8 joueurs en selectionnant l'indice 
 
 """menu"""
 menu_options = {
-    1: 'Créations de joueurs',
+    1: 'Encodage nouveaux joueurs',
     2: 'Mise à jour joueurs ',
     3: 'Encodage nouveau tournoi ',
-    4: 'Liste des joueurs par ordre alphabétique',
-    5: 'Liste des joueurs par classement ',
-    6: 'Liste de tous les tournois',
-    7: 'Exit',
+    4: 'Mise à jour tournoi',
+    5: 'Liste des joueurs par ordre alphabétique',
+    6: 'Liste des joueurs par classement ',
+    7: 'Liste de tous les tournois',
+    8: 'Exit',
 }
 
 
-"""DataBase"""
-DB_TOURNAMENT = 'db_Tournament.json'
-DB_PLAYERS = 'db_Players.json'
-TABLE_TOURNAMENT = 'tournament'
-PLAYERS_TOURNAMENT = 'players'
-
-
 """Constants for tournament"""
-AREA = "Bruxelles"
-DESCRIPTION = "Tournoi d'echecs avec 4 tours , 4 parties pour chaque tour et 8 joueurs"
+AREA_DEFAULT = "A completer"
+DESCRIPTION_DEFAULT = "A completer"
 """Constants for players"""
-LAST_NAME = ['STEIN','STEINER','STEINMANN','STEINMEYER','STERLING','STERMANN','STERMEYER','MEYER']
-FIRST_NAME = ['Jean-Pierre','Jeanne','Jean','Paula','Patrick','Lola','Paul','Helene']
-BIRTHDATE = ['10/03/1965','11/04/1966','12/05/1967','13/06/1968','14/07/1969','15/08/1970','16/09/1971','17/10/1972']
-SEX = ['M','F','M','F','M','F','M','F']
-CLASSMENT = [1300,600,1000,1200,900,1250,800,2050]
+LAST_NAME_DEFAULT = 'A completer'
+FIRST_NAME_DEFAULT = 'A completer'
+BIRTHDATE_DEFAULT = '01/01/1900'
+SEX_DEFAULT = 'A completer'
+CLASSMENT_DEFAULT = 400
