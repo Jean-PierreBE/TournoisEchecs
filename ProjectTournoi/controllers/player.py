@@ -7,18 +7,6 @@ import ProjectTournoi.variables as vr
 from tinydb import TinyDB
 from ProjectTournoi.db import db_players, db_tournament
 
-def create_players(self, tournoi):
-    """create some players"""
-    for num_player in range(vr.NUMBER_PLAYERS):
-        lastname = cp.CreatePlayer.prompt_for_lastname(self, num_player)
-        firstname = cp.CreatePlayer.prompt_for_firstname(self, num_player)
-        birthdate = cp.CreatePlayer.prompt_for_birthdate(self, num_player)
-        codesex = cp.CreatePlayer.prompt_for_sex(self, num_player)
-        classment = cp.CreatePlayer.prompt_for_classment(self, num_player)
-
-        player = pl.Player(vr.ID_PLAYER + str(num_player + 1), lastname, firstname, birthdate, codesex, classment)
-        tournoi.players.append(player)
-
 
 def choose_players(self, tournoi):
     """create some players"""
@@ -47,17 +35,17 @@ def choose_players(self, tournoi):
 
 def create_player(self, play_seq):
     """create 1 player"""
-    lastname = cp.CreatePlayer.prompt_for_lastname(self, -1)
-    firstname = cp.CreatePlayer.prompt_for_firstname(self, -1)
-    birthdate = cp.CreatePlayer.prompt_for_birthdate(self, -1)
-    codesex = cp.CreatePlayer.prompt_for_sex(self, -1)
-    classment = cp.CreatePlayer.prompt_for_classment(self, -1)
+    lastname = cp.CreatePlayer.prompt_for_lastname(self)
+    firstname = cp.CreatePlayer.prompt_for_firstname(self)
+    birthdate = cp.CreatePlayer.prompt_for_birthdate(self)
+    codesex = cp.CreatePlayer.prompt_for_sex(self)
+    classment = cp.CreatePlayer.prompt_for_classment(self)
     player = pl.Player(vr.ID_PLAYER + str(play_seq), lastname, firstname, birthdate, codesex, classment)
     self.players.append(player)
 
 
 def update_player(self, player_in):
-    """create 1 player"""
+    """update 1 player"""
     lastname = cp.UpdatePlayer.prompt_for_lastname(self, player_in.lastname)
     firstname = cp.UpdatePlayer.prompt_for_firstname(self, player_in.firstname)
     birthdate = cp.UpdatePlayer.prompt_for_birthdate(self, player_in.birthdate)

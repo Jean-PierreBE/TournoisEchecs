@@ -3,34 +3,25 @@ import datetime as dt
 from ProjectTournoi.variables import LAST_NAME_DEFAULT,FIRST_NAME_DEFAULT, BIRTHDATE_DEFAULT, SEX_DEFAULT, CLASSMENT_DEFAULT
 
 class CreatePlayer:
-    def prompt_for_lastname(self,num_player):
+    def prompt_for_lastname(self):
         """Prompt for a last name."""
-        if num_player + 1 > 0:
-            question = "tapez le nom du joueur n° " + str(num_player + 1) + " : "
-        else:
-            question = "tapez le nom du joueur : "
+        question = "tapez le nom du joueur : "
         lastname = input(question)
         if not lastname:
             return LAST_NAME_DEFAULT
         return lastname.upper()
 
-    def prompt_for_firstname(self,num_player):
+    def prompt_for_firstname(self):
         """Prompt for a first name."""
-        if num_player + 1 > 0:
-            question = "tapez le prénom du joueur n° " + str(num_player + 1) + " : "
-        else:
-            question = "tapez le prénom du joueur  : "
+        question = "tapez le prénom du joueur  : "
         firstname = input(question)
         if not firstname:
             return FIRST_NAME_DEFAULT
         return firstname
 
-    def prompt_for_birthdate(self,num_player):
+    def prompt_for_birthdate(self):
         """Prompt for a birthdate"""
-        if num_player + 1 > 0:
-            question = "Entrez la date de naissance du joueur n° " + str(num_player + 1) + " au format DD/MM/YYYY : "
-        else:
-            question = "Entrez la date de naissance du joueur au format DD/MM/YYYY : "
+        question = "Entrez la date de naissance du joueur au format DD/MM/YYYY : "
         date_entry = input(question)
         if not date_entry:
             date_entry = BIRTHDATE_DEFAULT
@@ -45,23 +36,17 @@ class CreatePlayer:
             print('Date invalide')
         return birthdate
 
-    def prompt_for_sex(self,num_player):
+    def prompt_for_sex(self):
         """Prompt for a code sex"""
-        if num_player + 1 > 0:
-            question = "Entrez le genre du joueur n° " + str(num_player + 1) + " (M/F) : "
-        else:
-            question = "Entrez le genre du joueur (M/F) : "
+        question = "Entrez le genre du joueur (M/F) : "
         codesex = input(question)
         if not codesex:
            return SEX_DEFAULT
         return codesex.upper()
 
-    def prompt_for_classment(self,num_player):
+    def prompt_for_classment(self):
         """Prompt for a classment"""
-        if num_player + 1 > 0:
-            question = "Entrez le dernier classement du joueur n° " + str(num_player + 1) + ": "
-        else:
-            question = "Entrez le dernier classement du joueur n° : "
+        question = "Entrez le dernier classement du joueur n° : "
         classment = input(question)
         try:
             return int(classment)

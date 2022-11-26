@@ -69,9 +69,6 @@ class Controller:
 
     def run_create_tournoi(self):
         ctn.create_tournament(self, len(db_tournament))
-        # liste des tournois
-        # demander de créer ou gérer un tournoi existant
-        # tournoi = self.tournois[indice choisi]
         """choose players from a list"""
         ply.choose_players(self, self.current_tournament)
 
