@@ -63,6 +63,8 @@ class Controller:
             print(self.tournois[i].area)
             print(self.tournois[i].date)
             print(self.tournois[i].tournament_id)
+            print(len(self.tournois[i].players))
+            print(len(self.tournois[i].rounds))
         # demander de créer ou gérer un tournoi existant
         # tournoi = self.tournois[indice choisi]
 
@@ -72,24 +74,31 @@ class Controller:
         """choose players from a list"""
         ply.choose_players(self, self.current_tournament)
 
-        """Rounds"""
-        for num_round in range(NUMBER_ROUNDS):
-            """begin round"""
-            rnd.create_round_begin(self, num_round, self.current_tournament)
-            """Swiss algorithm"""
-            cgm.get_games_swiss(self, num_round, self.current_tournament)
-            running_game = True
+        """Tournament"""
+        running_tournament = True
+        while running_tournament:
+            """Rounds"""
+            for num_round in range(NUMBER_ROUNDS):
+                """begin round"""
+                rnd.create_round_begin(self, num_round, self.current_tournament)
+                """Swiss algorithm"""
+                cgm.get_games_swiss(self, num_round, self.current_tournament)
+                running_game = True
 
-            while running_game:
-                """view games"""
-                rep.print_turning_views(self, num_round, self.current_tournament)
-                """choose number of game to encode or leave the round"""
-                running_game, igame = cgm.get_game_choose(self, num_round)
-                """encode score"""
-                if running_game:
-                    cgm.get_result(self, self.current_tournament.rounds[num_round].games[igame])
-            """end round"""
-            rnd.get_round_end(self, num_round, self.current_tournament)
+                while running_game:
+                    """view games"""
+                    rep.print_turning_views(self, num_round, self.current_tournament)
+                    """choose number of game to encode or leave the round"""
+                    running_game, igame = cgm.get_game_choose(self, num_round)
+                    """encode score"""
+                    if running_game:
+                        cgm.get_result(self, self.current_tournament.rounds[num_round].games[igame])
+                """end round"""
+                rnd.get_round_end(self, num_round, self.current_tournament)
+                """select if you want to continue tournament or yes"""
+                running_tournament = ctn.choose_continue_tournament(self)
+                if running_tournament == False:
+                    break
 
         """Affichage résultat tournoi"""
         rep.print_end_views(self, self.current_tournament)

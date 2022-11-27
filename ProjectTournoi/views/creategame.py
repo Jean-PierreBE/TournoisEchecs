@@ -1,8 +1,11 @@
+import ProjectTournoi.variables as vr
+from ProjectTournoi.controllers.tools import check_answer_y_n
+
 class CreateGame:
 
     def prompt_for_result(self,player_A,player_B):
         """Prompt for a score"""
-        result = input("Les joueur A " + player_A + " et Joueur B " + player_B + " ont fini .Donnez le score (0 si nul,1 si A gagnant,2 si B gagnant ) : ")
+        result = input(vr.MESSAGE_END_ROUND.format(player_A, player_B))
         try:
             return int(result)
         except ValueError:
@@ -10,10 +13,14 @@ class CreateGame:
 
     def prompt_for_continue_round(self):
         """Prompt for a score"""
-        response = input("le round est-il terminé (Y/N) ?  ")
-        if not response:
-            return 'None'
-        return response.upper()
+        check = False
+        while check == False:
+            response = input("le round est-il terminé (Y/N) ?  ")
+            if not response:
+                return vr.ANSWER_NO
+            check = check_answer_y_n(response.upper())
+            if check == True:
+                return response.upper()
 
     def prompt_for_encode_result(self):
         """Prompt for a score"""

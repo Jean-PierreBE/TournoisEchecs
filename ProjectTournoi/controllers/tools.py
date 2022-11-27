@@ -3,9 +3,8 @@ from ProjectTournoi.models import tournament as tn
 from ProjectTournoi.db import db_players, db_tournament
 
 import datetime as dt
-from ProjectTournoi.variables import MESSAGE_WRONG_DATE_FORMAT, MESSAGE_WRONG_DATE_INVALID, MESSAGE_NOT_NUMERIC,\
-                                    MESSAGE_CLASSMENT_MIN, MESSAGE_CLASSMENT_MAX, CLASSMENT_MIN, CLASSMENT_MAX,\
-                                    SEX_MALE, SEX_FEMALE, MESSAGE_WRONG_SEX
+import ProjectTournoi.variables as vr
+
 def get_result_player(list, element):
     for ind in range(len(list)):
         if list[ind].player_id == element:
@@ -18,19 +17,38 @@ def get_result_player(list, element):
 def check_date(date_entry):
     """check validity of the date DD/MM/YYYY"""
     if date_entry.find('/',2) != 2 or date_entry.find('/',5) != 5:
-        print(MESSAGE_WRONG_DATE_FORMAT)
+        print(vr.MESSAGE_WRONG_DATE_FORMAT)
         return False
     else:
         try:
             date_check = int(date_entry.replace('/',''))
         except ValueError:
-            print(MESSAGE_NOT_NUMERIC)
+            print(vr.MESSAGE_NOT_NUMERIC)
             return False
         day, month, year = map(int, date_entry.split('/'))
         try:
             date_check = dt.date(int(year), int(month), int(day))
         except ValueError:
-            print(MESSAGE_WRONG_DATE_INVALID)
+            print(vr.MESSAGE_WRONG_DATE_INVALID)
+            return False
+        return True
+
+def check_time(time_entry):
+    """check validity of the time HH:MM"""
+    if time_entry.find(':',2) != 2:
+        print(vr.MESSAGE_WRONG_TIME_FORMAT)
+        return False
+    else:
+        try:
+            time_check = int(time_entry.replace(':',''))
+        except ValueError:
+            print(vr.MESSAGE_NOT_NUMERIC)
+            return False
+        time, minute = map(int, time_entry.split(':'))
+        try:
+            time_check = dt.time(time, minute)
+        except ValueError:
+            print(vr.MESSAGE_WRONG_TIME_INVALID)
             return False
         return True
 
@@ -39,21 +57,29 @@ def check_classment(classment_entry):
     try:
         classment_check = int(classment_entry)
     except ValueError:
-        print(MESSAGE_NOT_NUMERIC)
+        print(vr.MESSAGE_NOT_NUMERIC)
         return False
-    if classment_check < CLASSMENT_MIN:
-        print(MESSAGE_CLASSMENT_MIN)
+    if classment_check < vr.CLASSMENT_MIN:
+        print(vr.MESSAGE_CLASSMENT_MIN)
         return False
-    elif(classment_check > CLASSMENT_MAX):
-        print(MESSAGE_CLASSMENT_MAX)
+    elif(classment_check > vr.CLASSMENT_MAX):
+        print(vr.MESSAGE_CLASSMENT_MAX)
         return False
     else:
         return True
 
 def check_sex(sex_entry):
+    """check validity of sex"""
+    if sex_entry != vr.SEX_MALE and sex_entry != vr.SEX_FEMALE:
+        print(vr.MESSAGE_WRONG_SEX)
+        return False
+    else:
+        return True
+
+def check_answer_y_n(answer_entry):
     """check validity of the classment"""
-    if sex_entry != SEX_MALE and sex_entry != SEX_FEMALE:
-        print(MESSAGE_WRONG_SEX)
+    if answer_entry != vr.ANSWER_NO and answer_entry != vr.ANSWER_YES:
+        print(vr.MESSAGE_BAD_ANSWER_Y_OR_N)
         return False
     else:
         return True
@@ -78,6 +104,6 @@ def download_players():
 def download_tournaments():
     tournaments = []
     for row in db_tournament:
-        tournament = tn.Tournament(row['tournament_id'], row['area'], row['date'], row['description'],'','')
+        tournament = tn.Tournament(row['tournament_id'], row['area'], row['date'], row['description'],row['players'],row['rounds'])
         tournaments.append(tournament)
     return tournaments

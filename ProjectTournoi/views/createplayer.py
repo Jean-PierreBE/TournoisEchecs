@@ -57,19 +57,12 @@ class CreatePlayer:
             return 'None'
         return response.upper()
 
-    def prompt_for_choose_players1(self):
-        """Prompt to continue encode players"""
-        response = input("Voulez-vous encoder des joueurs (1) ou les sélectionner à partir d'une liste (2) ? ")
-        if not response:
-            return 2
-        return int(response)
-
     def prompt_choose_indice_players(self, num_player):
         """Prompt to continue encode players"""
         if num_player == -1:
-            question = "Selectionner un indice pour le joueur "
+            question = vr.MESSAGE_SELECT_INDICE_PLAYER
         else:
-            question = "Selectionner un indice pour le joueur " + str(num_player) + " : "
+            question = vr.MESSAGE_SELECT_INDICE_PLAYER + str(num_player) + " : "
         response = input(question)
         if not response:
             return 1
