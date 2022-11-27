@@ -4,7 +4,7 @@ from ProjectTournoi.views import createendview as cv
 import ProjectTournoi.controllers.tools as tl
 
 import ProjectTournoi.variables as vr
-from tinydb import TinyDB
+
 from ProjectTournoi.db import db_players, db_tournament
 
 
@@ -15,7 +15,7 @@ def choose_players(self, tournoi):
         player = pl.Player(row['player_id'], row['lastname'], row['firstname'], row['birthdate'], row['sex'], row['classment'])
         players.append(player)
     cv.CreateEndView.list_only_players(self, players)
-    print(vr.INVITE_CHOOSE_8_PLAYERS)
+    print(vr.MESSAGE_CHOOSE_8_PLAYERS)
     for indpt in range(vr.NUMBER_PLAYERS):
         resp = True
         while resp:
@@ -35,22 +35,22 @@ def choose_players(self, tournoi):
 
 def create_player(self, play_seq):
     """create 1 player"""
-    lastname = cp.CreatePlayer.prompt_for_lastname(self)
-    firstname = cp.CreatePlayer.prompt_for_firstname(self)
-    birthdate = cp.CreatePlayer.prompt_for_birthdate(self)
-    codesex = cp.CreatePlayer.prompt_for_sex(self)
-    classment = cp.CreatePlayer.prompt_for_classment(self)
+    lastname = cp.CreatePlayer.prompt_for_lastname(self, vr.LAST_NAME_DEFAULT)
+    firstname = cp.CreatePlayer.prompt_for_firstname(self, vr.FIRST_NAME_DEFAULT)
+    birthdate = cp.CreatePlayer.prompt_for_birthdate(self, vr.BIRTHDATE_DEFAULT)
+    codesex = cp.CreatePlayer.prompt_for_sex(self, vr.SEX_DEFAULT)
+    classment = cp.CreatePlayer.prompt_for_classment(self, vr.CLASSMENT_DEFAULT)
     player = pl.Player(vr.ID_PLAYER + str(play_seq), lastname, firstname, birthdate, codesex, classment)
     self.players.append(player)
 
 
 def update_player(self, player_in):
     """update 1 player"""
-    lastname = cp.UpdatePlayer.prompt_for_lastname(self, player_in.lastname)
-    firstname = cp.UpdatePlayer.prompt_for_firstname(self, player_in.firstname)
-    birthdate = cp.UpdatePlayer.prompt_for_birthdate(self, player_in.birthdate)
-    codesex = cp.UpdatePlayer.prompt_for_sex(self, player_in.sex)
-    classment = cp.UpdatePlayer.prompt_for_classment(self, player_in.classment)
+    lastname = cp.CreatePlayer.prompt_for_lastname(self, player_in.lastname)
+    firstname = cp.CreatePlayer.prompt_for_firstname(self, player_in.firstname)
+    birthdate = cp.CreatePlayer.prompt_for_birthdate(self, player_in.birthdate)
+    codesex = cp.CreatePlayer.prompt_for_sex(self, player_in.sex)
+    classment = cp.CreatePlayer.prompt_for_classment(self, player_in.classment)
     player_out = pl.Player(player_in.player_id, lastname, firstname, birthdate, codesex, classment)
     return player_out
 
