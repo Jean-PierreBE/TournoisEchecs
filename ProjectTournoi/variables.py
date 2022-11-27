@@ -29,6 +29,8 @@ MESSAGE_BEGIN_TIME_ROUND = "Entrez l'heure de début du round n° {} au format H
 MESSAGE_END_DATE_ROUND = "Entrez la date de fin du round n° {} au format DD/MM/YYYY : "
 MESSAGE_END_TIME_ROUND = "Entrez l'heure de fin du round n° {} au format HH:MM : "
 MESSAGE_END_ROUND = "Les joueur A {} et Joueur B {} ont fini .Donnez le score (0 si nul,1 si A gagnant,2 si B gagnant ) : "
+MESSAGE_IF_ROUND_FINISHED = "le round est-il terminé (Y/N) ?  "
+MESSAGE_NUMBER_MATCH = "Pour quel match voulez-vous entrer les scores ?  "
 
 """error messages"""
 MESSAGE_BAD_ANSWER_Y_OR_N = "Veuillez encoder 'Y' ou 'N' !"
@@ -56,6 +58,9 @@ menu_options = {
     8: 'Exit',
 }
 
+RESULTS = [0, 1, 2]
+GAMES = [1, 2, 3, 4]
+CODE_SEXE = ['M', 'F']
 
 """Constants for tournament"""
 AREA_DEFAULT = "A completer"

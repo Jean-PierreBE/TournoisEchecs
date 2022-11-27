@@ -43,26 +43,13 @@ def get_games_swiss(self, num_round, tournoi):
             tournoi.rounds[num_round].games.append(game)
 
 def get_game_choose(self,num_round):
-    resp = True
-    while resp:
-        response = cg.CreateGame.prompt_for_continue_round(self)
-        if response.upper() == vr.ANSWER_YES:
-            return False, None
-        elif response.upper() == vr.ANSWER_NO:
-            num_game = cg.CreateGame.prompt_for_encode_result(self)
-            if num_game < 1 or num_game > vr.NUMBER_GAMES:
-                print(vr.MESSAGE_WRONG_GAME)
-            else:
-                return True, int(num_game) - 1
-        else:
-            print(vr.MESSAGE_BAD_ANSWER_Y_OR_N)
+    response = cg.CreateGame.prompt_for_continue_round(self)
+    if response.upper() == vr.ANSWER_YES:
+        return False, None
+    elif response.upper() == vr.ANSWER_NO:
+        num_game = cg.CreateGame.prompt_for_encode_result(self)
+        return True, int(num_game) - 1
 
-def get_result(self,game):
-    resp = True
-    while resp:
-        result = cg.CreateGame.prompt_for_result(self, game.player_a, game.player_b)
-        if result < 0 or result > 2:
-            print(vr.MESSAGE_WRONG_RESULT)
-        else:
-            game.result = result
-            resp = False
+def get_result(self, game):
+    game.result = cg.CreateGame.prompt_for_result(self, game.player_a, game.player_b)
+

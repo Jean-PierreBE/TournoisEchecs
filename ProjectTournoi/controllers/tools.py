@@ -11,8 +11,6 @@ def get_result_player(list, element):
             return ind
     return -1
 
-"""Search if player 1 and player 2 played already """
-
 """check validity of the date"""
 def check_date(date_entry):
     """check validity of the date DD/MM/YYYY"""
@@ -70,11 +68,11 @@ def check_classment(classment_entry):
 
 def check_sex(sex_entry):
     """check validity of sex"""
-    if sex_entry != vr.SEX_MALE and sex_entry != vr.SEX_FEMALE:
+    if sex_entry in vr.CODE_SEXE:
+        return True
+    else:
         print(vr.MESSAGE_WRONG_SEX)
         return False
-    else:
-        return True
 
 def check_answer_y_n(answer_entry):
     """check validity of the classment"""
@@ -84,6 +82,33 @@ def check_answer_y_n(answer_entry):
     else:
         return True
 
+def check_result(result_entry):
+    """check validity of the result"""
+    try:
+        result_check = int(result_entry)
+    except ValueError:
+        print(vr.MESSAGE_NOT_NUMERIC)
+        return False
+    if result_check in vr.RESULTS:
+        return True
+    else:
+        print(vr.MESSAGE_WRONG_RESULT)
+        return False
+
+def check_game(game_entry):
+    """check validity of the game"""
+    try:
+        game_check = int(game_entry)
+    except ValueError:
+        print(vr.MESSAGE_NOT_NUMERIC)
+        return False
+    if game_check in vr.GAMES:
+        return True
+    else:
+        print(vr.MESSAGE_WRONG_GAME)
+        return False
+
+"""Search if player 1 and player 2 played already """
 def search_couple(list, element_a, element_b):
     for indr in range(len(list)):
         for indg in range(len(list[indr].games)):
