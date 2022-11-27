@@ -1,6 +1,7 @@
 """Create tournament view"""
 import datetime as dt
 from ProjectTournoi.variables import LAST_NAME_DEFAULT,FIRST_NAME_DEFAULT, BIRTHDATE_DEFAULT, SEX_DEFAULT, CLASSMENT_DEFAULT
+from ProjectTournoi.controllers.tools import check_date
 
 class CreatePlayer:
     def prompt_for_lastname(self):
@@ -25,16 +26,11 @@ class CreatePlayer:
         date_entry = input(question)
         if not date_entry:
             date_entry = BIRTHDATE_DEFAULT
-        day, month, year = map(int, date_entry.split('/'))
-        isvaliddate = True
-        try:
-            birthdate = dt.date(year, month, day)
-        except ValueError:
-            isvaliddate = False
-            birthdate = BIRTHDATE_DEFAULT
-        if isvaliddate == False:
-            print('Date invalide')
-        return birthdate
+        response = False
+        while response == False:
+            response = check_date(date_entry)
+            if response == True:
+                return date_entry
 
     def prompt_for_sex(self):
         """Prompt for a code sex"""
@@ -80,7 +76,7 @@ class CreatePlayer:
 
 class UpdatePlayer:
 
-    def prompt_for_lastname(self,lastname_in):
+    def prompt_for_lastname(self, lastname_in):
         """Prompt for a last name."""
         question = "tapez le nom du joueur : "
         lastname = input(question)
@@ -88,7 +84,7 @@ class UpdatePlayer:
             return lastname_in
         return lastname.upper()
 
-    def prompt_for_firstname(self,firstname_in):
+    def prompt_for_firstname(self, firstname_in):
         """Prompt for a first name."""
         question = "tapez le prénom du joueur  : "
         firstname = input(question)
@@ -96,25 +92,19 @@ class UpdatePlayer:
             return firstname_in
         return firstname
 
-    def prompt_for_birthdate(self,birthdate_in):
+    def prompt_for_birthdate(self, birthdate_in):
         """Prompt for a birthdate"""
         question = "Entrez la date de naissance du joueur au format DD/MM/YYYY : "
         date_entry = input(question)
         if not date_entry:
-            return birthdate_in
-        day, month, year = map(int, date_entry.split('/'))
-        birthdate = dt.date(year, month, day)
-        isvaliddate = True
-        try:
-            birthdate = dt.date(year, month, day)
-        except ValueError:
-            isvaliddate = False
-            birthdate = BIRTHDATE_DEFAULT
-        if isvaliddate == False:
-            print('Date invalide')
-        return str(birthdate)
+            date_entry = birthdate_in
+        response = False
+        while response == False:
+            response = check_date(date_entry)
+            if response == True:
+                return date_entry
 
-    def prompt_for_sex(self,codesex_in):
+    def prompt_for_sex(self, codesex_in):
         """Prompt for a code sex"""
         question = "Entrez le genre du joueur (M/F) : "
         codesex = input(question)
@@ -122,7 +112,7 @@ class UpdatePlayer:
            return codesex_in
         return codesex.upper()
 
-    def prompt_for_classment(self,classment_in):
+    def prompt_for_classment(self, classment_in):
         """Prompt for a classment"""
         question = "Entrez le dernier classement du joueur n° : "
         classment = input(question)

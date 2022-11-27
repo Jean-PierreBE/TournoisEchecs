@@ -1,4 +1,4 @@
-"""Variables"""
+"""Constants"""
 NUMBER_PLAYERS = 8
 NUMBER_ROUNDS = 4
 NUMBER_GAMES = 4
@@ -8,13 +8,16 @@ ID_ROUND = 'Round_'
 ID_GAME = 'Game_'
 ANSWER_YES = 'Y'
 ANSWER_NO = 'N'
+TOURNAMENT_STATUS = {'new' : 0, 'Active' : 1, 'closed' : 2}
+"""messages"""
 MESSAGE_BAD_ANSWER_Y_OR_N = "Veuillez encoder 'Y' ou 'N' !"
 MESSAGE_BAD_ANSWER_1_OR_2 = "Veuillez encoder 1 ou 2 !"
 MESSAGE_PLAYER_OUT_OF_RANGE = "Veuillez selectionner un indice dans la list !"
 MESSAGE_PLAYER_ALLREADY_SELECTED = "Joueur déja selectionné !"
 MESSAGE_WRONG_GAME = "Veuillez encoder 1 ,2 ,3 ou 4 !"
 MESSAGE_WRONG_RESULT = "Veuillez encoder 0, 1 ou 2 !"
-TOURNAMENT_STATUS = {'new' : 0, 'Active' : 1, 'closed' : 2}
+MESSAGE_WRONG_DATE_FORMAT = "Veuillez encoder la date au format DD/MM/YYYY !"
+MESSAGE_WRONG_DATE_INVALID = "La date encodée est invalide !"
 INVITE_CHOOSE_8_PLAYERS = "Veuillez choisir 8 joueurs en selectionnant l'indice "
 
 """menu"""
