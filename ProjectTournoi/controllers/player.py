@@ -61,13 +61,3 @@ def get_players_continue(self):
         return True
     elif response.upper() == vr.ANSWER_NO:
         return False
-
-
-#def get_players_choose1(self):
-    #resp = True
-    #while resp:
-        #response = cp.CreatePlayer.prompt_for_choose_players(self)
-        #if response < 1 or response > 2:
-            #print(vr.MESSAGE_BAD_ANSWER_1_OR_2)
-        #else:
-            #return response

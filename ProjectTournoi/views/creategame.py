@@ -10,7 +10,7 @@ class CreateGame:
             result = input(vr.MESSAGE_END_ROUND.format(player_A, player_B))
             check = check_result(result)
             if check == True:
-                return result
+                return int(result)
 
     def prompt_for_continue_round(self):
         """Prompt for a score"""
@@ -30,4 +30,4 @@ class CreateGame:
             num_game = input(vr.MESSAGE_NUMBER_MATCH)
             check = check_game(num_game)
             if check == True:
-                return num_game
+                return int(num_game)
