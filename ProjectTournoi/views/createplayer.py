@@ -1,5 +1,5 @@
 """Create tournament view"""
-from ProjectTournoi.controllers.tools import check_date, check_classment, check_sex
+from ProjectTournoi.controllers.tools import check_date, check_classment, check_sex, check_answer_y_n
 import ProjectTournoi.variables as vr
 class CreatePlayer:
 
@@ -52,10 +52,12 @@ class CreatePlayer:
 
     def prompt_for_continue_players(self):
         """Prompt to continue encode players"""
-        response = input(vr.MESSAGE_CONTINUE_ENCODE_PLAYERS)
-        if not response:
-            return 'None'
-        return response.upper()
+        check = False
+        while check == False:
+            response = input(vr.MESSAGE_CONTINUE_ENCODE_PLAYERS)
+            check = check_answer_y_n(response.upper())
+            if check == True:
+                return response.upper()
 
     def prompt_choose_indice_players(self, num_player):
         """Prompt to continue encode players"""

@@ -56,22 +56,18 @@ def update_player(self, player_in):
 
 
 def get_players_continue(self):
-    resp = True
-    while resp:
-        response = cp.CreatePlayer.prompt_for_continue_players(self)
-        if response.upper() == vr.ANSWER_YES:
-            return True
-        elif response.upper() == vr.ANSWER_NO:
-            return False
-        else:
-            print(vr.MESSAGE_BAD_ANSWER_Y_OR_N)
+    response = cp.CreatePlayer.prompt_for_continue_players(self)
+    if response.upper() == vr.ANSWER_YES:
+        return True
+    elif response.upper() == vr.ANSWER_NO:
+        return False
 
 
-def get_players_choose(self):
-    resp = True
-    while resp:
-        response = cp.CreatePlayer.prompt_for_choose_players(self)
-        if response < 1 or response > 2:
-            print(vr.MESSAGE_BAD_ANSWER_1_OR_2)
-        else:
-            return response
+#def get_players_choose1(self):
+    #resp = True
+    #while resp:
+        #response = cp.CreatePlayer.prompt_for_choose_players(self)
+        #if response < 1 or response > 2:
+            #print(vr.MESSAGE_BAD_ANSWER_1_OR_2)
+        #else:
+            #return response
