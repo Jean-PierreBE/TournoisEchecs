@@ -19,10 +19,8 @@ def choose_players(self, tournoi):
     for indpt in range(vr.NUMBER_PLAYERS):
         resp = True
         while resp:
-            num_play = cp.CreatePlayer.prompt_choose_indice_players(self, indpt + 1)
-            if num_play > len(players):
-                print(vr.MESSAGE_PLAYER_OUT_OF_RANGE)
-            elif(tl.get_result_player(tournoi.players, players[num_play-1].player_id) >= 0 and
+            num_play = cp.CreatePlayer.prompt_choose_indice_players(self, indpt + 1, len(players))
+            if(tl.get_result_player(tournoi.players, players[num_play-1].player_id) >= 0 and
                     tl.get_result_player(tournoi.players, players[num_play-1].player_id) < len(players)):
                 print(vr.MESSAGE_PLAYER_ALLREADY_SELECTED)
             else:

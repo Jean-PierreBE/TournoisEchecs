@@ -19,3 +19,15 @@ def choose_continue_tournament(self):
             return True
         elif response.upper() == ANSWER_NO:
                 return False
+
+def continue_another_tournament(self):
+    resp = True
+    while resp:
+        response = ct.CreateTournament.prompt_continue_another_tournament(self)
+        if response.upper() == ANSWER_YES:
+            return True
+        elif response.upper() == ANSWER_NO:
+                return False
+
+def choose_tournament(self, tournaments):
+    pass

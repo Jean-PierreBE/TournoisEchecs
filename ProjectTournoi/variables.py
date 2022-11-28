@@ -10,7 +10,7 @@ ANSWER_YES = 'Y'
 ANSWER_NO = 'N'
 TOURNAMENT_STATUS = {'new' : 0, 'Active' : 1, 'closed' : 2}
 """messages"""
-MESSAGE_PLAYER_OUT_OF_RANGE = "Veuillez selectionner un indice dans la list !"
+MESSAGE_PLAYER_OUT_OF_RANGE = "Veuillez selectionner un indice dans la liste !"
 MESSAGE_CHOOSE_8_PLAYERS = "Veuillez choisir 8 joueurs en selectionnant l'indice "
 MESSAGE_ENCODE_LASTNAME = "tapez le nom du joueur : "
 MESSAGE_ENCODE_FIRSTNAME = "tapez le prénom du joueur  : "
@@ -19,6 +19,7 @@ MESSAGE_ENCODE_SEX = "Entrez le genre du joueur (M/F) : "
 MESSAGE_ENCODE_CLASSMENT = "Entrez le dernier classement du joueur n° : "
 MESSAGE_CONTINUE_ENCODE_PLAYERS = "Voulez-vous continuer à encoder des joueurs (Y/N) ? "
 MESSAGE_CONTINUE_ENCODE_TOURNAMENT = "voulez-vous continuer le tournoi (Y/N) ?  "
+MESSAGE_CONTINUE_ANOTHER_TOURNAMENT = "Voulez-vous encoder un autre tournoi (Y/N) ? "
 MESSAGE_ENCODE_AREA= "Entrez le lieu du tournoi : "
 MESSAGE_ENCODE_DATE_TOURNAMENT = "Entrez la date du tournoi au format DD/MM/YYYY : "
 MESSAGE_ENCODE_DESCRIPTION = "Entrez la description du tournoi : "

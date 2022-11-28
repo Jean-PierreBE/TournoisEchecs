@@ -39,3 +39,15 @@ class CreateTournament:
             check = check_answer_y_n(response.upper())
             if check == True:
                 return response.upper()
+
+    def prompt_continue_another_tournament(self):
+        """Prompt for update another tournament"""
+        check = False
+        while check == False:
+            response = input(vr.MESSAGE_CONTINUE_ANOTHER_TOURNAMENT)
+            if not response:
+                return vr.ANSWER_NO
+            check = check_answer_y_n(response.upper())
+            if check == True:
+                return response.upper()
+

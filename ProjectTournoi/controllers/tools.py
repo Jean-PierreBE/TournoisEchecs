@@ -108,6 +108,19 @@ def check_game(game_entry):
         print(vr.MESSAGE_WRONG_GAME)
         return False
 
+def check_indice(indice_entry, indice_max):
+    """check validity of the game"""
+    try:
+        indice_check = int(indice_entry)
+    except ValueError:
+        print(vr.MESSAGE_NOT_NUMERIC)
+        return False
+    if indice_check > indice_max or indice_check < 1:
+        print(vr.MESSAGE_PLAYER_OUT_OF_RANGE)
+        return False
+    else:
+        return True
+
 """Search if player 1 and player 2 played already """
 def search_couple(list, element_a, element_b):
     for indr in range(len(list)):

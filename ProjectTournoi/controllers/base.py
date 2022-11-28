@@ -8,7 +8,7 @@ import ProjectTournoi.controllers.player as ply
 from ProjectTournoi.views import createendview as cv
 from ProjectTournoi.views import createplayer as cp
 
-from ProjectTournoi.variables import NUMBER_ROUNDS
+from ProjectTournoi.variables import NUMBER_ROUNDS, MESSAGE_PLAYER_OUT_OF_RANGE
 import ProjectTournoi.controllers.tools as tl
 
 import jsons
@@ -47,7 +47,7 @@ class Controller:
         cv.CreateEndView.list_only_players(self, players)
         while encode_players:
             """Encode players"""
-            num_play = cp.CreatePlayer.prompt_choose_indice_players(self, -1)
+            num_play = cp.CreatePlayer.prompt_choose_indice_players(self, -1, len(players))
             player_out = ply.update_player(self, players[num_play-1])
             Playerid = Query()
             db_players.update({'classment': player_out.classment,'lastname': player_out.lastname,
@@ -57,23 +57,25 @@ class Controller:
 
 
     def run_update_tournoi(self):
-        # liste des tournois
-        self.tournois = tl.download_tournaments()
-        for i in range(len(self.tournois)):
-            print(self.tournois[i].area)
-            print(self.tournois[i].date)
-            print(self.tournois[i].tournament_id)
-            print(len(self.tournois[i].players))
-            print(len(self.tournois[i].rounds))
-        # demander de créer ou gérer un tournoi existant
-        # tournoi = self.tournois[indice choisi]
-
+        # list of tournaments
+        update_tournament = True
+        while update_tournament:
+            self.tournois = tl.download_tournaments()
+            """Choose tournament"""
+            ind_tournament = ctn.choose_tournament(self, self.tournois)
+            tournament = self.tournois[ind_tournament]
+            running_tournament = True
+            while running_tournament:
+                for num_round in range(NUMBER_ROUNDS):
+                    running_tournament = ctn.choose_continue_tournament(self)
+                    if running_tournament == False:
+                        break
+            update_tournament = ctn.continue_another_tournament(self)
 
     def run_create_tournoi(self):
         ctn.create_tournament(self, len(db_tournament))
         """choose players from a list"""
         ply.choose_players(self, self.current_tournament)
-
         """Tournament"""
         running_tournament = True
         while running_tournament:
