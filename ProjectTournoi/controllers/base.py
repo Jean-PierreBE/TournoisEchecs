@@ -7,8 +7,8 @@ import ProjectTournoi.controllers.player as ply
 
 from ProjectTournoi.views import createendview as cv
 from ProjectTournoi.views import createplayer as cp
-
-from ProjectTournoi.variables import NUMBER_ROUNDS, MESSAGE_PLAYER_OUT_OF_RANGE
+from ProjectTournoi.views import createtournament as ct
+from ProjectTournoi.variables import NUMBER_ROUNDS
 import ProjectTournoi.controllers.tools as tl
 
 import jsons
@@ -60,13 +60,20 @@ class Controller:
         # list of tournaments
         update_tournament = True
         while update_tournament:
-            self.tournois = tl.download_tournaments()
+            tournois = tl.download_tournaments()
+            cv.CreateEndView.list_only_tournaments(self, tournois)
             """Choose tournament"""
-            ind_tournament = ctn.choose_tournament(self, self.tournois)
-            tournament = self.tournois[ind_tournament]
+            ind_tournament = ct.CreateTournament.prompt_choose_tournament(self, len(tournois))
+            tournament = tournois[ind_tournament - 1]
+            """choose round to restart"""
+            round_deb = ct.CreateTournament.prompt_choose_round_deb(self, len(tournament.rounds) + 1)
             running_tournament = True
             while running_tournament:
                 for num_round in range(NUMBER_ROUNDS):
+                    print("num_round " + str(num_round))
+                    running_game = True
+                    while running_game:
+                        running_game, igame = cgm.get_game_choose(self, num_round)
                     running_tournament = ctn.choose_continue_tournament(self)
                     if running_tournament == False:
                         break

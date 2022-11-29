@@ -29,5 +29,3 @@ def continue_another_tournament(self):
         elif response.upper() == ANSWER_NO:
                 return False
 
-def choose_tournament(self, tournaments):
-    pass

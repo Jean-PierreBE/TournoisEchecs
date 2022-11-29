@@ -11,6 +11,7 @@ ANSWER_NO = 'N'
 TOURNAMENT_STATUS = {'new' : 0, 'Active' : 1, 'closed' : 2}
 """messages"""
 MESSAGE_PLAYER_OUT_OF_RANGE = "Veuillez selectionner un indice dans la liste !"
+MESSAGE_ROUND_OUT_OF_RANGE = "Veuillez selectionner un round disponible !"
 MESSAGE_CHOOSE_8_PLAYERS = "Veuillez choisir 8 joueurs en selectionnant l'indice "
 MESSAGE_ENCODE_LASTNAME = "tapez le nom du joueur : "
 MESSAGE_ENCODE_FIRSTNAME = "tapez le prénom du joueur  : "
@@ -23,8 +24,9 @@ MESSAGE_CONTINUE_ANOTHER_TOURNAMENT = "Voulez-vous encoder un autre tournoi (Y/N
 MESSAGE_ENCODE_AREA= "Entrez le lieu du tournoi : "
 MESSAGE_ENCODE_DATE_TOURNAMENT = "Entrez la date du tournoi au format DD/MM/YYYY : "
 MESSAGE_ENCODE_DESCRIPTION = "Entrez la description du tournoi : "
-MESSAGE_WRONG_SEX = "Veuillez encoder 'M' ou 'F' !"
-MESSAGE_SELECT_INDICE_PLAYER = "Selectionner un indice pour le joueur "
+MESSAGE_SELECT_INDICE_PLAYER = "Selectionnez un indice pour le joueur "
+MESSAGE_SELECT_INDICE_TOURNAMENT = "Selectionnez un indice pour le tournoi "
+MESSAGE_SELECT_ROUND_RESTART = "Selectionnez un round de redémarrage "
 MESSAGE_BEGIN_DATE_ROUND = "Entrez la date de début du round n° {} au format DD/MM/YYYY : "
 MESSAGE_BEGIN_TIME_ROUND = "Entrez l'heure de début du round n° {} au format HH:MM : "
 MESSAGE_END_DATE_ROUND = "Entrez la date de fin du round n° {} au format DD/MM/YYYY : "
@@ -46,6 +48,7 @@ MESSAGE_NOT_NUMERIC = "Valeur non numerique"
 MESSAGE_CLASSMENT_MIN = "Clessement inférieur au minimum"
 MESSAGE_CLASSMENT_MAX = "Clessement supérieur au maximum"
 MESSAGE_PLAYER_ALLREADY_SELECTED = "Joueur déja selectionné !"
+MESSAGE_WRONG_SEX = "Veuillez encoder 'M' ou 'F' !"
 
 """menu"""
 menu_options = {

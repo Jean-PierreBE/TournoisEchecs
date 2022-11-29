@@ -39,6 +39,21 @@ class CreateEndView:
 
         print(table)
 
+    def list_only_tournaments(self, tournaments):
+        """Create list of all tournaments"""
+        table = PrettyTable()
+        table.title = 'Liste des tournois disponibles '
+        table.field_names = ['Indice', 'Id', 'Lieu', 'Date', 'Description', 'Nombre de rounds']
+        indp = 0
+        for itournament in range(len(tournaments)):
+            for i in range(len(tournaments[itournament].rounds)):
+                print(tournaments[itournament].rounds[i])
+        for itournament in range(len(tournaments)):
+            indp += 1
+            table.add_row([indp, tournaments[itournament].tournament_id, tournaments[itournament].area, tournaments[itournament].date, tournaments[itournament].description, len(tournaments[itournament].rounds)])
+
+        print(table)
+
     def list_tournaments(self, area, date, description):
         """Create list of all players"""
         table = PrettyTable()
@@ -48,7 +63,7 @@ class CreateEndView:
 
         print(table)
 
-    def list_tournaments1(self, tournaments):
+    def list_tournaments_all(self, tournaments):
         """Create list of all players"""
         table = PrettyTable()
         table.title = 'liste des Tournois'

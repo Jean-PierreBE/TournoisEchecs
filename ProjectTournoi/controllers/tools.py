@@ -109,7 +109,7 @@ def check_game(game_entry):
         return False
 
 def check_indice(indice_entry, indice_max):
-    """check validity of the game"""
+    """check validity of indice"""
     try:
         indice_check = int(indice_entry)
     except ValueError:
@@ -117,6 +117,19 @@ def check_indice(indice_entry, indice_max):
         return False
     if indice_check > indice_max or indice_check < 1:
         print(vr.MESSAGE_PLAYER_OUT_OF_RANGE)
+        return False
+    else:
+        return True
+
+def check_round_restart(round_entry, round_max):
+    """check validity of round to restart"""
+    try:
+        round_check = int(round_entry)
+    except ValueError:
+        print(vr.MESSAGE_NOT_NUMERIC)
+        return False
+    if round_check > round_max or round_check < 1:
+        print(vr.MESSAGE_ROUND_OUT_OF_RANGE)
         return False
     else:
         return True
@@ -142,6 +155,6 @@ def download_players():
 def download_tournaments():
     tournaments = []
     for row in db_tournament:
-        tournament = tn.Tournament(row['tournament_id'], row['area'], row['date'], row['description'],row['players'],row['rounds'])
+        tournament = tn.Tournament(row['tournament_id'], row['area'], row['date'], row['description'], row['rounds'], row['players'])
         tournaments.append(tournament)
     return tournaments

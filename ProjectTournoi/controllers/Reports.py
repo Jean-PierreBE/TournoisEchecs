@@ -33,4 +33,4 @@ def print_players_order_classment(self):
 def print_all_tournaments(self):
     tournaments = tl.download_tournaments()
     sorted_tournaments = sorted(tournaments, key=lambda e:e.date )
-    cv.CreateEndView.list_tournaments1(self, sorted_tournaments)
+    cv.CreateEndView.list_tournaments_all(self, sorted_tournaments)
