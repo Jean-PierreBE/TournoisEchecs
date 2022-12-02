@@ -18,29 +18,34 @@ def get_games_swiss(self, num_round, tournoi):
             game = gm.Game(pref_game, player_a, player_b)
             tournoi.rounds[num_round].games.append(game)
     else:
-        sorted_player = sorted(tournoi.players, key=lambda e: (e.score, e.classment), reverse=True)
+        sorted_players = sorted(tournoi.players, key=lambda e: (e.score, e.classment), reverse=True)
         last_player = 0
         """search precedent game"""
-        already_played = tl.search_couple(tournoi.rounds, sorted_player[0].player_id,
-                                          sorted_player[1].player_id)
-        for num_game in range(vr.NUMBER_GAMES):
-            pref_game = vr.ID_GAME + str(num_round + 1) + str(num_game + 1)
-            if already_played and num_game < 2:
-                if num_game == 0:
-                    ind_playa = 0
-                    ind_playb = 2
-                elif num_game == 1:
-                    ind_playa = 1
-                    ind_playb = 3
-                    last_player = 4
-            else:
-                ind_playa = last_player
-                ind_playb = last_player + 1
-                last_player = last_player + 2
-            player_a = sorted_player[ind_playa].player_id
-            player_b = sorted_player[ind_playb].player_id
-            game = gm.Game(pref_game, player_a, player_b)
-            tournoi.rounds[num_round].games.append(game)
+        """
+        history = {
+                    player_1 : [player_2,player_4], 
+                    player_2 : [player_1,player_5],...
+                }
+        """
+        history = {player.player_id : [] for player in tournoi.players}
+        for round in tournoi.rounds:
+            for game in round.games:
+                history[game.player_a].append(game.player_b)
+                history[game.player_b].append(game.player_a)
+
+        affected_players = []
+        num_game = 0
+        for player in sorted_players:
+            for adversaire in sorted_players:
+                if (adversaire != player) and (adversaire not in history[player.player_id]) and (adversaire not in affected_players):
+
+                    pref_game = vr.ID_GAME + str(num_round + 1) + str(num_game + 1)
+                    game = gm.Game(pref_game, player, adversaire)
+                    tournoi.rounds[num_round].games.append(game)
+                    num_game += 1
+                    affected_players.append(player)
+                    affected_players.append(adversaire)
+
 
 def get_game_choose(self,num_round):
     response = cg.CreateGame.prompt_for_continue_round(self)
