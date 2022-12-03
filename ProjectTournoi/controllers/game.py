@@ -1,5 +1,4 @@
 from ProjectTournoi.models import game as gm
-import ProjectTournoi.controllers.tools as tl
 from ProjectTournoi.views import creategame as cg
 
 import ProjectTournoi.variables as vr
@@ -37,17 +36,17 @@ def get_games_swiss(self, num_round, tournoi):
         num_game = 0
         for player in sorted_players:
             for adversaire in sorted_players:
-                if (adversaire != player) and (adversaire not in history[player.player_id]) and (adversaire not in affected_players):
+                if (adversaire.player_id != player.player_id) and (adversaire.player_id not in history[player.player_id]) and (adversaire.player_id not in affected_players)\
+                        and (player.player_id not in affected_players):
 
                     pref_game = vr.ID_GAME + str(num_round + 1) + str(num_game + 1)
-                    game = gm.Game(pref_game, player, adversaire)
+                    game = gm.Game(pref_game, player.player_id, adversaire.player_id)
                     tournoi.rounds[num_round].games.append(game)
                     num_game += 1
-                    affected_players.append(player)
-                    affected_players.append(adversaire)
+                    affected_players.append(player.player_id)
+                    affected_players.append(adversaire.player_id)
 
-
-def get_game_choose(self,num_round):
+def get_game_choose(self, num_round):
     response = cg.CreateGame.prompt_for_continue_round(self)
     if response.upper() == vr.ANSWER_YES:
         return False, None
@@ -57,4 +56,3 @@ def get_game_choose(self,num_round):
 
 def get_result(self, game):
     game.result = cg.CreateGame.prompt_for_result(self, game.player_a, game.player_b)
-

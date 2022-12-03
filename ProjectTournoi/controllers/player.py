@@ -5,7 +5,7 @@ import ProjectTournoi.controllers.tools as tl
 
 import ProjectTournoi.variables as vr
 
-from ProjectTournoi.db import db_players, db_tournament
+from ProjectTournoi.db import db_players
 
 
 def choose_players(self, tournoi):

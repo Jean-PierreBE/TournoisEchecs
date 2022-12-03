@@ -1,6 +1,8 @@
 """Create tournament view"""
 from ProjectTournoi.controllers.tools import check_date, check_classment, check_sex, check_answer_y_n, check_indice
 import ProjectTournoi.variables as vr
+
+
 class CreatePlayer:
 
     def prompt_for_lastname(self, lastname_in):
@@ -71,5 +73,3 @@ class CreatePlayer:
             check = check_indice(response, indice_max)
             if check is True:
                 return int(response)
-
-

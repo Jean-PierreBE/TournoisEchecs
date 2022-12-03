@@ -1,5 +1,6 @@
 import json
 
+
 class Tournament:
     """Chess Tournament"""
 
@@ -34,17 +35,17 @@ class Tournament:
             self.players[indb].score += 1
 
     def serialize(self):
-            """
-            {
-            players : [{name : stein , },..., tous les joueurs],
-            rounds : [{
-                        start_date : ...,
-                        games : [{player_a : ...,...},...]
-                        }]
-              ]
+        """
+        {
+        players : [{name : stein , },..., tous les joueurs],
+        rounds : [{
+                    start_date : ...,
+                    games : [{player_a : ...,...},...]
+                    }]
+          ]
 
-            :param self:
-            :return:
-            """
-            return json.dump(self, default=lambda o: o.__dict__,
-                              sort_keys=True, indent=4)
+        :param self:
+        :return:
+        """
+        return json.dump(self, default=lambda o: o.__dict__,
+                          sort_keys=True, indent=4)

@@ -2,6 +2,7 @@ from prettytable import PrettyTable
 import ProjectTournoi.controllers.tools as tl
 import ProjectTournoi.variables as vr
 
+
 class CreateEndView:
 
     def list_players(self, area, date, players):
@@ -104,7 +105,7 @@ class CreateEndView:
         table = PrettyTable()
 
         table.title = 'Résultats du Tournoi du ' + str(tournoi.date) + ' à ' + tournoi.area + ' par round'
-        table.field_names = ['round', 'Game', 'Joueur A', 'Joueur B','Résultat']
+        table.field_names = ['round', 'Game', 'Joueur A', 'Joueur B', 'Résultat']
         for indr in range(len(tournoi.rounds)):
             for indg in range(len(tournoi.rounds[indr].games)):
                 ind_a = tl.get_result_player(tournoi.players, tournoi.rounds[indr].games[indg].player_a)
@@ -128,7 +129,7 @@ class CreateEndView:
         table = PrettyTable()
 
         table.title = 'Déroulement du round n° ' + str(num_round + 1) + ' du Tournoi du ' + str(tournoi.date) + ' à ' + tournoi.area
-        table.field_names = ['Game', 'Id Joueur A', 'Joueur A','Id Joueur B', 'Joueur B', 'Résultat']
+        table.field_names = ['Game', 'Id Joueur A', 'Joueur A', 'Id Joueur B', 'Joueur B', 'Résultat']
         for indg in range(vr.NUMBER_GAMES):
             ind_a = tl.get_result_player(tournoi.players, tournoi.rounds[num_round].games[indg].player_a)
             ind_b = tl.get_result_player(tournoi.players, tournoi.rounds[num_round].games[indg].player_b)

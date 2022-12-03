@@ -18,6 +18,7 @@ from ProjectTournoi.db import db_players, db_tournament
 class Controller:
     """Main controller"""
 
+
     def __init__(self, ctview, cpview, crview, cgview, cvview):
         # models
         self.tournois = []
@@ -50,7 +51,7 @@ class Controller:
             num_play = cp.CreatePlayer.prompt_choose_indice_players(self, -1, len(players))
             player_out = ply.update_player(self, players[num_play-1])
             Playerid = Query()
-            db_players.update({'classment': player_out.classment,'lastname': player_out.lastname,
+            db_players.update({'classment': player_out.classment, 'lastname': player_out.lastname,
                                 'firstname': player_out.firstname, 'birthdate': player_out.birthdate,
                                'sex': player_out.sex}, Playerid.player_id == player_out.player_id)
             encode_players = ply.get_players_continue(self)
@@ -75,7 +76,7 @@ class Controller:
                     while running_game:
                         running_game, igame = cgm.get_game_choose(self, num_round)
                     running_tournament = ctn.choose_continue_tournament(self)
-                    if running_tournament == False:
+                    if running_tournament is False:
                         break
             update_tournament = ctn.continue_another_tournament(self)
 
@@ -85,29 +86,28 @@ class Controller:
         ply.choose_players(self, self.current_tournament)
         """Tournament"""
         running_tournament = True
-        while running_tournament:
-            """Rounds"""
-            for num_round in range(NUMBER_ROUNDS):
-                """begin round"""
-                rnd.create_round_begin(self, num_round, self.current_tournament)
-                """Swiss algorithm"""
-                cgm.get_games_swiss(self, num_round, self.current_tournament)
-                running_game = True
+        """Rounds"""
+        for num_round in range(NUMBER_ROUNDS):
+            """begin round"""
+            rnd.create_round_begin(self, num_round, self.current_tournament)
+            """Swiss algorithm"""
+            cgm.get_games_swiss(self, num_round, self.current_tournament)
+            running_game = True
 
-                while running_game:
-                    """view games"""
-                    rep.print_turning_views(self, num_round, self.current_tournament)
-                    """choose number of game to encode or leave the round"""
-                    running_game, igame = cgm.get_game_choose(self, num_round)
-                    """encode score"""
-                    if running_game:
-                        cgm.get_result(self, self.current_tournament.rounds[num_round].games[igame])
-                """end round"""
-                rnd.get_round_end(self, num_round, self.current_tournament)
-                """select if you want to continue tournament or yes"""
-                running_tournament = ctn.choose_continue_tournament(self)
-                if running_tournament == False:
-                    break
+            while running_game:
+                """view games"""
+                rep.print_turning_views(self, num_round, self.current_tournament)
+                """choose number of game to encode or leave the round"""
+                running_game, igame = cgm.get_game_choose(self, num_round)
+                """encode score"""
+                if running_game:
+                    cgm.get_result(self, self.current_tournament.rounds[num_round].games[igame])
+            """end round"""
+            rnd.get_round_end(self, num_round, self.current_tournament)
+            """select if you want to continue tournament or yes"""
+            running_tournament = ctn.choose_continue_tournament(self)
+            if running_tournament is False:
+                break
 
         """Affichage résultat tournoi"""
         rep.print_end_views(self, self.current_tournament)

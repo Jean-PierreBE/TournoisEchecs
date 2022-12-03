@@ -1,6 +1,7 @@
 import ProjectTournoi.variables as vr
 from ProjectTournoi.controllers.tools import check_answer_y_n, check_result, check_game
 
+
 class CreateGame:
 
     def prompt_for_result(self, player_A, player_B):
