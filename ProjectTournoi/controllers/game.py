@@ -7,6 +7,7 @@ import ProjectTournoi.variables as vr
 def get_games_swiss(self, num_round, tournoi):
     """first round"""
     if num_round == 0:
+        print(tournoi.players)
         sorted_player = sorted(tournoi.players, key=lambda e: e.classment, reverse=True)
         last_player = 0
         for num_game in range(vr.NUMBER_GAMES):

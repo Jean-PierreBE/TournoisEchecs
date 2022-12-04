@@ -1,5 +1,8 @@
 from ProjectTournoi.models import player as pl
+from ProjectTournoi.models import round as rn
 from ProjectTournoi.models import tournament as tn
+from ProjectTournoi.models import game as gm
+
 from ProjectTournoi.db import db_players, db_tournament
 
 import datetime as dt
@@ -155,6 +158,29 @@ def download_players():
 def download_tournaments():
     tournaments = []
     for row in db_tournament:
-        tournament = tn.Tournament(row['tournament_id'], row['area'], row['date'], row['description'], row['rounds'], row['players'])
+        tournament = tn.Tournament(row['tournament_id'], row['area'], row['date'], row['description'],[], [])
+        """create players"""
+        for indp in range(len(row['players'])):
+            player_sel = pl.Player(row['players'][indp]['player_id'], row['players'][indp]['lastname'],
+                                   row['players'][indp]['firstname'],
+                                   row['players'][indp]['birthdate'], row['players'][indp]['sex'],
+                                   row['players'][indp]['classment'], row['players'][indp]['score'])
+            tournament.players.append(player_sel)
+        """create rounds"""
+        for indr in range(len(row['rounds'])):
+            round_sel = rn.Round(row['rounds'][indr]['round_id'], row['rounds'][indr]['begindate'],
+                                 row['rounds'][indr]['begintime'], row['rounds'][indr]['enddate'],
+                                 row['rounds'][indr]['endtime'],[])
+            """create games"""
+            for indg in range(len(row['rounds'][indr]['games'])):
+                game_sel = gm.Game(row['rounds'][indr]['games'][indg]['game_id'], \
+                           row['rounds'][indr]['games'][indg]['player_a'], \
+                           row['rounds'][indr]['games'][indg]['player_b'],
+                           row['rounds'][indr]['games'][indg]['result'])
+                round_sel.games.append(game_sel)
+
+            tournament.rounds.append(round_sel)
+
         tournaments.append(tournament)
+
     return tournaments

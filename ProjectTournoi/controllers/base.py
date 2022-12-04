@@ -4,6 +4,8 @@ import ProjectTournoi.controllers.tournament as ctn
 import ProjectTournoi.controllers.game as cgm
 import ProjectTournoi.controllers.round as rnd
 import ProjectTournoi.controllers.player as ply
+from ProjectTournoi.models import tournament as tn
+from ProjectTournoi.models import player as pl
 
 from ProjectTournoi.views import createendview as cv
 from ProjectTournoi.views import createplayer as cp
@@ -12,12 +14,12 @@ from ProjectTournoi.variables import NUMBER_ROUNDS
 import ProjectTournoi.controllers.tools as tl
 
 import jsons
-from tinydb import Query
+from tinydb import Query, where
 from ProjectTournoi.db import db_players, db_tournament
+
 
 class Controller:
     """Main controller"""
-
 
     def __init__(self, ctview, cpview, crview, cgview, cvview):
         # models
@@ -52,32 +54,54 @@ class Controller:
             player_out = ply.update_player(self, players[num_play-1])
             Playerid = Query()
             db_players.update({'classment': player_out.classment, 'lastname': player_out.lastname,
-                                'firstname': player_out.firstname, 'birthdate': player_out.birthdate,
-                               'sex': player_out.sex}, Playerid.player_id == player_out.player_id)
+                            'firstname': player_out.firstname, 'birthdate': player_out.birthdate,
+                            'sex': player_out.sex}, Playerid.player_id == player_out.player_id)
             encode_players = ply.get_players_continue(self)
-
 
     def run_update_tournoi(self):
         # list of tournaments
         update_tournament = True
         while update_tournament:
-            tournois = tl.download_tournaments()
-            cv.CreateEndView.list_only_tournaments(self, tournois)
+            tournaments = tl.download_tournaments()
+            cv.CreateEndView.list_only_tournaments(self, tournaments)
             """Choose tournament"""
-            ind_tournament = ct.CreateTournament.prompt_choose_tournament(self, len(tournois))
-            tournament = tournois[ind_tournament - 1]
+            ind_tournament = ct.CreateTournament.prompt_choose_tournament(self, len(tournaments))
+            tournament = tournaments[ind_tournament - 1]
+
             """choose round to restart"""
             round_deb = ct.CreateTournament.prompt_choose_round_deb(self, len(tournament.rounds) + 1)
             running_tournament = True
             while running_tournament:
-                for num_round in range(NUMBER_ROUNDS):
+                for num_round in range(round_deb - 1, NUMBER_ROUNDS):
                     print("num_round " + str(num_round))
+                    """begin round"""
+                    rnd.create_round_begin(self, num_round, tournament)
+                    """Swiss algorithm"""
+                    cgm.get_games_swiss(self, num_round, tournament)
                     running_game = True
                     while running_game:
+                        """view games"""
+                        rep.print_turning_views(self, num_round, tournament)
+                        """choose number of game to encode or leave the round"""
                         running_game, igame = cgm.get_game_choose(self, num_round)
-                    running_tournament = ctn.choose_continue_tournament(self)
+                        """encode score"""
+                        if running_game:
+                            cgm.get_result(self, tournament.rounds[num_round].games[igame])
+                    """end round"""
+                    rnd.get_round_end(self, num_round, tournament)
+                    """select if you want to continue tournament or yes"""
+                    if num_round == NUMBER_ROUNDS - 1:
+                        running_tournament = False
+                    else:
+                        running_tournament = ctn.choose_continue_tournament(self)
                     if running_tournament is False:
                         break
+                """Affichage résultat tournoi"""
+                rep.print_end_views(self, tournament)
+                """serialize object"""
+                serialized_tournament = jsons.dump(tournament)
+                db_tournament.remove(where('tournament_id') == tournament.tournament_id)
+                db_tournament.insert(serialized_tournament)
             update_tournament = ctn.continue_another_tournament(self)
 
     def run_create_tournoi(self):
@@ -105,7 +129,10 @@ class Controller:
             """end round"""
             rnd.get_round_end(self, num_round, self.current_tournament)
             """select if you want to continue tournament or yes"""
-            running_tournament = ctn.choose_continue_tournament(self)
+            if num_round == NUMBER_ROUNDS - 1:
+                running_tournament = False
+            else:
+                running_tournament = ctn.choose_continue_tournament(self)
             if running_tournament is False:
                 break
 
@@ -118,6 +145,7 @@ class Controller:
     def run_report_players_alph(self):
         """reports"""
         rep.print_players_order_alphabetics(self)
+
     def run_report_players_classment(self):
         rep.print_players_order_classment(self)
 

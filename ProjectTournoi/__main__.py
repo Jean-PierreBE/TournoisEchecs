@@ -7,6 +7,7 @@ import ProjectTournoi.views.creategame as vg
 import ProjectTournoi.views.createendview as vv
 from ProjectTournoi.variables import menu_options
 
+
 def print_menu():
 
     print("Gestion de tournois d'échecs")
@@ -28,7 +29,7 @@ while True:
     option = ''
     try:
         option = int(input('Entrez votre choix: '))
-    except:
+    except ValueError:
         print('caractères non numériques ...')
     if option == 1:
         tournoi.run_create_players()

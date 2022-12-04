@@ -28,4 +28,3 @@ def continue_another_tournament(self):
             return True
         elif response.upper() == ANSWER_NO:
                 return False
-

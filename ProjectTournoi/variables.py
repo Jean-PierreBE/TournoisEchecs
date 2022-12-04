@@ -8,30 +8,41 @@ ID_ROUND = 'Round_'
 ID_GAME = 'Game_'
 ANSWER_YES = 'Y'
 ANSWER_NO = 'N'
-TOURNAMENT_STATUS = {'new' : 0, 'Active' : 1, 'closed' : 2}
+TOURNAMENT_STATUS = {'new': 0, 'Active': 1, 'closed': 2}
 """messages"""
 MESSAGE_PLAYER_OUT_OF_RANGE = "Veuillez selectionner un indice dans la liste !"
 MESSAGE_ROUND_OUT_OF_RANGE = "Veuillez selectionner un round disponible !"
-MESSAGE_CHOOSE_8_PLAYERS = "Veuillez choisir 8 joueurs en selectionnant l'indice "
+MESSAGE_CHOOSE_8_PLAYERS = "Veuillez choisir 8 joueurs en selectionnant" \
+                           " l'indice "
 MESSAGE_ENCODE_LASTNAME = "tapez le nom du joueur : "
 MESSAGE_ENCODE_FIRSTNAME = "tapez le prénom du joueur  : "
-MESSAGE_ENCODE_BIRTHDATE = "Entrez la date de naissance du joueur au format DD/MM/YYYY : "
+MESSAGE_ENCODE_BIRTHDATE = "Entrez la date de naissance du joueur au format" \
+                           " DD/MM/YYYY : "
 MESSAGE_ENCODE_SEX = "Entrez le genre du joueur (M/F) : "
 MESSAGE_ENCODE_CLASSMENT = "Entrez le dernier classement du joueur n° : "
-MESSAGE_CONTINUE_ENCODE_PLAYERS = "Voulez-vous continuer à encoder des joueurs (Y/N) ? "
-MESSAGE_CONTINUE_ENCODE_TOURNAMENT = "voulez-vous continuer le tournoi (Y/N) ?  "
-MESSAGE_CONTINUE_ANOTHER_TOURNAMENT = "Voulez-vous encoder un autre tournoi (Y/N) ? "
-MESSAGE_ENCODE_AREA= "Entrez le lieu du tournoi : "
-MESSAGE_ENCODE_DATE_TOURNAMENT = "Entrez la date du tournoi au format DD/MM/YYYY : "
+MESSAGE_CONTINUE_ENCODE_PLAYERS = "Voulez-vous continuer à encoder " \
+                                  "des joueurs (Y/N) ? "
+MESSAGE_CONTINUE_ENCODE_TOURNAMENT = "voulez-vous continuer le tournoi" \
+                                     " (Y/N) ?  "
+MESSAGE_CONTINUE_ANOTHER_TOURNAMENT = "Voulez-vous encoder un autre tournoi" \
+                                      " (Y/N) ? "
+MESSAGE_ENCODE_AREA = "Entrez le lieu du tournoi : "
+MESSAGE_ENCODE_DATE_TOURNAMENT = "Entrez la date du tournoi au format " \
+                                 "DD/MM/YYYY : "
 MESSAGE_ENCODE_DESCRIPTION = "Entrez la description du tournoi : "
 MESSAGE_SELECT_INDICE_PLAYER = "Selectionnez un indice pour le joueur "
 MESSAGE_SELECT_INDICE_TOURNAMENT = "Selectionnez un indice pour le tournoi "
 MESSAGE_SELECT_ROUND_RESTART = "Selectionnez un round de redémarrage "
-MESSAGE_BEGIN_DATE_ROUND = "Entrez la date de début du round n° {} au format DD/MM/YYYY : "
-MESSAGE_BEGIN_TIME_ROUND = "Entrez l'heure de début du round n° {} au format HH:MM : "
-MESSAGE_END_DATE_ROUND = "Entrez la date de fin du round n° {} au format DD/MM/YYYY : "
-MESSAGE_END_TIME_ROUND = "Entrez l'heure de fin du round n° {} au format HH:MM : "
-MESSAGE_END_ROUND = "Les joueur A {} et Joueur B {} ont fini .Donnez le score (0 si nul,1 si A gagnant,2 si B gagnant ) : "
+MESSAGE_BEGIN_DATE_ROUND = "Entrez la date de début du round n° {} " \
+                           "au format DD/MM/YYYY : "
+MESSAGE_BEGIN_TIME_ROUND = "Entrez l'heure de début du round n° {} " \
+                           "au format HH:MM : "
+MESSAGE_END_DATE_ROUND = "Entrez la date de fin du round n° {} " \
+                         "au format DD/MM/YYYY : "
+MESSAGE_END_TIME_ROUND = "Entrez l'heure de fin du round n° {} " \
+                         "au format HH:MM : "
+MESSAGE_END_ROUND = "Les joueur A {} et Joueur B {} ont fini .Donnez" \
+                    " le score (0 si nul,1 si A gagnant,2 si B gagnant ) : "
 MESSAGE_IF_ROUND_FINISHED = "le round est-il terminé (Y/N) ?  "
 MESSAGE_NUMBER_MATCH = "Pour quel match voulez-vous entrer les scores ?  "
 
@@ -78,4 +89,4 @@ CLASSMENT_DEFAULT = 400
 CLASSMENT_MIN = 400
 CLASSMENT_MAX = 3000
 SEX_MALE = 'M'
-SEX_FEMALE  ='F'
+SEX_FEMALE = 'F'
