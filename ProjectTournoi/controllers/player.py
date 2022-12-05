@@ -59,3 +59,6 @@ def get_players_continue(self):
         return True
     elif response.upper() == vr.ANSWER_NO:
         return False
+
+def update_score_if_replay(self, tournoi):
+    pass

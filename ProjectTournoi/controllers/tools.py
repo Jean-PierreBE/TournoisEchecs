@@ -1,10 +1,3 @@
-from ProjectTournoi.models import player as pl
-from ProjectTournoi.models import round as rn
-from ProjectTournoi.models import tournament as tn
-from ProjectTournoi.models import game as gm
-
-from ProjectTournoi.db import db_players, db_tournament
-
 import datetime as dt
 import ProjectTournoi.variables as vr
 
@@ -138,7 +131,7 @@ def check_round_restart(round_entry, round_max):
         return True
 
 """Search if player 1 and player 2 played already """
-def search_couple(list, element_a, element_b):
+def search_couple1(list, element_a, element_b):
     for indr in range(len(list)):
         for indg in range(len(list[indr].games)):
             if list[indr].games[indg].player_a == element_a and list[indr].games[indg].player_b == element_b:
@@ -146,41 +139,3 @@ def search_couple(list, element_a, element_b):
             if list[indr].games[indg].player_b == element_a and list[indr].games[indg].player_a == element_b:
                 return True
     return False
-
-def download_players():
-    players = []
-    for row in db_players:
-        player = pl.Player(row['player_id'], row['lastname'], row['firstname'], row['birthdate'], row['sex'],
-                           row['classment'])
-        players.append(player)
-    return players
-
-def download_tournaments():
-    tournaments = []
-    for row in db_tournament:
-        tournament = tn.Tournament(row['tournament_id'], row['area'], row['date'], row['description'],[], [])
-        """create players"""
-        for indp in range(len(row['players'])):
-            player_sel = pl.Player(row['players'][indp]['player_id'], row['players'][indp]['lastname'],
-                                   row['players'][indp]['firstname'],
-                                   row['players'][indp]['birthdate'], row['players'][indp]['sex'],
-                                   row['players'][indp]['classment'], row['players'][indp]['score'])
-            tournament.players.append(player_sel)
-        """create rounds"""
-        for indr in range(len(row['rounds'])):
-            round_sel = rn.Round(row['rounds'][indr]['round_id'], row['rounds'][indr]['begindate'],
-                                 row['rounds'][indr]['begintime'], row['rounds'][indr]['enddate'],
-                                 row['rounds'][indr]['endtime'],[])
-            """create games"""
-            for indg in range(len(row['rounds'][indr]['games'])):
-                game_sel = gm.Game(row['rounds'][indr]['games'][indg]['game_id'], \
-                           row['rounds'][indr]['games'][indg]['player_a'], \
-                           row['rounds'][indr]['games'][indg]['player_b'],
-                           row['rounds'][indr]['games'][indg]['result'])
-                round_sel.games.append(game_sel)
-
-            tournament.rounds.append(round_sel)
-
-        tournaments.append(tournament)
-
-    return tournaments

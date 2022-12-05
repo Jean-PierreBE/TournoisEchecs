@@ -19,7 +19,7 @@ MESSAGE_ENCODE_FIRSTNAME = "tapez le prénom du joueur  : "
 MESSAGE_ENCODE_BIRTHDATE = "Entrez la date de naissance du joueur au format" \
                            " DD/MM/YYYY : "
 MESSAGE_ENCODE_SEX = "Entrez le genre du joueur (M/F) : "
-MESSAGE_ENCODE_CLASSMENT = "Entrez le dernier classement du joueur n° : "
+MESSAGE_ENCODE_CLASSMENT = "Entrez le dernier classement du joueur : "
 MESSAGE_CONTINUE_ENCODE_PLAYERS = "Voulez-vous continuer à encoder " \
                                   "des joueurs (Y/N) ? "
 MESSAGE_CONTINUE_ENCODE_TOURNAMENT = "voulez-vous continuer le tournoi" \
@@ -30,9 +30,9 @@ MESSAGE_ENCODE_AREA = "Entrez le lieu du tournoi : "
 MESSAGE_ENCODE_DATE_TOURNAMENT = "Entrez la date du tournoi au format " \
                                  "DD/MM/YYYY : "
 MESSAGE_ENCODE_DESCRIPTION = "Entrez la description du tournoi : "
-MESSAGE_SELECT_INDICE_PLAYER = "Selectionnez un indice pour le joueur "
-MESSAGE_SELECT_INDICE_TOURNAMENT = "Selectionnez un indice pour le tournoi "
-MESSAGE_SELECT_ROUND_RESTART = "Selectionnez un round de redémarrage "
+MESSAGE_SELECT_INDICE_PLAYER = "Selectionnez un indice pour le joueur : "
+MESSAGE_SELECT_INDICE_TOURNAMENT = "Selectionnez un indice pour le tournoi : "
+MESSAGE_SELECT_ROUND_RESTART = "Selectionnez un round de redémarrage : "
 MESSAGE_BEGIN_DATE_ROUND = "Entrez la date de début du round n° {} " \
                            "au format DD/MM/YYYY : "
 MESSAGE_BEGIN_TIME_ROUND = "Entrez l'heure de début du round n° {} " \

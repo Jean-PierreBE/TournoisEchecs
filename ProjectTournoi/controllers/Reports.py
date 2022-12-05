@@ -1,6 +1,5 @@
 import ProjectTournoi.views.createendview as cv
-import ProjectTournoi.controllers.tools as tl
-
+import ProjectTournoi.controllers.acces_db as db
 
 def print_turning_views(self, num_round, tournoi):
     """list of tournaments"""
@@ -24,7 +23,7 @@ def print_end_views(self, tournoi):
 
 
 def print_players_order_alphabetics(self):
-    players = tl.download_players()
+    players = db.download_players()
     sorted_player = sorted(players, key=lambda e: (e.lastname, e.firstname))
     cv.CreateEndView.list_players_sort(self, sorted_player,
                                        "Liste des joueurs par "
@@ -32,13 +31,13 @@ def print_players_order_alphabetics(self):
 
 
 def print_players_order_classment(self):
-    players = tl.download_players()
+    players = db.download_players()
     sorted_player = sorted(players, key=lambda e: e.classment)
     cv.CreateEndView.list_players_sort(self, sorted_player,
                                        "Liste des joueurs par classement")
 
 
 def print_all_tournaments(self):
-    tournaments = tl.download_tournaments()
+    tournaments = db.download_tournaments()
     sorted_tournaments = sorted(tournaments, key=lambda e: e.date)
     cv.CreateEndView.list_tournaments_all(self, sorted_tournaments)
