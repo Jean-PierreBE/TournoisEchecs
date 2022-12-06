@@ -63,7 +63,7 @@ class Controller:
             """check previous results"""
             cv.CreateEndView.list_results_rounds(self, tournament)
             """choose round to restart"""
-            round_deb = ct.CreateTournament.prompt_choose_round_deb(self, len(tournament.rounds))
+            round_deb = ct.CreateTournament.prompt_choose_round_deb(self, len(tournament.rounds) + 1)
             """delete rounds if replayed"""
             for indc in range(round_deb - 1, len(tournament.rounds)):
                 del tournament.rounds[round_deb - 1]
@@ -73,26 +73,7 @@ class Controller:
             running_tournament = True
             while running_tournament:
                 for num_round in range(round_deb - 1, NUMBER_ROUNDS):
-                    """begin round"""
-                    rnd.create_round_begin(self, num_round, tournament)
-                    """Swiss algorithm"""
-                    cgm.get_games_swiss(self, num_round, tournament)
-                    running_game = True
-                    while running_game:
-                        """view games"""
-                        rep.print_turning_views(self, num_round, tournament)
-                        """choose number of game to encode or leave the round"""
-                        running_game, igame = cgm.get_game_choose(self, num_round)
-                        """encode score"""
-                        if running_game:
-                            cgm.get_result(self, tournament.rounds[num_round].games[igame])
-                    """end round"""
-                    rnd.get_round_end(self, num_round, tournament)
-                    """select if you want to continue tournament or yes"""
-                    if num_round == NUMBER_ROUNDS - 1:
-                        running_tournament = False
-                    else:
-                        running_tournament = ctn.choose_continue_tournament(self)
+                    running_tournament = rnd.turning_round(self, num_round, tournament)
                     if running_tournament is False:
                         break
                 """Affichage résultat tournoi"""
@@ -105,34 +86,10 @@ class Controller:
         ctn.create_tournament(self, len(db_tournament))
         """choose players from a list"""
         ply.choose_players(self, self.current_tournament)
-        """Tournament"""
-        running_tournament = True
         """Rounds"""
         for num_round in range(NUMBER_ROUNDS):
-            """begin round"""
-            rnd.create_round_begin(self, num_round, self.current_tournament)
-            """Swiss algorithm"""
-            cgm.get_games_swiss(self, num_round, self.current_tournament)
-            running_game = True
-
-            while running_game:
-                """view games"""
-                rep.print_turning_views(self, num_round, self.current_tournament)
-                """choose number of game to encode or leave the round"""
-                running_game, igame = cgm.get_game_choose(self, num_round)
-                """encode score"""
-                if running_game:
-                    cgm.get_result(self, self.current_tournament.rounds[num_round].games[igame])
-            """end round"""
-            rnd.get_round_end(self, num_round, self.current_tournament)
-            """select if you want to continue tournament or yes"""
-            if num_round == NUMBER_ROUNDS - 1:
-                running_tournament = False
-            else:
-                running_tournament = ctn.choose_continue_tournament(self)
-            if running_tournament is False:
+            if rnd.turning_round(self, num_round, self.current_tournament) is False:
                 break
-
         """Affichage résultat tournoi"""
         rep.print_end_views(self, self.current_tournament)
         """insert tournament in db"""

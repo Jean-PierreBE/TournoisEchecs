@@ -5,12 +5,13 @@ import ProjectTournoi.views.createplayer as vp
 import ProjectTournoi.views.createround as vr
 import ProjectTournoi.views.creategame as vg
 import ProjectTournoi.views.createendview as vv
-from ProjectTournoi.variables import menu_options
+from ProjectTournoi.variables import menu_options, MESSAGE_NOT_NUMERIC, TITLE_MENU, \
+                MESSAGE_INVITE_MENU, MESSAGE_GOOD_BYE, MESSAGE_SELECT_MENU
 
 
 def print_menu():
 
-    print("Gestion de tournois d'échecs")
+    print(TITLE_MENU)
     for key in menu_options.keys():
         print(key, '--', menu_options[key])
 
@@ -28,9 +29,9 @@ while True:
     print_menu()
     option = ''
     try:
-        option = int(input('Entrez votre choix: '))
+        option = int(input(MESSAGE_INVITE_MENU))
     except ValueError:
-        print('caractères non numériques ...')
+        print(MESSAGE_NOT_NUMERIC)
     if option == 1:
         tournoi.run_create_players()
     elif option == 2:
@@ -46,7 +47,7 @@ while True:
     elif option == 7:
         tournoi.run_report_tournament()
     elif option == 8:
-        print("Au revoir et à bientôt !")
+        print(MESSAGE_GOOD_BYE)
         exit()
     else:
-        print('veuillez entrer un chiffre entre 1 et 7.')
+        print(MESSAGE_SELECT_MENU)

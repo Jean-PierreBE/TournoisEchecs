@@ -61,4 +61,12 @@ def get_players_continue(self):
         return False
 
 def update_score_if_replay(self, tournoi):
-    pass
+    """reinit score with 0"""
+    for indp in range(len(tournoi.players)):
+        tournoi.players[indp].score = 0
+    """sum score """
+    for indr in range(len(tournoi.rounds)):
+        for indg in range(len(tournoi.rounds[indr].games)):
+            inda = tl.get_result_player(tournoi.players, tournoi.rounds[indr].games[indg].player_a)
+            indb = tl.get_result_player(tournoi.players, tournoi.rounds[indr].games[indg].player_b)
+            tournoi.set_result(tournoi.rounds[indr].games[indg].result, inda, indb)

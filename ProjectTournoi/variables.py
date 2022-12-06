@@ -9,7 +9,12 @@ ID_GAME = 'Game_'
 ANSWER_YES = 'Y'
 ANSWER_NO = 'N'
 TOURNAMENT_STATUS = {'new': 0, 'Active': 1, 'closed': 2}
-"""messages"""
+"""messages menu"""
+TITLE_MENU = "Gestion de tournois d'échecs"
+MESSAGE_INVITE_MENU = "Entrez votre choix : "
+MESSAGE_GOOD_BYE = "Au revoir et à bientôt !"
+MESSAGE_SELECT_MENU = "veuillez entrer un chiffre entre 1 et 8."
+"""messages views"""
 MESSAGE_PLAYER_OUT_OF_RANGE = "Veuillez selectionner un indice dans la liste !"
 MESSAGE_ROUND_OUT_OF_RANGE = "Veuillez selectionner un round disponible !"
 MESSAGE_CHOOSE_8_PLAYERS = "Veuillez choisir 8 joueurs en selectionnant" \

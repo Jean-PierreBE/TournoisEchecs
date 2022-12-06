@@ -124,7 +124,6 @@ class CreateEndView:
     def list_turning_round(self, num_round, tournoi):
         """Create list of results by round"""
         table = PrettyTable()
-
         table.title = 'Déroulement du round n° ' + str(num_round + 1) + ' du Tournoi du ' + str(tournoi.date) + ' à ' + tournoi.area
         table.field_names = ['Game', 'Id Joueur A', 'Joueur A', 'Id Joueur B', 'Joueur B', 'Résultat']
         for indg in range(vr.NUMBER_GAMES):

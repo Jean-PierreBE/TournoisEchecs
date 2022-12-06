@@ -18,7 +18,6 @@ def get_games_swiss(self, num_round, tournoi):
             tournoi.rounds[num_round].games.append(game)
     else:
         sorted_players = sorted(tournoi.players, key=lambda e: (e.score, e.classment), reverse=True)
-        last_player = 0
         """search precedent game"""
         """
         history = {
@@ -31,7 +30,7 @@ def get_games_swiss(self, num_round, tournoi):
             for game in round.games:
                 history[game.player_a].append(game.player_b)
                 history[game.player_b].append(game.player_a)
-
+        print(history)
         affected_players = []
         num_game = 0
         for player in sorted_players:
@@ -45,6 +44,13 @@ def get_games_swiss(self, num_round, tournoi):
                     num_game += 1
                     affected_players.append(player.player_id)
                     affected_players.append(adversaire.player_id)
+                    print(affected_players)
+        """check if all players affected"""
+        if len(affected_players) < vr.NUMBER_PLAYERS:
+            miss_player = []
+            for player in sorted_players:
+                if player.player_id not in affected_players:
+                    pass
 
 def get_game_choose(self, num_round):
     response = cg.CreateGame.prompt_for_continue_round(self)

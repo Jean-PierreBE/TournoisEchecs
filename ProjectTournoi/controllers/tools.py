@@ -124,7 +124,7 @@ def check_round_restart(round_entry, round_max):
     except ValueError:
         print(vr.MESSAGE_NOT_NUMERIC)
         return False
-    if round_check > round_max or round_check < 1:
+    if (round_check > round_max) or (round_check > vr.NUMBER_ROUNDS) or (round_check) < 1:
         print(vr.MESSAGE_ROUND_OUT_OF_RANGE)
         return False
     else:
