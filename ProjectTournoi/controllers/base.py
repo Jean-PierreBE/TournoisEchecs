@@ -1,7 +1,6 @@
 """Define the main controller"""
 import ProjectTournoi.controllers.Reports as rep
 import ProjectTournoi.controllers.tournament as ctn
-import ProjectTournoi.controllers.game as cgm
 import ProjectTournoi.controllers.round as rnd
 import ProjectTournoi.controllers.player as ply
 

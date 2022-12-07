@@ -30,13 +30,14 @@ def get_round_end(self, num_round, tournoi):
         tournoi.set_result(round.games[igame].result, inda, indb)
 
     """list of provisional results of tournament"""
-    cv.CreateEndView.list_results_tournaments(self, 0, tournoi.area, tournoi.date, tournoi.players)
+    cv.CreateEndView.list_results_tournaments(self, 0, tournoi.date, tournoi.players)
 
 def turning_round(self, num_round, tournament):
     """begin round"""
     create_round_begin(self, num_round, tournament)
     """Swiss algorithm"""
-    cgm.get_games_swiss(self, num_round, tournament)
+    if cgm.get_games_swiss(self, num_round, tournament) is False:
+        return False
     running_game = True
     while running_game:
         """view games"""

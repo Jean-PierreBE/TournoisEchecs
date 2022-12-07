@@ -8,7 +8,7 @@ ID_ROUND = 'Round_'
 ID_GAME = 'Game_'
 ANSWER_YES = 'Y'
 ANSWER_NO = 'N'
-TOURNAMENT_STATUS = {'new': 0, 'Active': 1, 'closed': 2}
+GAME_RESULTS = {0: 'Match nul', 1: 'Joueur A vainqueur',2: 'Joueur B vainqueur'}
 """messages menu"""
 TITLE_MENU = "Gestion de tournois d'échecs"
 MESSAGE_INVITE_MENU = "Entrez votre choix : "
@@ -48,6 +48,7 @@ MESSAGE_END_TIME_ROUND = "Entrez l'heure de fin du round n° {} " \
                          "au format HH:MM : "
 MESSAGE_END_ROUND = "Les joueur A {} et Joueur B {} ont fini .Donnez" \
                     " le score (0 si nul,1 si A gagnant,2 si B gagnant ) : "
+MESSAGE_ADD_PLAYER = "Voulez-vous créer le dernier match avec Les joueur A {} et Joueur B {} ?"
 MESSAGE_IF_ROUND_FINISHED = "le round est-il terminé (Y/N) ?  "
 MESSAGE_NUMBER_MATCH = "Pour quel match voulez-vous entrer les scores ?  "
 
@@ -65,6 +66,7 @@ MESSAGE_CLASSMENT_MIN = "Clessement inférieur au minimum"
 MESSAGE_CLASSMENT_MAX = "Clessement supérieur au maximum"
 MESSAGE_PLAYER_ALLREADY_SELECTED = "Joueur déja selectionné !"
 MESSAGE_WRONG_SEX = "Veuillez encoder 'M' ou 'F' !"
+MESSAGE_STOP_TOURNAMENT = "Puisque c'est comme ça , le tournoi s'arrête !!"
 
 """menu"""
 menu_options = {
@@ -77,10 +79,27 @@ menu_options = {
     7: 'Liste de tous les tournois',
     8: 'Exit',
 }
-
+MENUS = [1, 2, 3, 4, 5, 6, 7, 8]
 RESULTS = [0, 1, 2]
 GAMES = [1, 2, 3, 4]
 CODE_SEXE = ['M', 'F']
+NO_RESULT = ['Pas de résultat', 'En attente']
+STATUS_TOURNAMENT = ['définitifs', 'provisoires']
+
+"""reports"""
+"""columns"""
+COL_PLAYERS = ['Nom', 'Prénom', 'Date de naissance', 'sexe', 'classement']
+COL_TOURNAMENTS = ['Lieu', 'date', 'Description']
+COL_PLAYERS_DISPO = ['Indice', 'Id', 'Nom', 'Prénom', 'Date de naissance', 'sexe', 'classement']
+COL_TOURNAMENT_DISPO = ['Indice', 'Id', 'Lieu', 'Date', 'Description', 'Nombre de rounds']
+COL_TURNING_ROUND = ['Game', 'Id Joueur A', 'Joueur A', 'Id Joueur B', 'Joueur B', 'Résultat']
+"""title"""
+TITLE_PLAYERS_ALPH = "Liste des joueurs par ordre alphabetique"
+TITLE_PLAYERS_CLASS = "Liste des joueurs par classement"
+TITLE_TOURNAMENT_LIST = 'liste des Tournois'
+TITLE_PLAYERS_DISPO = 'Liste des joueurs disponibles '
+TITLE_TOURNAMENT_DISPO = 'Liste des tournois disponibles '
+TITLE_TURNING_ROUND = 'Déroulement du round n° {} du Tournoi du {} à {}'
 
 """Constants for tournament"""
 AREA_DEFAULT = "A completer"

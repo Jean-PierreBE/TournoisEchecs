@@ -1,6 +1,6 @@
 from ProjectTournoi.models import game as gm
 from ProjectTournoi.views import creategame as cg
-
+from ProjectTournoi.controllers.tools import get_result_player
 import ProjectTournoi.variables as vr
 
 
@@ -30,27 +30,39 @@ def get_games_swiss(self, num_round, tournoi):
             for game in round.games:
                 history[game.player_a].append(game.player_b)
                 history[game.player_b].append(game.player_a)
-        print(history)
         affected_players = []
         num_game = 0
         for player in sorted_players:
             for adversaire in sorted_players:
                 if (adversaire.player_id != player.player_id) and (adversaire.player_id not in history[player.player_id]) and (adversaire.player_id not in affected_players)\
                         and (player.player_id not in affected_players):
-
                     pref_game = vr.ID_GAME + str(num_round + 1) + str(num_game + 1)
                     game = gm.Game(pref_game, player.player_id, adversaire.player_id)
                     tournoi.rounds[num_round].games.append(game)
                     num_game += 1
                     affected_players.append(player.player_id)
                     affected_players.append(adversaire.player_id)
-                    print(affected_players)
         """check if all players affected"""
         if len(affected_players) < vr.NUMBER_PLAYERS:
             miss_player = []
             for player in sorted_players:
                 if player.player_id not in affected_players:
-                    pass
+                    miss_player.append(player.player_id)
+            """get names of the last player"""
+            ind_a = get_result_player(sorted_players, miss_player[0])
+            ind_b = get_result_player(sorted_players, miss_player[1])
+            player_a = sorted_players[ind_a].lastname + ' ' + sorted_players[ind_a].firstname
+            player_b = sorted_players[ind_b].lastname + ' ' + sorted_players[ind_b].firstname
+            response = cg.CreateGame.prompt_add_player_manually(self, player_a, player_b)
+            if response.upper() == vr.ANSWER_YES:
+                pref_game = vr.ID_GAME + str(num_round + 1) + str(num_game + 1)
+                game = gm.Game(pref_game, miss_player[0], miss_player[1])
+                tournoi.rounds[num_round].games.append(game)
+                return True
+            elif response.upper() == vr.ANSWER_NO:
+                return False
+        else:
+            return True
 
 def get_game_choose(self, num_round):
     response = cg.CreateGame.prompt_for_continue_round(self)

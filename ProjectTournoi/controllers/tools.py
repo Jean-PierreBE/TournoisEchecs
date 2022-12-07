@@ -7,6 +7,19 @@ def get_result_player(list, element):
             return ind
     return -1
 
+def check_menu(result_entry):
+    """check validity of the menu"""
+    try:
+        result_check = int(result_entry)
+    except ValueError:
+        print(vr.MESSAGE_NOT_NUMERIC)
+        return False
+    if result_check in vr.MENUS:
+        return True
+    else:
+        print(vr.MESSAGE_SELECT_MENU)
+        return False
+
 """check validity of the date"""
 def check_date(date_entry):
     """check validity of the date DD/MM/YYYY"""
@@ -129,13 +142,3 @@ def check_round_restart(round_entry, round_max):
         return False
     else:
         return True
-
-"""Search if player 1 and player 2 played already """
-def search_couple1(list, element_a, element_b):
-    for indr in range(len(list)):
-        for indg in range(len(list[indr].games)):
-            if list[indr].games[indg].player_a == element_a and list[indr].games[indg].player_b == element_b:
-                return True
-            if list[indr].games[indg].player_b == element_a and list[indr].games[indg].player_a == element_b:
-                return True
-    return False

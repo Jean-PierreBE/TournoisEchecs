@@ -3,6 +3,8 @@ from ProjectTournoi.models import tournament as tn
 
 from ProjectTournoi.variables import ID_TOURNAMENT,ANSWER_NO, ANSWER_YES, MESSAGE_BAD_ANSWER_Y_OR_N
 
+
+
 def create_tournament(self, num_id):
     """create tournament"""
     area = ct.CreateTournament.prompt_for_area(self)

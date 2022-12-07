@@ -5,9 +5,19 @@ import ProjectTournoi.views.createplayer as vp
 import ProjectTournoi.views.createround as vr
 import ProjectTournoi.views.creategame as vg
 import ProjectTournoi.views.createendview as vv
-from ProjectTournoi.variables import menu_options, MESSAGE_NOT_NUMERIC, TITLE_MENU, \
-                MESSAGE_INVITE_MENU, MESSAGE_GOOD_BYE, MESSAGE_SELECT_MENU
+from ProjectTournoi.variables import menu_options, TITLE_MENU, \
+                MESSAGE_INVITE_MENU, MESSAGE_GOOD_BYE
+from ProjectTournoi.controllers.tools import check_menu
 
+
+def prompt_for_menu():
+    """Prompt for a score"""
+    check = False
+    while check is False:
+        result = input(MESSAGE_INVITE_MENU)
+        check = check_menu(result)
+        if check is True:
+            return int(result)
 
 def print_menu():
 
@@ -27,11 +37,7 @@ tournoi = Controller(ctview, cpview, crview, cgview, cvview)
 
 while True:
     print_menu()
-    option = ''
-    try:
-        option = int(input(MESSAGE_INVITE_MENU))
-    except ValueError:
-        print(MESSAGE_NOT_NUMERIC)
+    option = prompt_for_menu()
     if option == 1:
         tournoi.run_create_players()
     elif option == 2:
@@ -49,5 +55,3 @@ while True:
     elif option == 8:
         print(MESSAGE_GOOD_BYE)
         exit()
-    else:
-        print(MESSAGE_SELECT_MENU)
