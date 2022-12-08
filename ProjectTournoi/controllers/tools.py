@@ -14,7 +14,7 @@ def check_menu(result_entry):
     except ValueError:
         print(vr.MESSAGE_NOT_NUMERIC)
         return False
-    if result_check in vr.MENUS:
+    if result_check in vr.menu_options:
         return True
     else:
         print(vr.MESSAGE_SELECT_MENU)
@@ -98,7 +98,7 @@ def check_result(result_entry):
     except ValueError:
         print(vr.MESSAGE_NOT_NUMERIC)
         return False
-    if result_check in vr.RESULTS:
+    if result_check in vr.GAME_RESULTS:
         return True
     else:
         print(vr.MESSAGE_WRONG_RESULT)

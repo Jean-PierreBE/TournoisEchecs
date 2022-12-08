@@ -79,12 +79,11 @@ menu_options = {
     7: 'Liste de tous les tournois',
     8: 'Exit',
 }
-MENUS = [1, 2, 3, 4, 5, 6, 7, 8]
-RESULTS = [0, 1, 2]
+#RESULTS = [0, 1, 2]
 GAMES = [1, 2, 3, 4]
 CODE_SEXE = ['M', 'F']
 NO_RESULT = ['Pas de résultat', 'En attente']
-STATUS_TOURNAMENT = ['définitifs', 'provisoires']
+STATUS_TOURNAMENT = ['provisoires', 'définitifs']
 
 """reports"""
 """columns"""
@@ -93,13 +92,20 @@ COL_TOURNAMENTS = ['Lieu', 'date', 'Description']
 COL_PLAYERS_DISPO = ['Indice', 'Id', 'Nom', 'Prénom', 'Date de naissance', 'sexe', 'classement']
 COL_TOURNAMENT_DISPO = ['Indice', 'Id', 'Lieu', 'Date', 'Description', 'Nombre de rounds']
 COL_TURNING_ROUND = ['Game', 'Id Joueur A', 'Joueur A', 'Id Joueur B', 'Joueur B', 'Résultat']
+COL_RESULTS_ROUNDS = ['round', 'Game', 'Joueur A', 'Joueur B', 'Résultat']
+COL_LIST_ROUNDS = ['round', 'Date de début', 'Heure de début', 'Date de fin', 'Heure de fin']
+COL_RESULTS_TOURNAMENT = ['Nom', 'Prénom', 'Score']
 """title"""
 TITLE_PLAYERS_ALPH = "Liste des joueurs par ordre alphabetique"
 TITLE_PLAYERS_CLASS = "Liste des joueurs par classement"
+TITLE_ALL_PLAYERS = 'Liste des joueurs du tournoi du {} à {}'
 TITLE_TOURNAMENT_LIST = 'liste des Tournois'
 TITLE_PLAYERS_DISPO = 'Liste des joueurs disponibles '
 TITLE_TOURNAMENT_DISPO = 'Liste des tournois disponibles '
 TITLE_TURNING_ROUND = 'Déroulement du round n° {} du Tournoi du {} à {}'
+TITLE_RESULTS_ROUNDS = 'Résultats du Tournoi du {} à {} par round'
+TITLE_LIST_ROUNDS = 'Rounds du Tournoi du {} à {}'
+TITLE_RESULTS_TOURNAMENT = 'Résultats {} du tournoi du {}'
 
 """Constants for tournament"""
 AREA_DEFAULT = "A completer"
