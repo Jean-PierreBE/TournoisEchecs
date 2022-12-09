@@ -1,6 +1,6 @@
 """Create tournament view"""
-from ProjectTournoi.controllers.tools import check_date, check_classment, check_sex, check_answer_y_n, check_indice
-import ProjectTournoi.variables as vr
+from ProjectTournoi.tools.check import check_date, check_classment, check_sex, check_answer_y_n, check_indice
+import ProjectTournoi.tools.constants as vr
 
 
 class CreatePlayer:

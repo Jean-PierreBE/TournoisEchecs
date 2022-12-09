@@ -1,7 +1,7 @@
 """Create tournament view"""
 import datetime as dt
-import ProjectTournoi.variables as vr
-from ProjectTournoi.controllers.tools import check_answer_y_n, check_date, check_indice, check_round_restart
+import ProjectTournoi.tools.constants as vr
+from ProjectTournoi.tools.check import check_answer_y_n, check_date, check_indice, check_round_restart
 
 
 class CreateTournament:

@@ -1,6 +1,6 @@
 from prettytable import PrettyTable
-import ProjectTournoi.controllers.tools as tl
-import ProjectTournoi.variables as vr
+import ProjectTournoi.tools.check as tl
+import ProjectTournoi.tools.constants as vr
 
 
 class CreateEndView:

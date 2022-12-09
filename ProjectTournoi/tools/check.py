@@ -1,11 +1,13 @@
 import datetime as dt
-import ProjectTournoi.variables as vr
+import ProjectTournoi.tools.constants as vr
+
 
 def get_result_player(list, element):
     for ind in range(len(list)):
         if list[ind].player_id == element:
             return ind
     return -1
+
 
 def check_menu(result_entry):
     """check validity of the menu"""
@@ -20,44 +22,46 @@ def check_menu(result_entry):
         print(vr.MESSAGE_SELECT_MENU)
         return False
 
-"""check validity of the date"""
+
 def check_date(date_entry):
     """check validity of the date DD/MM/YYYY"""
-    if date_entry.find('/',2) != 2 or date_entry.find('/',5) != 5:
+    if date_entry.find('/', 2) != 2 or date_entry.find('/', 5) != 5:
         print(vr.MESSAGE_WRONG_DATE_FORMAT)
         return False
     else:
         try:
-            date_check = int(date_entry.replace('/',''))
+            date_check = int(date_entry.replace('/','')) # noqa
         except ValueError:
             print(vr.MESSAGE_NOT_NUMERIC)
             return False
         day, month, year = map(int, date_entry.split('/'))
         try:
-            date_check = dt.date(int(year), int(month), int(day))
+            date_check = dt.date(int(year), int(month), int(day)) # noqa
         except ValueError:
             print(vr.MESSAGE_WRONG_DATE_INVALID)
             return False
         return True
 
+
 def check_time(time_entry):
     """check validity of the time HH:MM"""
-    if time_entry.find(':',2) != 2:
+    if time_entry.find(':', 2) != 2:
         print(vr.MESSAGE_WRONG_TIME_FORMAT)
         return False
     else:
         try:
-            time_check = int(time_entry.replace(':',''))
+            time_check = int(time_entry.replace(':','')) # noqa
         except ValueError:
             print(vr.MESSAGE_NOT_NUMERIC)
             return False
         time, minute = map(int, time_entry.split(':'))
         try:
-            time_check = dt.time(time, minute)
+            time_check = dt.time(time, minute) # noqa
         except ValueError:
             print(vr.MESSAGE_WRONG_TIME_INVALID)
             return False
         return True
+
 
 def check_classment(classment_entry):
     """check validity of the classment"""
@@ -69,11 +73,12 @@ def check_classment(classment_entry):
     if classment_check < vr.CLASSMENT_MIN:
         print(vr.MESSAGE_CLASSMENT_MIN)
         return False
-    elif(classment_check > vr.CLASSMENT_MAX):
+    elif (classment_check > vr.CLASSMENT_MAX):
         print(vr.MESSAGE_CLASSMENT_MAX)
         return False
     else:
         return True
+
 
 def check_sex(sex_entry):
     """check validity of sex"""
@@ -83,6 +88,7 @@ def check_sex(sex_entry):
         print(vr.MESSAGE_WRONG_SEX)
         return False
 
+
 def check_answer_y_n(answer_entry):
     """check validity of the classment"""
     if answer_entry != vr.ANSWER_NO and answer_entry != vr.ANSWER_YES:
@@ -90,6 +96,7 @@ def check_answer_y_n(answer_entry):
         return False
     else:
         return True
+
 
 def check_result(result_entry):
     """check validity of the result"""
@@ -104,6 +111,7 @@ def check_result(result_entry):
         print(vr.MESSAGE_WRONG_RESULT)
         return False
 
+
 def check_game(game_entry):
     """check validity of the game"""
     try:
@@ -116,6 +124,7 @@ def check_game(game_entry):
     else:
         print(vr.MESSAGE_WRONG_GAME)
         return False
+
 
 def check_indice(indice_entry, indice_max):
     """check validity of indice"""
@@ -130,6 +139,7 @@ def check_indice(indice_entry, indice_max):
     else:
         return True
 
+
 def check_round_restart(round_entry, round_max):
     """check validity of round to restart"""
     try:
@@ -137,7 +147,8 @@ def check_round_restart(round_entry, round_max):
     except ValueError:
         print(vr.MESSAGE_NOT_NUMERIC)
         return False
-    if (round_check > round_max) or (round_check > vr.NUMBER_ROUNDS) or (round_check) < 1:
+    if (round_check > round_max) or (round_check > vr.NUMBER_ROUNDS)\
+            or (round_check) < 1:
         print(vr.MESSAGE_ROUND_OUT_OF_RANGE)
         return False
     else:

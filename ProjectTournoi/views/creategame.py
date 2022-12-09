@@ -1,5 +1,6 @@
-import ProjectTournoi.variables as vr
-from ProjectTournoi.controllers.tools import check_answer_y_n, check_result, check_game, get_result_player
+import ProjectTournoi.tools.constants as vr
+from ProjectTournoi.tools.check import check_answer_y_n, \
+    check_result, check_game
 
 
 class CreateGame:
@@ -32,14 +33,3 @@ class CreateGame:
             check = check_game(num_game)
             if check is True:
                 return int(num_game)
-
-    def prompt_add_player_manually(self, player_a, player_b):
-        """Prompt for a score"""
-        check = False
-        while check is False:
-            response = input(vr.MESSAGE_ADD_PLAYER.format(player_a, player_b))
-            check = check_answer_y_n(response.upper())
-            if check is True:
-                if response == vr.ANSWER_NO:
-                    print(vr.MESSAGE_STOP_TOURNAMENT)
-                return response.upper()

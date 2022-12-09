@@ -5,9 +5,9 @@ import ProjectTournoi.views.createplayer as vp
 import ProjectTournoi.views.createround as vr
 import ProjectTournoi.views.creategame as vg
 import ProjectTournoi.views.createendview as vv
-from ProjectTournoi.variables import menu_options, TITLE_MENU, \
+from ProjectTournoi.tools.constants import menu_options, TITLE_MENU, \
                 MESSAGE_INVITE_MENU, MESSAGE_GOOD_BYE
-from ProjectTournoi.controllers.tools import check_menu
+from ProjectTournoi.tools.check import check_menu
 
 
 def prompt_for_menu():

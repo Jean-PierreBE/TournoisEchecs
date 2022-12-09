@@ -7,7 +7,7 @@ import ProjectTournoi.controllers.player as ply
 from ProjectTournoi.views import createendview as cv
 from ProjectTournoi.views import createplayer as cp
 from ProjectTournoi.views import createtournament as ct
-from ProjectTournoi.variables import NUMBER_ROUNDS
+from ProjectTournoi.tools.constants import NUMBER_ROUNDS
 import ProjectTournoi.controllers.acces_db as db
 
 from ProjectTournoi.db import db_players, db_tournament
@@ -34,27 +34,27 @@ class Controller:
         while encode_players:
             """Encode players"""
             play_seq += 1
-            ply.create_player(self, play_seq)
-            encode_players = ply.get_players_continue(self)
-        db.insert_players(self.players)
+            ply.Controller_player.create_player(self, play_seq)
+            encode_players = ply.Controller_player.get_players_continue(self)
+        db.controller_db.insert_players(self, self.players)
         self.players.clear()
 
     def run_update_players(self):
         encode_players = True
-        players = db.download_players()
+        players = db.controller_db.download_players(self)
         cv.CreateEndView.list_only_players(self, players)
         while encode_players:
             """Encode players"""
             num_play = cp.CreatePlayer.prompt_choose_indice_players(self, -1, len(players))
-            player_out = ply.update_player(self, players[num_play-1])
-            db.update_player(player_out)
-            encode_players = ply.get_players_continue(self)
+            player_out = ply.Controller_player.update_player(self, players[num_play-1])
+            db.controller_db.update_player(self, player_out)
+            encode_players = ply.Controller_player.get_players_continue(self)
 
     def run_update_tournoi(self):
         # list of tournaments
         update_tournament = True
         while update_tournament:
-            self.tournaments = db.download_tournaments()
+            self.tournaments = db.controller_db.download_tournaments(self)
             cv.CreateEndView.list_only_tournaments(self, self.tournaments)
             """Choose tournament"""
             ind_tournament = ct.CreateTournament.prompt_choose_tournament(self, len(self.tournaments))
@@ -67,39 +67,39 @@ class Controller:
             for indc in range(round_deb - 1, len(tournament.rounds)):
                 del tournament.rounds[round_deb - 1]
             """update results tournament"""
-            ply.update_score_if_replay(self, tournament)
+            ply.Controller_player.update_score_if_replay(self, tournament)
             """execute tournament"""
             running_tournament = True
             while running_tournament:
                 for num_round in range(round_deb - 1, NUMBER_ROUNDS):
-                    running_tournament = rnd.turning_round(self, num_round, tournament)
+                    running_tournament = rnd.turning_round.turning_round(self, num_round, tournament)
                     if running_tournament is False:
                         break
                 """Affichage résultat tournoi"""
-                rep.print_end_views(self, tournament)
+                rep.Controller_reports.print_end_views(self, tournament)
                 """serialize object"""
-                db.update_tournament(tournament)
-            update_tournament = ctn.continue_another_tournament(self)
+                db.controller_db.update_tournament(self, tournament)
+            update_tournament = ctn.Controller_tournament.continue_another_tournament(self)
 
     def run_create_tournoi(self):
-        ctn.create_tournament(self, len(db_tournament))
+        ctn.Controller_tournament.create_tournament(self, len(db_tournament))
         """choose players from a list"""
-        ply.choose_players(self, self.current_tournament)
+        ply.Controller_player.choose_players(self, self.current_tournament)
         """Rounds"""
         for num_round in range(NUMBER_ROUNDS):
-            if rnd.turning_round(self, num_round, self.current_tournament) is False:
+            if rnd.turning_round.turning_round(self, num_round, self.current_tournament) is False:
                 break
         """Affichage résultat tournoi"""
-        rep.print_end_views(self, self.current_tournament)
+        rep.Controller_reports.print_end_views(self, self.current_tournament)
         """insert tournament in db"""
-        db.insert_tournament(self.current_tournament)
+        db.controller_db.insert_tournament(self, self.current_tournament)
 
     def run_report_players_alph(self):
         """reports"""
-        rep.print_players_order_alphabetics(self)
+        rep.Controller_reports.print_players_order_alphabetics(self)
 
     def run_report_players_classment(self):
-        rep.print_players_order_classment(self)
+        rep.Controller_reports.print_players_order_classment(self)
 
     def run_report_tournament(self):
-        rep.print_all_tournaments(self)
+        rep.Controller_reports.print_all_tournaments(self)
