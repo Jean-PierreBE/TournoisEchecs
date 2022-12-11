@@ -1,7 +1,8 @@
 from ProjectTournoi.views import createtournament as ct
 from ProjectTournoi.models import tournament as tn
 
-from ProjectTournoi.tools.constants import ID_TOURNAMENT,ANSWER_NO, ANSWER_YES
+from ProjectTournoi.tools.constants import ID_TOURNAMENT, ANSWER_NO, ANSWER_YES
+
 
 class Controller_tournament:
 
@@ -11,7 +12,11 @@ class Controller_tournament:
         date = ct.CreateTournament.prompt_for_date(self)
         description = ct.CreateTournament.prompt_for_description(self)
 
-        self.current_tournament = tn.Tournament(ID_TOURNAMENT + str(num_id + 1), area, date, description, [], [])
+        self.current_tournament = tn.Tournament(ID_TOURNAMENT +
+                                                str(num_id + 1),
+                                                area,
+                                                date,
+                                                description, [], [])
 
     def choose_continue_tournament(self):
         resp = True
@@ -20,13 +25,14 @@ class Controller_tournament:
             if response.upper() == ANSWER_YES:
                 return True
             elif response.upper() == ANSWER_NO:
-                    return False
+                return False
 
     def continue_another_tournament(self):
         resp = True
         while resp:
-            response = ct.CreateTournament.prompt_continue_another_tournament(self)
+            response = ct.CreateTournament.\
+                prompt_continue_another_tournament(self)
             if response.upper() == ANSWER_YES:
                 return True
             elif response.upper() == ANSWER_NO:
-                    return False
+                return False
