@@ -11,7 +11,8 @@ class CreateRound:
         """Prompt for a begin date"""
         check = False
         while check is False:
-            date_entry = input(vr.MESSAGE_BEGIN_DATE_ROUND.format(num_round + 1))
+            date_entry = input(
+                vr.MESSAGE_BEGIN_DATE_ROUND.format(num_round + 1))
             if not date_entry:
                 return dt.date.today().strftime("%d/%m/%Y")
             check = check_date(date_entry)
@@ -22,7 +23,8 @@ class CreateRound:
         """Prompt for a time date"""
         check = False
         while check is False:
-            time_entry = input(vr.MESSAGE_BEGIN_TIME_ROUND.format(num_round + 1))
+            time_entry = input(
+                vr.MESSAGE_BEGIN_TIME_ROUND.format(num_round + 1))
             if not time_entry:
                 return tm.strftime("%H:%M:%S", tm.localtime())
             check = check_time(time_entry)

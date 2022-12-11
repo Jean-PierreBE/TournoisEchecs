@@ -8,7 +8,8 @@ ID_ROUND = 'Round_'
 ID_GAME = 'Game_'
 ANSWER_YES = 'Y'
 ANSWER_NO = 'N'
-GAME_RESULTS = {0: 'Match nul', 1: 'Joueur A vainqueur',2: 'Joueur B vainqueur'}
+GAME_RESULTS = {0: 'Match nul', 1: 'Joueur A vainqueur',
+                2: 'Joueur B vainqueur'}
 """messages menu"""
 TITLE_MENU = "Gestion de tournois d'échecs"
 MESSAGE_INVITE_MENU = "Entrez votre choix : "
@@ -48,7 +49,8 @@ MESSAGE_END_TIME_ROUND = "Entrez l'heure de fin du round n° {} " \
                          "au format HH:MM : "
 MESSAGE_END_ROUND = "Les joueur A {} et Joueur B {} ont fini .Donnez" \
                     " le score (0 si nul,1 si A gagnant,2 si B gagnant ) : "
-MESSAGE_ADD_PLAYER = "Voulez-vous créer le dernier match avec Les joueur A {} et Joueur B {} ?"
+MESSAGE_ADD_PLAYER = "Voulez-vous créer le dernier match " \
+                     "avec Les joueur A {} et Joueur B {} ?"
 MESSAGE_IF_ROUND_FINISHED = "le round est-il terminé (Y/N) ?  "
 MESSAGE_NUMBER_MATCH = "Pour quel match voulez-vous entrer les scores ?  "
 
@@ -79,7 +81,6 @@ menu_options = {
     7: 'Liste de tous les tournois',
     8: 'Exit',
 }
-#RESULTS = [0, 1, 2]
 GAMES = [1, 2, 3, 4]
 CODE_SEXE = ['M', 'F']
 NO_RESULT = ['Pas de résultat', 'En attente']
@@ -89,11 +90,15 @@ STATUS_TOURNAMENT = ['provisoires', 'définitifs']
 """columns"""
 COL_PLAYERS = ['Nom', 'Prénom', 'Date de naissance', 'sexe', 'classement']
 COL_TOURNAMENTS = ['Lieu', 'date', 'Description']
-COL_PLAYERS_DISPO = ['Indice', 'Id', 'Nom', 'Prénom', 'Date de naissance', 'sexe', 'classement']
-COL_TOURNAMENT_DISPO = ['Indice', 'Id', 'Lieu', 'Date', 'Description', 'Nombre de rounds']
-COL_TURNING_ROUND = ['Game', 'Id Joueur A', 'Joueur A', 'Id Joueur B', 'Joueur B', 'Résultat']
+COL_PLAYERS_DISPO = ['Indice', 'Id', 'Nom', 'Prénom',
+                     'Date de naissance', 'sexe', 'classement']
+COL_TOURNAMENT_DISPO = ['Indice', 'Id', 'Lieu', 'Date', 'Description',
+                        'Nombre de rounds']
+COL_TURNING_ROUND = ['Game', 'Id Joueur A', 'Joueur A',
+                     'Id Joueur B', 'Joueur B', 'Résultat']
 COL_RESULTS_ROUNDS = ['round', 'Game', 'Joueur A', 'Joueur B', 'Résultat']
-COL_LIST_ROUNDS = ['round', 'Date de début', 'Heure de début', 'Date de fin', 'Heure de fin']
+COL_LIST_ROUNDS = ['round', 'Date de début', 'Heure de début',
+                   'Date de fin', 'Heure de fin']
 COL_RESULTS_TOURNAMENT = ['Nom', 'Prénom', 'Score']
 """title"""
 TITLE_PLAYERS_ALPH = "Liste des joueurs par ordre alphabetique"

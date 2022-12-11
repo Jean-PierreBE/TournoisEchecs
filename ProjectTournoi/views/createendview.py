@@ -12,7 +12,10 @@ class CreateEndView:
         table.title = vr.TITLE_ALL_PLAYERS.format(str(date), area)
         table.field_names = vr.COL_PLAYERS
         for iplayer in range(len(players)):
-            table.add_row([players[iplayer].lastname, players[iplayer].firstname, players[iplayer].birthdate, players[iplayer].sex, players[iplayer].classment])
+            table.add_row([players[iplayer].lastname,
+                           players[iplayer].firstname,
+                           players[iplayer].birthdate,
+                           players[iplayer].sex, players[iplayer].classment])
 
         print(table)
 
@@ -23,7 +26,10 @@ class CreateEndView:
         table.title = title_rep
         table.field_names = vr.COL_PLAYERS
         for iplayer in range(len(players)):
-            table.add_row([players[iplayer].lastname, players[iplayer].firstname, players[iplayer].birthdate, players[iplayer].sex, players[iplayer].classment])
+            table.add_row([players[iplayer].lastname,
+                           players[iplayer].firstname,
+                           players[iplayer].birthdate,
+                           players[iplayer].sex, players[iplayer].classment])
 
         print(table)
 
@@ -36,7 +42,11 @@ class CreateEndView:
         indp = 0
         for iplayer in range(len(players)):
             indp += 1
-            table.add_row([indp, players[iplayer].player_id, players[iplayer].lastname, players[iplayer].firstname, players[iplayer].birthdate, players[iplayer].sex, players[iplayer].classment])
+            table.add_row([indp, players[iplayer].player_id,
+                           players[iplayer].lastname,
+                           players[iplayer].firstname,
+                           players[iplayer].birthdate, players[iplayer].sex,
+                           players[iplayer].classment])
 
         print(table)
 
@@ -48,7 +58,11 @@ class CreateEndView:
         indp = 0
         for itournament in range(len(tournaments)):
             indp += 1
-            table.add_row([indp, tournaments[itournament].tournament_id, tournaments[itournament].area, tournaments[itournament].date, tournaments[itournament].description, len(tournaments[itournament].rounds)])
+            table.add_row([indp, tournaments[itournament].tournament_id,
+                           tournaments[itournament].area,
+                           tournaments[itournament].date,
+                           tournaments[itournament].description,
+                           len(tournaments[itournament].rounds)])
 
         print(table)
 
@@ -67,7 +81,9 @@ class CreateEndView:
         table.title = vr.TITLE_TOURNAMENT_LIST
         table.field_names = vr.COL_TOURNAMENTS
         for itournoi in range(len(tournaments)):
-            table.add_row([tournaments[itournoi].area, tournaments[itournoi].date, tournaments[itournoi].description])
+            table.add_row([tournaments[itournoi].area,
+                           tournaments[itournoi].date,
+                           tournaments[itournoi].description])
 
         print(table)
 
@@ -78,58 +94,79 @@ class CreateEndView:
         table.title = vr.TITLE_RESULTS_TOURNAMENT.format(lib_status, str(date))
         table.field_names = vr.COL_RESULTS_TOURNAMENT
         for iplayer in range(len(players)):
-            table.add_row([players[iplayer].lastname, players[iplayer].firstname, players[iplayer].score])
+            table.add_row([players[iplayer].lastname,
+                           players[iplayer].firstname, players[iplayer].score])
 
         print(table)
 
     def list_rounds(self, tournoi):
         """Create list of results by round"""
         table = PrettyTable()
-        table.title = vr.TITLE_LIST_ROUNDS.format(str(tournoi.date), tournoi.area)
+        table.title = vr.TITLE_LIST_ROUNDS.format(str(tournoi.date),
+                                                  tournoi.area)
         table.field_names = vr.COL_LIST_ROUNDS
         for indr in range(len(tournoi.rounds)):
-            table.add_row([tournoi.rounds[indr].round_id, tournoi.rounds[indr].begindate,
-                            tournoi.rounds[indr].begintime,
-                            tournoi.rounds[indr].enddate,
-                            tournoi.rounds[indr].endtime])
+            table.add_row([tournoi.rounds[indr].round_id,
+                           tournoi.rounds[indr].begindate,
+                           tournoi.rounds[indr].begintime,
+                           tournoi.rounds[indr].enddate,
+                           tournoi.rounds[indr].endtime])
         print(table)
 
     def list_results_rounds(self, tournoi):
         """Create list of results by round"""
         table = PrettyTable()
-        table.title = vr.TITLE_RESULTS_ROUNDS.format(str(tournoi.date), tournoi.area)
+        table.title = vr.TITLE_RESULTS_ROUNDS.format(str(tournoi.date),
+                                                     tournoi.area)
         table.field_names = vr.COL_RESULTS_ROUNDS
         for indr in range(len(tournoi.rounds)):
             for indg in range(len(tournoi.rounds[indr].games)):
-                ind_a = tl.get_result_player(tournoi.players, tournoi.rounds[indr].games[indg].player_a)
-                ind_b = tl.get_result_player(tournoi.players, tournoi.rounds[indr].games[indg].player_b)
+                ind_a = tl.get_result_player(tournoi.players,
+                                             tournoi.rounds[indr].
+                                             games[indg].player_a)
+                ind_b = tl.get_result_player(tournoi.players,
+                                             tournoi.rounds[indr].
+                                             games[indg].player_b)
                 if tournoi.rounds[indr].games[indg].result in vr.GAME_RESULTS:
-                    lib_result = vr.GAME_RESULTS[tournoi.rounds[indr].games[indg].result]
+                    lib_result = vr.GAME_RESULTS[tournoi.rounds[indr].
+                                                 games[indg].result]
                 else:
                     lib_result = vr.NO_RESULT[0]
                 table.add_row([tournoi.rounds[indr].round_id,
                                tournoi.rounds[indr].games[indg].game_id,
-                               tournoi.players[ind_a].lastname + ' ' + tournoi.players[ind_a].firstname,
-                               tournoi.players[ind_b].lastname + ' ' + tournoi.players[ind_b].firstname,
+                               tournoi.players[ind_a].lastname + ' ' +
+                               tournoi.players[ind_a].firstname,
+                               tournoi.players[ind_b].lastname + ' ' +
+                               tournoi.players[ind_b].firstname,
                                lib_result])
         print(table)
 
     def list_turning_round(self, num_round, tournoi):
         """Create list of results by round"""
         table = PrettyTable()
-        table.title = vr.TITLE_TURNING_ROUND.format(str(num_round + 1), str(tournoi.date), tournoi.area)
+        table.title = vr.TITLE_TURNING_ROUND.format(str(num_round + 1),
+                                                    str(tournoi.date),
+                                                    tournoi.area)
         table.field_names = vr.COL_TURNING_ROUND
         for indg in range(vr.NUMBER_GAMES):
-            ind_a = tl.get_result_player(tournoi.players, tournoi.rounds[num_round].games[indg].player_a)
-            ind_b = tl.get_result_player(tournoi.players, tournoi.rounds[num_round].games[indg].player_b)
+            ind_a = tl.get_result_player(tournoi.players,
+                                         tournoi.rounds[num_round].
+                                         games[indg].player_a)
+            ind_b = tl.get_result_player(tournoi.players,
+                                         tournoi.rounds[num_round].
+                                         games[indg].player_b)
             if tournoi.rounds[num_round].games[indg].result in vr.GAME_RESULTS:
-                lib_result = vr.GAME_RESULTS[tournoi.rounds[num_round].games[indg].result]
+                lib_result = \
+                    vr.GAME_RESULTS[tournoi.rounds[num_round].
+                                    games[indg].result]
             else:
                 lib_result = vr.NO_RESULT[1]
             table.add_row([tournoi.rounds[num_round].games[indg].game_id,
                            tournoi.rounds[num_round].games[indg].player_a,
-                           tournoi.players[ind_a].lastname + ' ' + tournoi.players[ind_a].firstname,
+                           tournoi.players[ind_a].lastname +
+                           ' ' + tournoi.players[ind_a].firstname,
                            tournoi.rounds[num_round].games[indg].player_b,
-                           tournoi.players[ind_b].lastname + ' ' + tournoi.players[ind_b].firstname,
+                           tournoi.players[ind_b].lastname +
+                           ' ' + tournoi.players[ind_b].firstname,
                            lib_result])
         print(table)

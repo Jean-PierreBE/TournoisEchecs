@@ -1,5 +1,6 @@
 """Create tournament view"""
-from ProjectTournoi.tools.check import check_date, check_classment, check_sex, check_answer_y_n, check_indice
+from ProjectTournoi.tools.check import check_date, check_classment,\
+    check_sex, check_answer_y_n, check_indice
 import ProjectTournoi.tools.constants as vr
 
 
@@ -66,7 +67,8 @@ class CreatePlayer:
         if num_player == -1:
             question = vr.MESSAGE_SELECT_INDICE_PLAYER
         else:
-            question = vr.MESSAGE_SELECT_INDICE_PLAYER + str(num_player) + " : "
+            question = vr.MESSAGE_SELECT_INDICE_PLAYER +\
+                       str(num_player) + " : "
         check = False
         while check is False:
             response = input(question)

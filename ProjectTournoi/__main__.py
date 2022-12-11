@@ -19,6 +19,7 @@ def prompt_for_menu():
         if check is True:
             return int(result)
 
+
 def print_menu():
 
     print(TITLE_MENU)
