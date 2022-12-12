@@ -69,3 +69,7 @@ class CreateTournament:
             check = check_round_restart(response, number_round_available)
             if check is True:
                 return int(response)
+
+    def prompt_list_tournaments_empty(self):
+        """list empty"""
+        print(vr.MESSAGE_LIST_TOURNAMENTS_EMPTY)

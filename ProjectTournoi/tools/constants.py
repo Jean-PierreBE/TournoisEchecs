@@ -14,7 +14,7 @@ GAME_RESULTS = {0: 'Match nul', 1: 'Joueur A vainqueur',
 TITLE_MENU = "Gestion de tournois d'échecs"
 MESSAGE_INVITE_MENU = "Entrez votre choix : "
 MESSAGE_GOOD_BYE = "Au revoir et à bientôt !"
-MESSAGE_SELECT_MENU = "veuillez entrer un chiffre entre 1 et 8."
+MESSAGE_SELECT_MENU = "veuillez entrer un chiffre entre 1 et 9."
 """messages views"""
 MESSAGE_PLAYER_OUT_OF_RANGE = "Veuillez selectionner un indice dans la liste !"
 MESSAGE_ROUND_OUT_OF_RANGE = "Veuillez selectionner un round disponible !"
@@ -30,7 +30,8 @@ MESSAGE_CONTINUE_ENCODE_PLAYERS = "Voulez-vous continuer à encoder " \
                                   "des joueurs (Y/N) ? "
 MESSAGE_CONTINUE_ENCODE_TOURNAMENT = "voulez-vous continuer le tournoi" \
                                      " (Y/N) ?  "
-MESSAGE_CONTINUE_ANOTHER_TOURNAMENT = "Voulez-vous encoder un autre tournoi" \
+MESSAGE_CONTINUE_ANOTHER_TOURNAMENT = "Voulez-vous sélectionner " \
+                                      "un autre tournoi" \
                                       " (Y/N) ? "
 MESSAGE_ENCODE_AREA = "Entrez le lieu du tournoi : "
 MESSAGE_ENCODE_DATE_TOURNAMENT = "Entrez la date du tournoi au format " \
@@ -68,7 +69,8 @@ MESSAGE_CLASSMENT_MIN = "Clessement inférieur au minimum"
 MESSAGE_CLASSMENT_MAX = "Clessement supérieur au maximum"
 MESSAGE_PLAYER_ALLREADY_SELECTED = "Joueur déja selectionné !"
 MESSAGE_WRONG_SEX = "Veuillez encoder 'M' ou 'F' !"
-MESSAGE_STOP_TOURNAMENT = "Puisque c'est comme ça , le tournoi s'arrête !!"
+MESSAGE_LIST_PLAYERS_EMPTY = "La liste des joueurs est vide"
+MESSAGE_LIST_TOURNAMENTS_EMPTY = "La liste des tournois est vide"
 
 """menu"""
 menu_options = {
@@ -79,7 +81,8 @@ menu_options = {
     5: 'Liste des joueurs par ordre alphabétique',
     6: 'Liste des joueurs par classement ',
     7: 'Liste de tous les tournois',
-    8: 'Exit',
+    8: 'Résultats par tournoi',
+    9: 'Exit',
 }
 GAMES = [1, 2, 3, 4]
 CODE_SEXE = ['M', 'F']

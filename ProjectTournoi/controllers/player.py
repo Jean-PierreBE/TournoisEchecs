@@ -13,35 +13,41 @@ class Controller_player:
     def choose_players(self, tournoi):
         """create some players"""
         players = []
-        for row in db_players:
-            player = pl.Player(row['player_id'], row['lastname'],
-                               row['firstname'], row['birthdate'],
-                               row['sex'], row['classment'])
-            players.append(player)
-        cv.CreateEndView.list_only_players(self, players)
-        print(vr.MESSAGE_CHOOSE_8_PLAYERS)
-        for indpt in range(vr.NUMBER_PLAYERS):
-            resp = True
-            while resp:
-                num_play = cp.CreatePlayer.\
-                    prompt_choose_indice_players(self,
-                                                 indpt + 1,
-                                                 len(players))
-                if 0 <= tl.get_result_player(tournoi.players,
-                                             players[num_play - 1].player_id) \
-                        < len(players):
-                    print(vr.MESSAGE_PLAYER_ALLREADY_SELECTED)
-                else:
-                    player_sel = pl.Player(players[num_play-1].player_id,
-                                           players[num_play-1].lastname,
-                                           players[num_play-1].firstname,
-                                           players[num_play-1].birthdate,
-                                           players[num_play-1].sex,
-                                           players[num_play-1].classment)
-                    tournoi.players.append(player_sel)
-                    resp = False
-            cv.CreateEndView.list_players(self, tournoi.area,
-                                          tournoi.date, tournoi.players)
+        if len(db_players) == 0:
+            cp.CreatePlayer.prompt_list_players_empty(self)
+            return False
+        else:
+            for row in db_players:
+                player = pl.Player(row['player_id'], row['lastname'],
+                                   row['firstname'], row['birthdate'],
+                                   row['sex'], row['classment'])
+                players.append(player)
+            cv.CreateEndView.list_only_players(self, players)
+            print(vr.MESSAGE_CHOOSE_8_PLAYERS)
+            for indpt in range(vr.NUMBER_PLAYERS):
+                resp = True
+                while resp:
+                    num_play = cp.CreatePlayer.\
+                        prompt_choose_indice_players(self,
+                                                     indpt + 1,
+                                                     len(players))
+                    if 0 <= tl.get_result_player(tournoi.players,
+                                                 players[num_play - 1].
+                                                 player_id) \
+                            < len(players):
+                        print(vr.MESSAGE_PLAYER_ALLREADY_SELECTED)
+                    else:
+                        player_sel = pl.Player(players[num_play-1].player_id,
+                                               players[num_play-1].lastname,
+                                               players[num_play-1].firstname,
+                                               players[num_play-1].birthdate,
+                                               players[num_play-1].sex,
+                                               players[num_play-1].classment)
+                        tournoi.players.append(player_sel)
+                        resp = False
+                cv.CreateEndView.list_players(self, tournoi.area,
+                                              tournoi.date, tournoi.players)
+                return True
 
     def create_player(self, play_seq):
         """create 1 player"""

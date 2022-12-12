@@ -40,67 +40,77 @@ class Controller:
         self.players.clear()
 
     def run_update_players(self):
-        encode_players = True
         players = db.controller_db.download_players(self)
-        cv.CreateEndView.list_only_players(self, players)
-        while encode_players:
-            """Encode players"""
-            num_play = cp.CreatePlayer.\
-                prompt_choose_indice_players(self, -1, len(players))
-            player_out = ply.Controller_player.\
-                update_player(self, players[num_play-1])
-            db.controller_db.update_player(self, player_out)
-            encode_players = ply.Controller_player.get_players_continue(self)
+        if len(players) == 0:
+            encode_players = False
+            cp.CreatePlayer.prompt_list_players_empty(self)
+        else:
+            encode_players = True
+            cv.CreateEndView.list_only_players(self, players)
+            while encode_players:
+                """Encode players"""
+                num_play = cp.CreatePlayer.\
+                    prompt_choose_indice_players(self, -1, len(players))
+                player_out = ply.Controller_player.\
+                    update_player(self, players[num_play-1])
+                db.controller_db.update_player(self, player_out)
+                encode_players = ply.Controller_player.\
+                    get_players_continue(self)
 
     def run_update_tournoi(self):
         # list of tournaments
-        update_tournament = True
-        while update_tournament:
-            self.tournaments = db.controller_db.download_tournaments(self)
-            cv.CreateEndView.list_only_tournaments(self, self.tournaments)
-            """Choose tournament"""
-            ind_tournament = ct.CreateTournament.\
-                prompt_choose_tournament(self, len(self.tournaments))
-            tournament = self.tournaments[ind_tournament - 1]
-            """check previous results"""
-            cv.CreateEndView.list_results_rounds(self, tournament)
-            """choose round to restart"""
-            round_deb = ct.CreateTournament.\
-                prompt_choose_round_deb(self, len(tournament.rounds) + 1)
-            """delete rounds if replayed"""
-            for indc in range(round_deb - 1, len(tournament.rounds)):
-                del tournament.rounds[round_deb - 1]
-            """update results tournament"""
-            ply.Controller_player.update_score_if_replay(self, tournament)
-            """execute tournament"""
-            running_tournament = True
-            while running_tournament:
-                for num_round in range(round_deb - 1, NUMBER_ROUNDS):
-                    running_tournament = rnd.turning_round.\
-                        turning_round(self, num_round, tournament)
-                    if running_tournament is False:
-                        break
-                """Affichage résultat tournoi"""
-                rep.Controller_reports.print_end_views(self, tournament)
-                """serialize object"""
-                db.controller_db.update_tournament(self, tournament)
-            update_tournament = ctn.Controller_tournament.\
-                continue_another_tournament(self)
+        self.tournaments = db.controller_db.download_tournaments(self)
+        if len(self.tournaments) == 0:
+            update_tournament = False
+            ct.CreateTournament.prompt_list_tournaments_empty(self)
+        else:
+            update_tournament = True
+            while update_tournament:
+                cv.CreateEndView.list_only_tournaments(self, self.tournaments)
+                """Choose tournament"""
+                ind_tournament = ct.CreateTournament.\
+                    prompt_choose_tournament(self, len(self.tournaments))
+                tournament = self.tournaments[ind_tournament - 1]
+                """check previous results"""
+                cv.CreateEndView.list_results_rounds(self, tournament)
+                """choose round to restart"""
+                round_deb = ct.CreateTournament.\
+                    prompt_choose_round_deb(self, len(tournament.rounds) + 1)
+                """delete rounds if replayed"""
+                for indc in range(round_deb - 1, len(tournament.rounds)):
+                    del tournament.rounds[round_deb - 1]
+                """update results tournament"""
+                ply.Controller_player.update_score_if_replay(self, tournament)
+                """execute tournament"""
+                running_tournament = True
+                while running_tournament:
+                    for num_round in range(round_deb - 1, NUMBER_ROUNDS):
+                        running_tournament = rnd.turning_round.\
+                            turning_round(self, num_round, tournament)
+                        if running_tournament is False:
+                            break
+                    """Affichage résultat tournoi"""
+                    rep.Controller_reports.print_end_views(self, tournament)
+                    """serialize object"""
+                    db.controller_db.update_tournament(self, tournament)
+                update_tournament = ctn.Controller_tournament.\
+                    continue_another_tournament(self)
 
     def run_create_tournoi(self):
         ctn.Controller_tournament.create_tournament(self, len(db_tournament))
         """choose players from a list"""
-        ply.Controller_player.choose_players(self, self.current_tournament)
-        """Rounds"""
-        for num_round in range(NUMBER_ROUNDS):
-            if rnd.turning_round.\
-                    turning_round(self, num_round,
-                                  self.current_tournament) is False:
-                break
-        """Affichage résultat tournoi"""
-        rep.Controller_reports.print_end_views(self, self.current_tournament)
-        """insert tournament in db"""
-        db.controller_db.insert_tournament(self, self.current_tournament)
+        if ply.Controller_player.choose_players(self, self.current_tournament):
+            """Rounds"""
+            for num_round in range(NUMBER_ROUNDS):
+                if rnd.turning_round.\
+                        turning_round(self, num_round,
+                                      self.current_tournament) is False:
+                    break
+            """Affichage résultat tournoi"""
+            rep.Controller_reports.print_end_views(self,
+                                                   self.current_tournament)
+            """insert tournament in db"""
+            db.controller_db.insert_tournament(self, self.current_tournament)
 
     def run_report_players_alph(self):
         """reports"""
@@ -111,3 +121,22 @@ class Controller:
 
     def run_report_tournament(self):
         rep.Controller_reports.print_all_tournaments(self)
+
+    def run_report_result_tournament(self):
+        # list of tournaments
+        self.tournaments = db.controller_db.download_tournaments(self)
+        if len(self.tournaments) == 0:
+            consult_tournament = False
+            ct.CreateTournament.prompt_list_tournaments_empty(self)
+        else:
+            consult_tournament = True
+            while consult_tournament:
+                cv.CreateEndView.list_only_tournaments(self, self.tournaments)
+                """Choose tournament"""
+                ind_tournament = ct.CreateTournament. \
+                    prompt_choose_tournament(self, len(self.tournaments))
+                tournament = self.tournaments[ind_tournament - 1]
+                """Affichage résultat tournoi"""
+                rep.Controller_reports.print_end_views(self, tournament)
+                consult_tournament = ctn.Controller_tournament. \
+                    continue_another_tournament(self)

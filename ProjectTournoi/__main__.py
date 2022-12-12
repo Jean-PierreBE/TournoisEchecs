@@ -54,5 +54,7 @@ while True:
     elif option == 7:
         tournoi.run_report_tournament()
     elif option == 8:
+        tournoi.run_report_result_tournament()
+    elif option == 9:
         print(MESSAGE_GOOD_BYE)
         exit()

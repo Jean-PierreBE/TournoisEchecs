@@ -75,3 +75,7 @@ class CreatePlayer:
             check = check_indice(response, indice_max)
             if check is True:
                 return int(response)
+
+    def prompt_list_players_empty(self):
+        """list empty"""
+        print(vr.MESSAGE_LIST_PLAYERS_EMPTY)
