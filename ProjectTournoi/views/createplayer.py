@@ -48,10 +48,10 @@ class CreatePlayer:
         while check is False:
             classment = input(vr.MESSAGE_ENCODE_CLASSMENT)
             if not classment:
-                return classment_in
+                return int(classment_in)
             check = check_classment(classment)
             if check is True:
-                return classment
+                return int(classment)
 
     def prompt_for_continue_players(self):
         """Prompt to continue encode players"""
@@ -79,3 +79,8 @@ class CreatePlayer:
     def prompt_list_players_empty(self):
         """list empty"""
         print(vr.MESSAGE_LIST_PLAYERS_EMPTY)
+
+    def prompt_list_not_enough_players(self, num_player):
+        """not enough players"""
+        print(vr.MESSAGE_NOT_ENOUGH_PLAYERS.
+              format(vr.NUMBER_PLAYERS - num_player))

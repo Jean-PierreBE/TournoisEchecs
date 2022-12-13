@@ -7,7 +7,7 @@ import ProjectTournoi.controllers.player as ply
 from ProjectTournoi.views import createendview as cv
 from ProjectTournoi.views import createplayer as cp
 from ProjectTournoi.views import createtournament as ct
-from ProjectTournoi.tools.constants import NUMBER_ROUNDS
+from ProjectTournoi.tools.constants import NUMBER_ROUNDS, NUMBER_PLAYERS
 import ProjectTournoi.controllers.acces_db as db
 
 from ProjectTournoi.db import db_players, db_tournament
@@ -97,9 +97,15 @@ class Controller:
                     continue_another_tournament(self)
 
     def run_create_tournoi(self):
-        ctn.Controller_tournament.create_tournament(self, len(db_tournament))
-        """choose players from a list"""
-        if ply.Controller_player.choose_players(self, self.current_tournament):
+        """check if there's enough players"""
+        if len(db_players) < NUMBER_PLAYERS:
+            cp.CreatePlayer.prompt_list_not_enough_players(self,
+                                                           len(db_players))
+        else:
+            ctn.Controller_tournament.create_tournament(self,
+                                                        len(db_tournament))
+            """choose players from a list"""
+            ply.Controller_player.choose_players(self, self.current_tournament)
             """Rounds"""
             for num_round in range(NUMBER_ROUNDS):
                 if rnd.turning_round.\

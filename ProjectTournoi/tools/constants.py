@@ -71,6 +71,7 @@ MESSAGE_PLAYER_ALLREADY_SELECTED = "Joueur déja selectionné !"
 MESSAGE_WRONG_SEX = "Veuillez encoder 'M' ou 'F' !"
 MESSAGE_LIST_PLAYERS_EMPTY = "La liste des joueurs est vide"
 MESSAGE_LIST_TOURNAMENTS_EMPTY = "La liste des tournois est vide"
+MESSAGE_NOT_ENOUGH_PLAYERS = "Il manque {} joueurs pour commencer un tournoi !"
 
 """menu"""
 menu_options = {
