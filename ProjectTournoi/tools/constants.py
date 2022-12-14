@@ -8,8 +8,7 @@ ID_ROUND = 'Round_'
 ID_GAME = 'Game_'
 ANSWER_YES = 'Y'
 ANSWER_NO = 'N'
-GAME_RESULTS = {0: 'Match nul', 1: 'Joueur A vainqueur',
-                2: 'Joueur B vainqueur'}
+GAME_RESULTS = {0: 'Match nul', 1: 'Joueur A vainqueur', 2: 'Joueur B vainqueur'}
 """messages menu"""
 TITLE_MENU = "Gestion de tournois d'échecs"
 MESSAGE_INVITE_MENU = "Entrez votre choix : "
@@ -18,40 +17,28 @@ MESSAGE_SELECT_MENU = "veuillez entrer un chiffre entre 1 et 9."
 """messages views"""
 MESSAGE_PLAYER_OUT_OF_RANGE = "Veuillez selectionner un indice dans la liste !"
 MESSAGE_ROUND_OUT_OF_RANGE = "Veuillez selectionner un round disponible !"
-MESSAGE_CHOOSE_8_PLAYERS = "Veuillez choisir 8 joueurs en selectionnant" \
-                           " l'indice "
+MESSAGE_CHOOSE_8_PLAYERS = "Veuillez choisir 8 joueurs en selectionnant l'indice "
 MESSAGE_ENCODE_LASTNAME = "tapez le nom du joueur : "
 MESSAGE_ENCODE_FIRSTNAME = "tapez le prénom du joueur  : "
-MESSAGE_ENCODE_BIRTHDATE = "Entrez la date de naissance du joueur au format" \
-                           " DD/MM/YYYY : "
+MESSAGE_ENCODE_BIRTHDATE = "Entrez la date de naissance du joueur au format DD/MM/YYYY : "
 MESSAGE_ENCODE_SEX = "Entrez le genre du joueur (M/F) : "
 MESSAGE_ENCODE_CLASSMENT = "Entrez le dernier classement du joueur : "
-MESSAGE_CONTINUE_ENCODE_PLAYERS = "Voulez-vous continuer à encoder " \
-                                  "des joueurs (Y/N) ? "
-MESSAGE_CONTINUE_ENCODE_TOURNAMENT = "voulez-vous continuer le tournoi" \
-                                     " (Y/N) ?  "
-MESSAGE_CONTINUE_ANOTHER_TOURNAMENT = "Voulez-vous sélectionner " \
-                                      "un autre tournoi" \
-                                      " (Y/N) ? "
+MESSAGE_CONTINUE_ENCODE_PLAYERS = "Voulez-vous continuer à encoder des joueurs (Y/N) ? "
+MESSAGE_CONTINUE_ENCODE_TOURNAMENT = "voulez-vous continuer le tournoi (Y/N) ?  "
+MESSAGE_CONTINUE_ANOTHER_TOURNAMENT = "Voulez-vous sélectionner un autre tournoi (Y/N) ? "
 MESSAGE_ENCODE_AREA = "Entrez le lieu du tournoi : "
-MESSAGE_ENCODE_DATE_TOURNAMENT = "Entrez la date du tournoi au format " \
-                                 "DD/MM/YYYY : "
+MESSAGE_ENCODE_DATE_TOURNAMENT = "Entrez la date du tournoi au format DD/MM/YYYY : "
 MESSAGE_ENCODE_DESCRIPTION = "Entrez la description du tournoi : "
 MESSAGE_SELECT_INDICE_PLAYER = "Selectionnez un indice pour le joueur : "
 MESSAGE_SELECT_INDICE_TOURNAMENT = "Selectionnez un indice pour le tournoi : "
 MESSAGE_SELECT_ROUND_RESTART = "Selectionnez un round de redémarrage : "
-MESSAGE_BEGIN_DATE_ROUND = "Entrez la date de début du round n° {} " \
-                           "au format DD/MM/YYYY : "
-MESSAGE_BEGIN_TIME_ROUND = "Entrez l'heure de début du round n° {} " \
-                           "au format HH:MM : "
-MESSAGE_END_DATE_ROUND = "Entrez la date de fin du round n° {} " \
-                         "au format DD/MM/YYYY : "
-MESSAGE_END_TIME_ROUND = "Entrez l'heure de fin du round n° {} " \
-                         "au format HH:MM : "
-MESSAGE_END_ROUND = "Les joueur A {} et Joueur B {} ont fini .Donnez" \
-                    " le score (0 si nul,1 si A gagnant,2 si B gagnant ) : "
-MESSAGE_ADD_PLAYER = "Voulez-vous créer le dernier match " \
-                     "avec Les joueur A {} et Joueur B {} ?"
+MESSAGE_BEGIN_DATE_ROUND = "Entrez la date de début du round n° {} au format DD/MM/YYYY : "
+MESSAGE_BEGIN_TIME_ROUND = "Entrez l'heure de début du round n° {} au format HH:MM : "
+MESSAGE_END_DATE_ROUND = "Entrez la date de fin du round n° {} au format DD/MM/YYYY : "
+MESSAGE_END_TIME_ROUND = "Entrez l'heure de fin du round n° {} au format HH:MM : "
+MESSAGE_END_ROUND = "Les joueur A {} et Joueur B {} ont fini .Donnez le score " \
+                    "(0 si nul,1 si A gagnant,2 si B gagnant ) : "
+MESSAGE_ADD_PLAYER = "Voulez-vous créer le dernier match avec Les joueur A {} et Joueur B {} ?"
 MESSAGE_IF_ROUND_FINISHED = "le round est-il terminé (Y/N) ?  "
 MESSAGE_NUMBER_MATCH = "Pour quel match voulez-vous entrer les scores ?  "
 
@@ -94,15 +81,11 @@ STATUS_TOURNAMENT = ['provisoires', 'définitifs']
 """columns"""
 COL_PLAYERS = ['Nom', 'Prénom', 'Date de naissance', 'sexe', 'classement']
 COL_TOURNAMENTS = ['Lieu', 'date', 'Description']
-COL_PLAYERS_DISPO = ['Indice', 'Id', 'Nom', 'Prénom',
-                     'Date de naissance', 'sexe', 'classement']
-COL_TOURNAMENT_DISPO = ['Indice', 'Id', 'Lieu', 'Date', 'Description',
-                        'Nombre de rounds']
-COL_TURNING_ROUND = ['Game', 'Id Joueur A', 'Joueur A',
-                     'Id Joueur B', 'Joueur B', 'Résultat']
+COL_PLAYERS_DISPO = ['Indice', 'Id', 'Nom', 'Prénom', 'Date de naissance', 'sexe', 'classement']
+COL_TOURNAMENT_DISPO = ['Indice', 'Id', 'Lieu', 'Date', 'Description', 'Nombre de rounds']
+COL_TURNING_ROUND = ['Game', 'Id Joueur A', 'Joueur A', 'Id Joueur B', 'Joueur B', 'Résultat']
 COL_RESULTS_ROUNDS = ['round', 'Game', 'Joueur A', 'Joueur B', 'Résultat']
-COL_LIST_ROUNDS = ['round', 'Date de début', 'Heure de début',
-                   'Date de fin', 'Heure de fin']
+COL_LIST_ROUNDS = ['round', 'Date de début', 'Heure de début', 'Date de fin', 'Heure de fin']
 COL_RESULTS_TOURNAMENT = ['Nom', 'Prénom', 'Score']
 """title"""
 TITLE_PLAYERS_ALPH = "Liste des joueurs par ordre alphabetique"

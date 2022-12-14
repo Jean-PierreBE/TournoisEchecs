@@ -26,8 +26,7 @@ class controller_db:
     def download_tournaments(self):
         tournaments = []
         for row in db_tournament:
-            tournament = tn.Tournament(row['tournament_id'], row['area'],
-                                       row['date'], row['description'], [], [])
+            tournament = tn.Tournament(row['tournament_id'], row['area'], row['date'], row['description'], [], [])
             """create players"""
             for indp in range(len(row['players'])):
                 player_sel = pl.Player(row['players'][indp]['player_id'],
@@ -47,14 +46,10 @@ class controller_db:
                                      row['rounds'][indr]['endtime'], [])
                 """create games"""
                 for indg in range(len(row['rounds'][indr]['games'])):
-                    game_sel = gm.Game(row['rounds'][indr]['games']
-                                       [indg]['game_id'],
-                                       row['rounds'][indr]['games']
-                                       [indg]['player_a'],
-                                       row['rounds'][indr]['games']
-                                       [indg]['player_b'],
-                                       row['rounds'][indr]['games']
-                                       [indg]['result'])
+                    game_sel = gm.Game(row['rounds'][indr]['games'][indg]['game_id'],
+                                       row['rounds'][indr]['games'][indg]['player_a'],
+                                       row['rounds'][indr]['games'][indg]['player_b'],
+                                       row['rounds'][indr]['games'][indg]['result'])
                     round_sel.games.append(game_sel)
 
                 tournament.rounds.append(round_sel)
@@ -78,8 +73,7 @@ class controller_db:
 
     def update_tournament(self, tournament):
         serialized_tournament = jsons.dump(tournament)
-        db_tournament.remove(where('tournament_id') ==
-                             tournament.tournament_id)
+        db_tournament.remove(where('tournament_id') == tournament.tournament_id)
         db_tournament.insert(serialized_tournament)
 
     def insert_tournament(self, tournament):

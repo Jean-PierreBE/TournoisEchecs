@@ -1,5 +1,5 @@
 from prettytable import PrettyTable
-import ProjectTournoi.tools.check as tl
+from ProjectTournoi.tools.check import get_result_player
 import ProjectTournoi.tools.constants as vr
 
 
@@ -102,8 +102,7 @@ class CreateEndView:
     def list_rounds(self, tournoi):
         """Create list of results by round"""
         table = PrettyTable()
-        table.title = vr.TITLE_LIST_ROUNDS.format(str(tournoi.date),
-                                                  tournoi.area)
+        table.title = vr.TITLE_LIST_ROUNDS.format(str(tournoi.date), tournoi.area)
         table.field_names = vr.COL_LIST_ROUNDS
         for indr in range(len(tournoi.rounds)):
             table.add_row([tournoi.rounds[indr].round_id,
@@ -116,17 +115,14 @@ class CreateEndView:
     def list_results_rounds(self, tournoi):
         """Create list of results by round"""
         table = PrettyTable()
-        table.title = vr.TITLE_RESULTS_ROUNDS.format(str(tournoi.date),
-                                                     tournoi.area)
+        table.title = vr.TITLE_RESULTS_ROUNDS.format(str(tournoi.date), tournoi.area)
         table.field_names = vr.COL_RESULTS_ROUNDS
         for indr in range(len(tournoi.rounds)):
             for indg in range(len(tournoi.rounds[indr].games)):
-                ind_a = tl.get_result_player(tournoi.players,
-                                             tournoi.rounds[indr].
-                                             games[indg].player_a)
-                ind_b = tl.get_result_player(tournoi.players,
-                                             tournoi.rounds[indr].
-                                             games[indg].player_b)
+                ind_a = get_result_player(tournoi.players,
+                                          tournoi.rounds[indr].games[indg].player_a)
+                ind_b = get_result_player(tournoi.players,
+                                          tournoi.rounds[indr].games[indg].player_b)
                 if tournoi.rounds[indr].games[indg].result in vr.GAME_RESULTS:
                     lib_result = vr.GAME_RESULTS[tournoi.rounds[indr].
                                                  games[indg].result]
@@ -144,21 +140,15 @@ class CreateEndView:
     def list_turning_round(self, num_round, tournoi):
         """Create list of results by round"""
         table = PrettyTable()
-        table.title = vr.TITLE_TURNING_ROUND.format(str(num_round + 1),
-                                                    str(tournoi.date),
-                                                    tournoi.area)
+        table.title = vr.TITLE_TURNING_ROUND.format(str(num_round + 1), str(tournoi.date), tournoi.area)
         table.field_names = vr.COL_TURNING_ROUND
         for indg in range(vr.NUMBER_GAMES):
-            ind_a = tl.get_result_player(tournoi.players,
-                                         tournoi.rounds[num_round].
-                                         games[indg].player_a)
-            ind_b = tl.get_result_player(tournoi.players,
-                                         tournoi.rounds[num_round].
-                                         games[indg].player_b)
+            ind_a = get_result_player(tournoi.players,
+                                      tournoi.rounds[num_round].games[indg].player_a)
+            ind_b = get_result_player(tournoi.players,
+                                      tournoi.rounds[num_round].games[indg].player_b)
             if tournoi.rounds[num_round].games[indg].result in vr.GAME_RESULTS:
-                lib_result = \
-                    vr.GAME_RESULTS[tournoi.rounds[num_round].
-                                    games[indg].result]
+                lib_result = vr.GAME_RESULTS[tournoi.rounds[num_round].games[indg].result]
             else:
                 lib_result = vr.NO_RESULT[1]
             table.add_row([tournoi.rounds[num_round].games[indg].game_id,

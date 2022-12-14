@@ -1,12 +1,11 @@
 """Entry point"""
 from ProjectTournoi.controllers.base import Controller
-import ProjectTournoi.views.createtournament as vt
-import ProjectTournoi.views.createplayer as vp
-import ProjectTournoi.views.createround as vr
-import ProjectTournoi.views.creategame as vg
-import ProjectTournoi.views.createendview as vv
-from ProjectTournoi.tools.constants import menu_options, TITLE_MENU, \
-                MESSAGE_INVITE_MENU, MESSAGE_GOOD_BYE
+import ProjectTournoi.views.create_tournament as vt
+import ProjectTournoi.views.create_player as vp
+import ProjectTournoi.views.create_round as vr
+import ProjectTournoi.views.create_game as vg
+import ProjectTournoi.views.create_end_view as vv
+from ProjectTournoi.tools.constants import menu_options, TITLE_MENU, MESSAGE_INVITE_MENU, MESSAGE_GOOD_BYE
 from ProjectTournoi.tools.check import check_menu
 
 

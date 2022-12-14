@@ -1,12 +1,12 @@
 """Define the main controller"""
-import ProjectTournoi.controllers.Reports as rep
+import ProjectTournoi.controllers.reports as rep
 import ProjectTournoi.controllers.tournament as ctn
 import ProjectTournoi.controllers.round as rnd
 import ProjectTournoi.controllers.player as ply
 
-from ProjectTournoi.views import createendview as cv
-from ProjectTournoi.views import createplayer as cp
-from ProjectTournoi.views import createtournament as ct
+from ProjectTournoi.views import create_end_view as cv
+from ProjectTournoi.views import create_player as cp
+from ProjectTournoi.views import create_tournament as ct
 from ProjectTournoi.tools.constants import NUMBER_ROUNDS, NUMBER_PLAYERS
 import ProjectTournoi.controllers.acces_db as db
 
@@ -49,13 +49,10 @@ class Controller:
             cv.CreateEndView.list_only_players(self, players)
             while encode_players:
                 """Encode players"""
-                num_play = cp.CreatePlayer.\
-                    prompt_choose_indice_players(self, -1, len(players))
-                player_out = ply.Controller_player.\
-                    update_player(self, players[num_play-1])
+                num_play = cp.CreatePlayer.prompt_choose_indice_players(self, -1, len(players))
+                player_out = ply.Controller_player.update_player(self, players[num_play-1])
                 db.controller_db.update_player(self, player_out)
-                encode_players = ply.Controller_player.\
-                    get_players_continue(self)
+                encode_players = ply.Controller_player.get_players_continue(self)
 
     def run_update_tournoi(self):
         # list of tournaments
@@ -68,14 +65,12 @@ class Controller:
             while update_tournament:
                 cv.CreateEndView.list_only_tournaments(self, self.tournaments)
                 """Choose tournament"""
-                ind_tournament = ct.CreateTournament.\
-                    prompt_choose_tournament(self, len(self.tournaments))
+                ind_tournament = ct.CreateTournament.prompt_choose_tournament(self, len(self.tournaments))
                 tournament = self.tournaments[ind_tournament - 1]
                 """check previous results"""
                 cv.CreateEndView.list_results_rounds(self, tournament)
                 """choose round to restart"""
-                round_deb = ct.CreateTournament.\
-                    prompt_choose_round_deb(self, len(tournament.rounds) + 1)
+                round_deb = ct.CreateTournament.prompt_choose_round_deb(self, len(tournament.rounds) + 1)
                 """delete rounds if replayed"""
                 for indc in range(round_deb - 1, len(tournament.rounds)):
                     del tournament.rounds[round_deb - 1]
@@ -85,36 +80,29 @@ class Controller:
                 running_tournament = True
                 while running_tournament:
                     for num_round in range(round_deb - 1, NUMBER_ROUNDS):
-                        running_tournament = rnd.turning_round.\
-                            turning_round(self, num_round, tournament)
+                        running_tournament = rnd.turning_round.turning_round(self, num_round, tournament)
                         if running_tournament is False:
                             break
                     """Affichage résultat tournoi"""
                     rep.Controller_reports.print_end_views(self, tournament)
                     """serialize object"""
                     db.controller_db.update_tournament(self, tournament)
-                update_tournament = ctn.Controller_tournament.\
-                    continue_another_tournament(self)
+                update_tournament = ctn.Controller_tournament.continue_another_tournament(self)
 
     def run_create_tournoi(self):
         """check if there's enough players"""
         if len(db_players) < NUMBER_PLAYERS:
-            cp.CreatePlayer.prompt_list_not_enough_players(self,
-                                                           len(db_players))
+            cp.CreatePlayer.prompt_list_not_enough_players(self, len(db_players))
         else:
-            ctn.Controller_tournament.create_tournament(self,
-                                                        len(db_tournament))
+            ctn.Controller_tournament.create_tournament(self, len(db_tournament))
             """choose players from a list"""
             ply.Controller_player.choose_players(self, self.current_tournament)
             """Rounds"""
             for num_round in range(NUMBER_ROUNDS):
-                if rnd.turning_round.\
-                        turning_round(self, num_round,
-                                      self.current_tournament) is False:
+                if rnd.turning_round.turning_round(self, num_round, self.current_tournament) is False:
                     break
             """Affichage résultat tournoi"""
-            rep.Controller_reports.print_end_views(self,
-                                                   self.current_tournament)
+            rep.Controller_reports.print_end_views(self, self.current_tournament)
             """insert tournament in db"""
             db.controller_db.insert_tournament(self, self.current_tournament)
 
@@ -139,10 +127,8 @@ class Controller:
             while consult_tournament:
                 cv.CreateEndView.list_only_tournaments(self, self.tournaments)
                 """Choose tournament"""
-                ind_tournament = ct.CreateTournament. \
-                    prompt_choose_tournament(self, len(self.tournaments))
+                ind_tournament = ct.CreateTournament.prompt_choose_tournament(self, len(self.tournaments))
                 tournament = self.tournaments[ind_tournament - 1]
                 """Affichage résultat tournoi"""
                 rep.Controller_reports.print_end_views(self, tournament)
-                consult_tournament = ctn.Controller_tournament. \
-                    continue_another_tournament(self)
+                consult_tournament = ctn.Controller_tournament.continue_another_tournament(self)

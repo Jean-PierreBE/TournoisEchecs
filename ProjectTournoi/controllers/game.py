@@ -1,5 +1,5 @@
 from ProjectTournoi.models import game as gm
-from ProjectTournoi.views import creategame as cg
+from ProjectTournoi.views import create_game as cg
 import ProjectTournoi.tools.constants as vr
 
 
@@ -8,8 +8,7 @@ class Controller_game:
     def get_games_swiss(self, num_round, tournoi):
         """first round"""
         if num_round == 0:
-            sorted_player = sorted(tournoi.players,
-                                   key=lambda e: e.classment, reverse=True)
+            sorted_player = sorted(tournoi.players, key=lambda e: e.classment, reverse=True)
             last_player = 0
             for num_game in range(vr.NUMBER_GAMES):
                 pref_game = vr.ID_GAME + str(num_round + 1) + str(num_game + 1)
@@ -19,9 +18,7 @@ class Controller_game:
                 game = gm.Game(pref_game, player_a, player_b)
                 tournoi.rounds[num_round].games.append(game)
         else:
-            sorted_players = sorted(tournoi.players,
-                                    key=lambda e: (e.score, e.classment),
-                                    reverse=True)
+            sorted_players = sorted(tournoi.players, key=lambda e: (e.score, e.classment), reverse=True)
             """search precedent game"""
             """
             history = {
@@ -38,18 +35,12 @@ class Controller_game:
             num_game = 0
             for player in sorted_players:
                 for adversaire in sorted_players:
-                    if (adversaire.player_id != player.player_id)\
-                            and\
-                            (adversaire.player_id not
-                             in history[player.player_id])\
-                            and\
-                            (adversaire.player_id not in affected_players)\
-                            and\
+                    if (adversaire.player_id != player.player_id) and\
+                            (adversaire.player_id not in history[player.player_id]) and\
+                            (adversaire.player_id not in affected_players) and\
                             (player.player_id not in affected_players):
-                        pref_game = vr.ID_GAME + str(num_round + 1) +\
-                                    str(num_game + 1)
-                        game = gm.Game(pref_game, player.player_id,
-                                       adversaire.player_id)
+                        pref_game = vr.ID_GAME + str(num_round + 1) + str(num_game + 1)
+                        game = gm.Game(pref_game, player.player_id, adversaire.player_id)
                         tournoi.rounds[num_round].games.append(game)
                         num_game += 1
                         affected_players.append(player.player_id)
@@ -64,7 +55,6 @@ class Controller_game:
                 pref_game = vr.ID_GAME + str(num_round + 1) + str(num_game + 1)
                 game = gm.Game(pref_game, miss_player[0], miss_player[1])
                 tournoi.rounds[num_round].games.append(game)
-            return True
 
     def get_game_choose(self, num_round):
         response = cg.CreateGame.prompt_for_continue_round(self)
@@ -75,6 +65,4 @@ class Controller_game:
             return True, int(num_game) - 1
 
     def get_result(self, game):
-        game.result = cg.CreateGame.prompt_for_result(self,
-                                                      game.player_a,
-                                                      game.player_b)
+        game.result = cg.CreateGame.prompt_for_result(self, game.player_a, game.player_b)
