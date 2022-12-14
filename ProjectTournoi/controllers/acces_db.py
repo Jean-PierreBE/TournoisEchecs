@@ -1,3 +1,4 @@
+"""tools to manage tinydb"""
 import jsons
 from tinydb import Query, where
 

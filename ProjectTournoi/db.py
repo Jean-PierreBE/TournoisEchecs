@@ -1,4 +1,4 @@
-"""Entry point"""
+"""definition of databases"""
 from tinydb import TinyDB
 
 """DataBase"""

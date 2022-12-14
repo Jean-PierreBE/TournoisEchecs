@@ -1,4 +1,4 @@
-"""Create round view"""
+"""management of rounds"""
 import datetime as dt
 import time as tm
 from ProjectTournoi.tools.check import check_date, check_time

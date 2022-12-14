@@ -1,3 +1,4 @@
+"""controller for tournament"""
 from ProjectTournoi.views import create_tournament as ct
 from ProjectTournoi.models import tournament as tn
 

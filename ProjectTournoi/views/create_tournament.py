@@ -1,4 +1,4 @@
-"""Create tournament view"""
+"""management of views"""
 import datetime as dt
 import ProjectTournoi.tools.constants as vr
 from ProjectTournoi.tools.check import check_answer_y_n, check_date, check_indice, check_round_restart

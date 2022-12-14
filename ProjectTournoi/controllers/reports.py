@@ -1,3 +1,4 @@
+"""controller for reports"""
 import ProjectTournoi.views.create_end_view as cv
 import ProjectTournoi.controllers.acces_db as db
 from ProjectTournoi.tools.constants import TITLE_PLAYERS_ALPH, TITLE_PLAYERS_CLASS

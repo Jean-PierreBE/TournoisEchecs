@@ -1,11 +1,9 @@
-NUMBER_GAMES = 4
-
+"""round"""
 
 class Round:
     """chess round"""
 
-    def __init__(self, round_id, begindate, begintime,
-                 enddate, endtime, games):
+    def __init__(self, round_id, begindate, begintime, enddate, endtime, games):
         self.round_id = round_id
         self.begindate = begindate
         self.begintime = begintime

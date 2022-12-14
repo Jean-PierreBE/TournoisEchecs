@@ -1,3 +1,4 @@
+"""controller for players"""
 from ProjectTournoi.models import player as pl
 from ProjectTournoi.views import create_player as cp
 from ProjectTournoi.views import create_end_view as cv

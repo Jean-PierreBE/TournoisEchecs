@@ -1,3 +1,4 @@
+"""controller for rounds"""
 from ProjectTournoi.models import round as rn
 from ProjectTournoi.tools.check import get_result_player
 from ProjectTournoi.views import create_round as cr

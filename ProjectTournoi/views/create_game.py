@@ -1,3 +1,4 @@
+"""management of games"""
 import ProjectTournoi.tools.constants as vr
 from ProjectTournoi.tools.check import check_answer_y_n, check_result, check_game
 

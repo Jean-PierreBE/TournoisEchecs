@@ -1,4 +1,4 @@
-"""Entry point"""
+"""Beginning"""
 from ProjectTournoi.controllers.base import Controller
 import ProjectTournoi.views.create_tournament as vt
 import ProjectTournoi.views.create_player as vp

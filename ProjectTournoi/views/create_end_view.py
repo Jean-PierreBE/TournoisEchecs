@@ -1,3 +1,4 @@
+"""management of the views"""
 from prettytable import PrettyTable
 from ProjectTournoi.tools.check import get_result_player
 import ProjectTournoi.tools.constants as vr

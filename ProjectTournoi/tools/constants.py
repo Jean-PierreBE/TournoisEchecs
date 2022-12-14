@@ -1,4 +1,4 @@
-"""Constants"""
+"""Constants for the soft"""
 NUMBER_PLAYERS = 8
 NUMBER_ROUNDS = 4
 NUMBER_GAMES = 4

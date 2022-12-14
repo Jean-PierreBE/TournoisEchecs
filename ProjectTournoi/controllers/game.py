@@ -1,3 +1,4 @@
+"""controller for games"""
 from ProjectTournoi.models import game as gm
 from ProjectTournoi.views import create_game as cg
 import ProjectTournoi.tools.constants as vr
