@@ -1,17 +1,19 @@
 """management of views"""
 import datetime as dt
 import ProjectTournoi.tools.constants as vr
-from ProjectTournoi.tools.check import check_answer_y_n, check_date, check_indice, check_round_restart
+from ProjectTournoi.tools.check import check_answer_y_n, check_date, check_indice, check_round_restart, check_name
 
 
 class CreateTournament:
 
     def prompt_for_area(self):
         """prompt for the area of tournament"""
-        area = input(vr.MESSAGE_ENCODE_AREA)
-        if not area:
-            return vr.AREA_DEFAULT
-        return area
+        check = False
+        while check is False:
+            area = input(vr.MESSAGE_ENCODE_AREA)
+            check = check_name(area)
+            if check is True:
+                return area
 
     def prompt_for_date(self):
         """prompt for the date of tournament"""
@@ -26,18 +28,18 @@ class CreateTournament:
 
     def prompt_for_description(self):
         """prompt for the description of tournament"""
-        description = input(vr.MESSAGE_ENCODE_DESCRIPTION)
-        if not description:
-            return vr.DESCRIPTION_DEFAULT
-        return description
+        check = False
+        while check is False:
+            description = input(vr.MESSAGE_ENCODE_DESCRIPTION)
+            check = check_name(description)
+            if check is True:
+                return description
 
     def prompt_for_continue_tournament(self):
         """Prompt for a score"""
         check = False
         while check is False:
             response = input(vr.MESSAGE_CONTINUE_ENCODE_TOURNAMENT)
-            if not response:
-                return vr.ANSWER_NO
             check = check_answer_y_n(response.upper())
             if check is True:
                 return response.upper()
@@ -47,8 +49,6 @@ class CreateTournament:
         check = False
         while check is False:
             response = input(vr.MESSAGE_CONTINUE_ANOTHER_TOURNAMENT)
-            if not response:
-                return vr.ANSWER_NO
             check = check_answer_y_n(response.upper())
             if check is True:
                 return response.upper()

@@ -26,23 +26,23 @@ class Controller_player:
                 if 0 <= get_result_player(tournoi.players, players[num_play - 1].player_id) < len(players):
                     print(vr.MESSAGE_PLAYER_ALLREADY_SELECTED)
                 else:
-                    player_sel = pl.Player(players[num_play-1].player_id,
-                                           players[num_play-1].lastname,
-                                           players[num_play-1].firstname,
-                                           players[num_play-1].birthdate,
-                                           players[num_play-1].sex,
-                                           players[num_play-1].classment)
+                    player_sel = pl.Player(players[num_play - 1].player_id,
+                                           players[num_play - 1].lastname,
+                                           players[num_play - 1].firstname,
+                                           players[num_play - 1].birthdate,
+                                           players[num_play - 1].sex,
+                                           players[num_play - 1].classment)
                     tournoi.players.append(player_sel)
                     resp = False
             cv.CreateEndView.list_players(self, tournoi.area, tournoi.date, tournoi.players)
 
     def create_player(self, play_seq):
         """create 1 player"""
-        lastname = cp.CreatePlayer.prompt_for_lastname(self, vr.LAST_NAME_DEFAULT)
-        firstname = cp.CreatePlayer.prompt_for_firstname(self, vr.FIRST_NAME_DEFAULT)
+        lastname = cp.CreatePlayer.prompt_for_lastname(self, '')
+        firstname = cp.CreatePlayer.prompt_for_firstname(self, '')
         birthdate = cp.CreatePlayer.prompt_for_birthdate(self, vr.BIRTHDATE_DEFAULT)
-        codesex = cp.CreatePlayer.prompt_for_sex(self, vr.SEX_DEFAULT)
-        classment = cp.CreatePlayer.prompt_for_classment(self, vr.CLASSMENT_DEFAULT)
+        codesex = cp.CreatePlayer.prompt_for_sex(self, vr.VALUE_DEFAULT)
+        classment = cp.CreatePlayer.prompt_for_classment(self, '')
         player = pl.Player(vr.ID_PLAYER + str(play_seq), lastname,
                            firstname, birthdate, codesex, classment)
         self.players.append(player)

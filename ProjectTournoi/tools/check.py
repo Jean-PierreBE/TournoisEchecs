@@ -82,7 +82,7 @@ def check_classment(classment_entry):
 
 
 def check_sex(sex_entry):
-    """check validity of sex"""
+    """check validity of code sex"""
     if sex_entry in vr.CODE_SEXE:
         return True
     else:
@@ -91,7 +91,7 @@ def check_sex(sex_entry):
 
 
 def check_answer_y_n(answer_entry):
-    """check validity of the classment"""
+    """check validity of the answer yes or no"""
     if answer_entry != vr.ANSWER_NO and answer_entry != vr.ANSWER_YES:
         print(vr.MESSAGE_BAD_ANSWER_Y_OR_N)
         return False
@@ -150,6 +150,13 @@ def check_round_restart(round_entry, round_max):
         return False
     if (round_check > round_max) or (round_check > vr.NUMBER_ROUNDS) or (round_check) < 1:
         print(vr.MESSAGE_ROUND_OUT_OF_RANGE)
+        return False
+    else:
+        return True
+
+def check_name(lastname):
+    if lastname.replace(' ','') == '':
+        print(vr.MESSAGE_TYPE_MANDATORY)
         return False
     else:
         return True

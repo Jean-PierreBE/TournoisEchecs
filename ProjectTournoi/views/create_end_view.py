@@ -131,10 +131,8 @@ class CreateEndView:
                     lib_result = vr.NO_RESULT[0]
                 table.add_row([tournoi.rounds[indr].round_id,
                                tournoi.rounds[indr].games[indg].game_id,
-                               tournoi.players[ind_a].lastname + ' ' +
-                               tournoi.players[ind_a].firstname,
-                               tournoi.players[ind_b].lastname + ' ' +
-                               tournoi.players[ind_b].firstname,
+                               tournoi.players[ind_a].lastname + ' ' + tournoi.players[ind_a].firstname,
+                               tournoi.players[ind_b].lastname + ' ' + tournoi.players[ind_b].firstname,
                                lib_result])
         print(table)
 
@@ -154,10 +152,8 @@ class CreateEndView:
                 lib_result = vr.NO_RESULT[1]
             table.add_row([tournoi.rounds[num_round].games[indg].game_id,
                            tournoi.rounds[num_round].games[indg].player_a,
-                           tournoi.players[ind_a].lastname +
-                           ' ' + tournoi.players[ind_a].firstname,
+                           tournoi.players[ind_a].lastname + ' ' + tournoi.players[ind_a].firstname,
                            tournoi.rounds[num_round].games[indg].player_b,
-                           tournoi.players[ind_b].lastname +
-                           ' ' + tournoi.players[ind_b].firstname,
+                           tournoi.players[ind_b].lastname + ' ' + tournoi.players[ind_b].firstname,
                            lib_result])
         print(table)

@@ -13,8 +13,7 @@ class Controller_tournament:
         date = ct.CreateTournament.prompt_for_date(self)
         description = ct.CreateTournament.prompt_for_description(self)
 
-        self.current_tournament = tn.Tournament(ID_TOURNAMENT +
-                                                str(num_id + 1),
+        self.current_tournament = tn.Tournament(ID_TOURNAMENT + str(num_id + 1),
                                                 area,
                                                 date,
                                                 description, [], [])

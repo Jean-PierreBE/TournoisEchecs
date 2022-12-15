@@ -1,5 +1,5 @@
 """management of players"""
-from ProjectTournoi.tools.check import check_date, check_classment, check_sex, check_answer_y_n, check_indice
+from ProjectTournoi.tools.check import check_date, check_classment, check_sex, check_answer_y_n, check_indice, check_name
 import ProjectTournoi.tools.constants as vr
 
 
@@ -7,17 +7,25 @@ class CreatePlayer:
 
     def prompt_for_lastname(self, lastname_in):
         """Prompt for a last name."""
-        lastname = input(vr.MESSAGE_ENCODE_LASTNAME)
-        if not lastname:
-            return lastname_in
-        return lastname.upper()
+        check = False
+        while check is False:
+            lastname = input(vr.MESSAGE_ENCODE_LASTNAME)
+            if not lastname:
+                lastname = lastname_in
+            check = check_name(lastname)
+            if check is True:
+                return lastname.upper()
 
     def prompt_for_firstname(self, firstname_in):
         """Prompt for a first name."""
-        firstname = input(vr.MESSAGE_ENCODE_FIRSTNAME)
-        if not firstname:
-            return firstname_in
-        return firstname
+        check = False
+        while check is False:
+            firstname = input(vr.MESSAGE_ENCODE_FIRSTNAME)
+            if not firstname:
+                firstname = firstname_in
+            check = check_name(firstname)
+            if check is True:
+                return firstname
 
     def prompt_for_birthdate(self, birthdate_in):
         """Prompt for a birthdate"""
@@ -36,7 +44,7 @@ class CreatePlayer:
         while check is False:
             codesex = input(vr.MESSAGE_ENCODE_SEX)
             if not codesex:
-                return codesex_in
+                codesex = codesex_in
             check = check_sex(codesex.upper())
             if check is True:
                 return codesex.upper()
@@ -47,7 +55,7 @@ class CreatePlayer:
         while check is False:
             classment = input(vr.MESSAGE_ENCODE_CLASSMENT)
             if not classment:
-                return int(classment_in)
+                classment = classment_in
             check = check_classment(classment)
             if check is True:
                 return int(classment)

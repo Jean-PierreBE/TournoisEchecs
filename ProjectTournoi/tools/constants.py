@@ -45,6 +45,7 @@ MESSAGE_NUMBER_MATCH = "Pour quel match voulez-vous entrer les scores ?  "
 """error messages"""
 MESSAGE_BAD_ANSWER_Y_OR_N = "Veuillez encoder 'Y' ou 'N' !"
 MESSAGE_BAD_ANSWER_1_OR_2 = "Veuillez encoder 1 ou 2 !"
+MESSAGE_TYPE_MANDATORY = "Veuillez remplir le champ !"
 MESSAGE_WRONG_GAME = "Veuillez encoder 1 ,2 ,3 ou 4 !"
 MESSAGE_WRONG_RESULT = "Veuillez encoder 0, 1 ou 2 !"
 MESSAGE_WRONG_DATE_FORMAT = "Veuillez encoder la date au format DD/MM/YYYY !"
@@ -99,16 +100,11 @@ TITLE_RESULTS_ROUNDS = 'Résultats du Tournoi du {} à {} par round'
 TITLE_LIST_ROUNDS = 'Rounds du Tournoi du {} à {}'
 TITLE_RESULTS_TOURNAMENT = 'Résultats {} du tournoi du {}'
 
-"""Constants for tournament"""
-AREA_DEFAULT = "A completer"
-DESCRIPTION_DEFAULT = "A completer"
+VALUE_DEFAULT = "A completer"
 """Constants for players"""
-LAST_NAME_DEFAULT = 'A completer'
-FIRST_NAME_DEFAULT = 'A completer'
 BIRTHDATE_DEFAULT = '01/01/1900'
-SEX_DEFAULT = 'A completer'
 CLASSMENT_DEFAULT = 400
-CLASSMENT_MIN = 400
-CLASSMENT_MAX = 3000
+CLASSMENT_MIN = 1000
+CLASSMENT_MAX = 2800
 SEX_MALE = 'M'
 SEX_FEMALE = 'F'

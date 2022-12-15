@@ -20,7 +20,7 @@ class Controller_reports:
         """list of results of games """
         cv.CreateEndView.list_results_rounds(self, tournoi)
         """list of results of tournament"""
-        cv.CreateEndView.list_results_tournaments(self,  1, tournoi.date, tournoi.players)
+        cv.CreateEndView.list_results_tournaments(self, 1, tournoi.date, tournoi.players)
 
     def print_players_order_alphabetics(self):
         players = db.controller_db.download_players(self)

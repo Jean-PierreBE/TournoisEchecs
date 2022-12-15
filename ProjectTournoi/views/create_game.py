@@ -6,7 +6,7 @@ from ProjectTournoi.tools.check import check_answer_y_n, check_result, check_gam
 class CreateGame:
 
     def prompt_for_result(self, player_A, player_B):
-        """Prompt for a score"""
+        """Prompt for the result of the game"""
         check = False
         while check is False:
             result = input(vr.MESSAGE_END_ROUND.format(player_A, player_B))
@@ -15,18 +15,16 @@ class CreateGame:
                 return int(result)
 
     def prompt_for_continue_round(self):
-        """Prompt for a score"""
+        """Prompt to continue the round or no"""
         check = False
         while check is False:
             response = input(vr.MESSAGE_IF_ROUND_FINISHED)
-            if not response:
-                return vr.ANSWER_NO
             check = check_answer_y_n(response.upper())
             if check is True:
                 return response.upper()
 
     def prompt_for_encode_result(self):
-        """Prompt for a score"""
+        """Prompt to select the game to encode the result"""
         check = False
         while check is False:
             num_game = input(vr.MESSAGE_NUMBER_MATCH)

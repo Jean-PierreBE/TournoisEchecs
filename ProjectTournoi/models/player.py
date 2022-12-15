@@ -1,4 +1,6 @@
 """definition of player"""
+
+
 class Player:
     """Chess Player"""
 

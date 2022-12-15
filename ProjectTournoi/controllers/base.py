@@ -50,7 +50,7 @@ class Controller:
             while encode_players:
                 """Encode players"""
                 num_play = cp.CreatePlayer.prompt_choose_indice_players(self, -1, len(players))
-                player_out = ply.Controller_player.update_player(self, players[num_play-1])
+                player_out = ply.Controller_player.update_player(self, players[num_play - 1])
                 db.controller_db.update_player(self, player_out)
                 encode_players = ply.Controller_player.get_players_continue(self)
 
