@@ -154,8 +154,9 @@ def check_round_restart(round_entry, round_max):
     else:
         return True
 
+
 def check_name(lastname):
-    if lastname.replace(' ','') == '':
+    if lastname.replace(' ', '') == '':
         print(vr.MESSAGE_TYPE_MANDATORY)
         return False
     else:

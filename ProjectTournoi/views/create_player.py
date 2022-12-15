@@ -1,5 +1,6 @@
 """management of players"""
-from ProjectTournoi.tools.check import check_date, check_classment, check_sex, check_answer_y_n, check_indice, check_name
+from ProjectTournoi.tools.check import check_date, check_classment, check_sex, \
+    check_answer_y_n, check_indice, check_name
 import ProjectTournoi.tools.constants as vr
 
 
