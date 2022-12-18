@@ -31,6 +31,11 @@ On lance le programme en tapant sur la ligne de commande :
 - `python -m ProjectTournoi`
 
 ## Déroulement du programme
+On lance la commande ci-dessus et un menu avec 9 options apparaît
+Seul un chiffre entre 1 et 9 peut être encodé , sinon un message d'erreur apparaît.
+- option 1 : permet de créer des joueurs , les champs demandés sont nom, prénom, genre, date de naissance et classement.Le classement débute à 1000(enfant) et se termine à 2800(joueur de classe internationale) suivant le classement ELO.Les champs obligatoires sont nom, prénom, genre et classement. Des contrôles sont éffectués , le code genre ne peut comprendre que M (masculin) ou F (féminin).Le classement doit être numérique et compris entre 1000 et 2800.Une fois le joueur encodé, le programme propose de continuer. Si l'utilisateur choisit de quitter, tous les joueurs encodés sont stockés dans une base tinydb.
+- option 2 : permet de modifier les joueurs déja créés. Si aucun joueur n'a été encodé, un message d'erreur apparait. Si des joueurs ont été encodés, une liste des joeurs apparaît. Il suffit de sélectionner l'indice et de modifier les différents champs.Si l'utilisateur n'encode rien, la valeur initiale est conservée. Les contrôles sur le code genre,date de naissance, classement sont les mêmes qu'en cas de création si il y a une modification.
+- option 9 : quitte le programme
 
 ## Contrôle qualité
 Pour vérifier la qualité du code , on peut lancer la commande suivante :
@@ -45,9 +50,9 @@ pour cela il faut installer :
 le fichier tox.ini contient la configuration pour flake8.
 - `max-line-length = 119` : la longueur maximale de chaque ligne ne peut pas dépasser 119 caractères
 - `max-function-length = 50` : la longueur maximale de chaque fonction ne peut pas dépasser 50 lignes
-- `ignore = CFQ002, CFQ004` : évite les erreurs 
-                                - CFQ002 : nombre d'arguments en entrée trop élevés (> 6)
-                                - CFQ004 : nombre d'éléments en retour trop élevés (> 3)
+- `ignore = CFQ002, CFQ004` : évite les erreurs
+  - CFQ002 : nombre d'arguments en entrée trop élevés (> 6)
+  - CFQ004 : nombre d'éléments en retour trop élevés (> 3)
 
 Ces paramètres peuvent être modifiés
 
