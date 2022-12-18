@@ -40,7 +40,7 @@ Le rapport sortira en format html dans le répertoire flake-report
 pour cela il faut installer :
 - flake8 : contrôle du code pour vérifier la compatibilité avec les normes pep8
 - flake8-html : permet de sortir le rapport flake8 sous format html
-- flake-functions : permet d'ajouter des contrôles au niveau des fonctions (ex : longueur maximale des fonctions)
+- flake8-functions : permet d'ajouter des contrôles au niveau des fonctions (ex : longueur maximale des fonctions)
 
 le fichier tox.ini contient la configuration pour flake8.
 - `max-line-length = 119` : la longueur maximale de chaque ligne ne peut pas dépasser 119 caractères
