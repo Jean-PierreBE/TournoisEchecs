@@ -20,10 +20,36 @@ Les autres fichiers sont :
 - créer votre environnement virtuel
 - installer les packages python du fichier requirements.txt en lançant la commande suivante 
   - `pip install -r requirements.txt`
+
+les packages installés sont les suivants :
+- tinydb : gestion de la base de données tinydb
+- prettytable : gestion de tableau pour les différents affichages
+- jsons : permet de sérializer les objets pour les intégrer dans tinydb
+
 ## Lancement du programme
+On lance le programme en tapant sur la ligne de commande :
+- `python -m ProjectTournoi`
 
 ## Déroulement du programme
 
 ## Contrôle qualité
+Pour vérifier la qualité du code , on peut lancer la commande suivante :
+- `flake8 --format=html --htmldir=flake-report ProjectTournoi`
+Le rapport sortira en format html dans le répertoire flake-report
 
-flake8 --format=html --htmldir=flake-report ProjectTournoi
+pour cela il faut installer :
+- flake8 : contrôle du code pour vérifier la compatibilité avec les normes pep8
+- flake8-html : permet de sortir le rapport flake8 sous format html
+- flake-functions : permet d'ajouter des contrôles au niveau des fonctions (ex : longueur maximale des fonctions)
+
+le fichier tox.ini contient la configuration pour flake8.
+- `max-line-length = 119` : la longueur maximale de chaque ligne ne peut pas dépasser 119 caractères
+- `max-function-length = 50` : la longueur maximale de chaque fonction ne peut pas dépasser 50 lignes
+- `ignore = CFQ002, CFQ004` : évite les erreurs 
+                                - CFQ002 : nombre d'arguments en entrée trop élevés (> 6)
+                                - CFQ004 : nombre d'éléments en retour trop élevés (> 3)
+
+Ces paramètres peuvent être modifiés
+
+
+
