@@ -10,8 +10,16 @@ Le score de chaque match pourra être modifié durant chaque round.
 
 ## composition
 Tous les fichiers .py necessaires au fonctionnement du logiciel se trouvent dans le répertoire ProjectTournoi.
+Les autres fichiers sont :
+- README.md qui contient des informations sur le logiciel
+- requirements.txt contient les packages necessaires au bon fonctionnement du logiciel
+- tox.ini permet de paramétrer flake8 pour voir si le programme répond aux normes pep8
+
 ## Installation
-pip install -r requirements.txt
+- choisissez votre répertoire où exécuter vos programmes python
+- créer votre environnement virtuel
+- installer les packages python du fichier requirements.txt en lançant la commande suivante 
+  - `pip install -r requirements.txt`
 ## Lancement du programme
 
 ## Déroulement du programme
