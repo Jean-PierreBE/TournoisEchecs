@@ -1,7 +1,7 @@
 # Projet 4 OpenClassRoom : logiciel de gestion de tournoi d'Echecs
 ## Présentation du projet
 Le but de ce projet est de créer un logiciel de gestion de tournois d'échecs qui fonctionne hors ligne.
-8 joueurs participent à un tournoi qui se compose de 4 rounds et chaque round comprend 4 matchs avec 2 joueurs chacun.
+8 joueurs participent à un tournoi qui se compose de 4 rounds et chaque round comprend 4 matchs avec 2 joueurs chacun,suivant l'algorithme suisse (voir description plus bas).
 Avec le logiciel développé , les organisateurs vont pouvoir créer les joueurs (8 au minimum) , encoder les tournois et
 sortir des rapports sur le déroulement des tournois.
 Chaque tournoi pourra être arrêté temporairement à tout moment durant son déroulement pour diverses raisons : heure tardive, 
@@ -67,5 +67,12 @@ le fichier tox.ini contient la configuration pour flake8.
 
 Ces paramètres peuvent être modifiés
 
-
+## Algorithme suisse
+L'algorithme suisse permet d'affecter des joueurs à des matchs en fonction de leurs résultats, rangs.
+Pour notre cas , nous avons 8 joueurs qui devront éffectuer 4 matchs dans 4 rounds.
+Chaque jour a un classement ELO compris entre 100 et 2800. 
+Pour le premier round on classe les joueurs en fonction de leur classement , le premier match comprend le premier joueur et le cinquième,
+deuxième match comprend le 2 ème joueur et le ixième et ainsi de suite.
+Pour le deuxième round on trie les joueurs en fonction de leurs résultats du premier tour et de leur classement. Le premier match comprend les deux premiers , mais si ils ont déja joué ensemble , on prend le premier et le troisième. Et ainsi de suite. On cherche à ce que tous les joueurs changent d'adversaire à chaque match en tenant compte de leurs résultats.
+On fait la même chose pour les 2 derniers rounds. 
 
