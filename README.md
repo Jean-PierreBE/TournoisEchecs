@@ -45,8 +45,7 @@ Seul un chiffre entre 1 et 9 peut être encodé , sinon un message d'erreur appa
   -  liste des joueurs
   -  liste des rounds avec date de début, heure de début, date de fin, heure de fin
   -  liste des résultats par rounds et matchs
-  -  Résultats du tournoi par joueurs
-  il est possible de sélectionner un autre tourno      
+  -  Résultats du tournoi par joueurs     
 - option 9 : quitte le programme
 
 ## Contrôle qualité
