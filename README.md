@@ -40,12 +40,12 @@ Seul un chiffre entre 1 et 9 peut être encodé , sinon un message d'erreur appa
 - option 5 : Affiche la liste des joueurs par ordre alphabétique
 - option 6 : Affiche la liste des joueurs par classement (ordre croissant)
 - option 7 : Affiche la liste des tournois , lieux ,date , description
-- option 8 : La liste de tous les tournois encodés s'affiche , on sélectionne un tournoi et les tableaux suivants apparaissent 
-      -  lieu ,date ,description  
-      -  liste des joueurs
-      -  liste des rounds avec date de début, heure de début, date de fin, heure de fin
-      -  liste des résultats par rounds et matchs
-      -  Résultats du tournoi par joueurs
+- option 8 : La liste de tous les tournois encodés s'affiche , on sélectionne un tournoi et les tableaux suivants apparaissent
+  - lieu ,date ,description  
+  -  liste des joueurs
+  -  liste des rounds avec date de début, heure de début, date de fin, heure de fin
+  -  liste des résultats par rounds et matchs
+  -  Résultats du tournoi par joueurs
   il est possible de sélectionner un autre tourno      
 - option 9 : quitte le programme
 
