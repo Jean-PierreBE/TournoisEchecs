@@ -103,7 +103,6 @@ TITLE_RESULTS_TOURNAMENT = 'Résultats {} du tournoi du {}'
 VALUE_DEFAULT = "A completer"
 """Constants for players"""
 BIRTHDATE_DEFAULT = '01/01/1900'
-CLASSMENT_DEFAULT = 400
 CLASSMENT_MIN = 1000
 CLASSMENT_MAX = 2800
 SEX_MALE = 'M'
